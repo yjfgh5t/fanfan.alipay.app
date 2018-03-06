@@ -1,0 +1,10 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/todos/todos",    
+    "pages/add-todo/add-todo"
+  ],
+  "window": {
+    "defaultTitle": "Todo App"
+  }
+}
