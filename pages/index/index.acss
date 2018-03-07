@@ -11,7 +11,7 @@ width:100%;
  margin-top:6rpx;
  clear: both;
  overflow: hidden;
- padding: 10rpx;
+ padding: 15rpx 25rpx;
  position: relative;
 }
 
@@ -25,7 +25,7 @@ width:100%;
 .item-con{
     padding: 0rpx; 
     display: block;
-    width: 520rpx;
+    width: 490rpx;
 }
 .item-con text{
     display:block;
@@ -42,7 +42,7 @@ width:100%;
 .item-btn{
     position: absolute;
     right:20rpx;
-    bottom:10rpx;
+    bottom:15rpx;
 }
 .item-btn image{
     width:36rpx;
