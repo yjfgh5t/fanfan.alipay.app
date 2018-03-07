@@ -30,4 +30,7 @@ App({
       });
     });
   },
+  onShow:function(){
+     
+  },
 });

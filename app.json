@@ -1,10 +1,37 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/order/order",
+    "pages/me/me",
     "pages/todos/todos",    
     "pages/add-todo/add-todo"
   ],
   "window": {
     "defaultTitle": "Todo App"
+  },
+  "tabBar":{
+    "textColor": "#515151",
+    "selectedColor": "#1afa29",
+    "backgroundColor": "#ffffff",
+    "items": [
+      {
+        "pagePath": "pages/index/index",
+        "name": "饭饭",
+        "icon":"img/icon_menu_fan.png",
+        "activeIcon":"img/icon_menu_fan_active.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "name": "订单",
+        "icon":"img/icon_menu_order.png",
+        "activeIcon":"img/icon_menu_order_active.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "name": "我的",
+        "icon":"img/icon_menu_me.png",
+        "activeIcon":"img/icon_menu_me_active.png"
+      }
+    ]
   }
 }

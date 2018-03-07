@@ -1,0 +1,58 @@
+.page{
+   
+}
+
+.head-img{
+width:100%;
+}
+
+.view-block{
+ background-color: #fff;
+ margin-top:6rpx;
+ clear: both;
+ overflow: hidden;
+ padding: 10rpx;
+ position: relative;
+}
+
+.item-img{
+    width: 180rpx;
+    height: 180rpx; 
+}
+.item-con{
+    margin-left:20rpx; 
+}
+.item-con{
+    padding: 0rpx; 
+    display: block;
+    width: 520rpx;
+}
+.item-con text{
+    display:block;
+    line-height: 45rpx;
+    height: 45rpx;
+    font-size:28rpx;
+}
+.item-con text.desc{
+    color:#bfbfbf;
+    height:70rpx;
+    font-size:26rpx;
+    line-height:35rpx;
+}
+.item-btn{
+    position: absolute;
+    right:20rpx;
+    bottom:10rpx;
+}
+.item-btn image{
+    width:36rpx;
+    height:36rpx;
+    float:left;
+}
+.item-btn text{
+    height:36rpx;
+    line-height:36rpx;
+    float:left;
+    color:#000;
+    padding:0rpx  10rpx;
+}

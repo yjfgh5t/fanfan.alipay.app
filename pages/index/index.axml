@@ -1,3 +1,63 @@
-<view>
-    hello
+<view class="head-img">
+   <image style="width:100%;" mode="scaleToFill" src="{{headImg}}" onError="imageError" onLoad="imageLoad" />
+</view>
+
+<view class="view-block">
+    <view style="float:left;">
+        <image src="{{defaultImg}}" class="item-img" /> 
+    </view>
+    
+    <view style="float:left;margin-left:10rpx;">
+        <label class="item-con">
+            <text style="color:#000;font-weight:700;">招聘素食营养套餐</text>
+            <text class="desc">黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄</text>
+            <text style="">123</text>
+        </label>
+        <label  class="item-btn">
+            <image src="{{btnMinus}}" style="" />
+            <text>1</text>
+            <image src="{{btnAdd}}"/>
+        </label>
+    </view>  
+</view>
+
+
+<view class="view-block">
+    <view style="float:left;">
+        <image src="{{defaultImg}}" class="item-img" /> 
+    </view>
+    
+    <view style="float:left;margin-left:10rpx;">
+        <label class="item-con">
+            <text style="color:#000;font-weight:700;">招聘素食营养套餐</text>
+            <text class="desc">黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄</text>
+            <text style="">123</text>
+        </label>
+        <label  class="item-btn">
+            <image src="{{btnMinus}}" style="" />
+            <text>1</text>
+            <image src="{{btnAdd}}"/>
+        </label>
+    </view>  
+</view>
+
+
+
+<view class="view-block">
+    <view style="float:left;">
+        <image src="{{defaultImg}}" class="item-img" /> 
+    </view>
+    
+    <view style="float:left;margin-left:10rpx;">
+        <label class="item-con">
+            <text style="color:#000;font-weight:700;">招聘素食营养套餐</text>
+            <text class="desc">黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄</text>
+            <text style="">123</text>
+        </label>
+        <label  class="item-btn">
+            <image src="{{btnMinus}}" style="" />
+            <text>1</text>
+            <image src="{{btnAdd}}"/>
+        </label>
+    </view>  
 </view>

@@ -1,3 +1,9 @@
 Page({
-    data:{name:'hellow'}
+    data:{
+        name:'hellow',
+        headImg:'/img/img_index_head.jpeg',
+        defaultImg:'/img/img_item_default.png',
+        btnMinus:'/img/icon_btn_minus.png',
+        btnAdd:'/img/icon_btn_add.png',
+    }
 });
