@@ -1,61 +1,58 @@
+
 <view class="head-img">
    <image style="width:100%;" mode="scaleToFill" src="{{headImg}}" onError="imageError" onLoad="imageLoad" />
 </view>
+<!--遮罩层-->
+<view class="{{showMark?'view-mark':''}}"></view>
 
-<view class="view-block">
-    <view style="float:left;">
-        <image src="{{defaultImg}}" class="item-img" /> 
+<!--购物车弹出层 -->
+<view class="view-lay-car" hidden="{{!carData.show}}">
+    <view class="car-title"> 
+        <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
+        <text class="car-title-text">购物车</text>
+        <text onTap="closeCar" class="icon-close"> <icon type="clear" size="22"/></text>
     </view>
-    
-    <view style="float:left;margin-left:10rpx;">
-        <label class="item-con">
-            <text style="color:#000;font-weight:700;">招聘素食营养套餐</text>
-            <text class="desc">黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄</text>
-            <text style="">123</text>
-        </label>
-        <label  class="item-btn">
-            <image src="{{btnMinus}}" style="" />
-            <text>1</text>
-            <image src="{{btnAdd}}"/>
-        </label>
-    </view>  
+    <view class="car-body">
+        <view a:for="{{carData.itemArry}}" class="lay-item">
+                <text class="title">{{item.title}}</text>
+                <text class="price">{{item.price}}</text>
+                <label class="item-btn lay-car">
+                    <image src="{{btnMinus}}" />
+                    <text>1</text>
+                    <image src="{{btnAdd}}"/>
+                </label>
+        </view>
+    </view>
+    <view class="car-foot" style="line-height:100rpx;height:100rpx;background:rgba(0,0,0,0.6);overflow: hidden;">
+        <text style="margin-left:20rpx;font-size:32rpx;color:#fff;">￥34</text><text style="font-size:22rpx;color:#999;margin-left:3rpx;display:inline-block;">|共6份</text>
+        <text style="float:right;background-color:#4cd964;color:#fff;padding:0rpx 40rpx;">去结算</text>
+    </view>
+
 </view>
 
-
-<view class="view-block">
-    <view style="float:left;">
-        <image src="{{defaultImg}}" class="item-img" /> 
-    </view>
-    
-    <view style="float:left;margin-left:10rpx;">
-        <label class="item-con">
-            <text style="color:#000;font-weight:700;">招聘素食营养套餐</text>
-            <text class="desc">黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄</text>
-            <text style="">123</text>
-        </label>
-        <label  class="item-btn">
-            <image src="{{btnMinus}}" style="" />
-            <text>1</text>
-            <image src="{{btnAdd}}"/>
-        </label>
-    </view>  
+<!--购物车按钮-->
+<view class="view-car" hidden="{{carData.show}}" onTap="showCar">
+    <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
+    <text style="display:{{carData.itemArry.length==0?'none':'block'}}" class="txt-car {{carData.itemArry.length>9?'txt-car-len':''}}">{{carData.itemArry.length}}</text>
 </view>
 
-
-
-<view class="view-block">
+<!--商品列表 -->
+<view a:for="{{itemArry}}" class="view-block">
     <view style="float:left;">
-        <image src="{{defaultImg}}" class="item-img" /> 
+        <image src="{{item.icon}}" class="item-img" />
     </view>
     
     <view style="float:left;margin-left:10rpx;">
         <label class="item-con">
-            <text style="color:#000;font-weight:700;">招聘素食营养套餐</text>
-            <text class="desc">黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄</text>
-            <text style="">123</text>
+            <text style="color:#000;font-weight:700;">{{item.title}}</text>
+            <text class="desc">{{item.desc}}</text>
+            <text class="active" a:for="{{item.active}}" a:for-item="aitem">
+                <text class="t-head t-head-{{aitem.atype}}"></text> {{aitem.text}}
+            </text>
+            <text class="price">12.5</text>
         </label>
         <label  class="item-btn">
-            <image src="{{btnMinus}}" style="" />
+            <image src="{{btnMinus}}" />
             <text>1</text>
             <image src="{{btnAdd}}"/>
         </label>

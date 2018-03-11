@@ -1,5 +1,5 @@
 .page{
-   
+  font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
 }
 
 .head-img{
@@ -20,9 +20,7 @@ width:100%;
     height: 180rpx; 
 }
 .item-con{
-    margin-left:20rpx; 
-}
-.item-con{
+    margin-left:20rpx;   
     padding: 0rpx; 
     display: block;
     width: 490rpx;
@@ -30,15 +28,52 @@ width:100%;
 .item-con text{
     display:block;
     line-height: 45rpx;
-    height: 45rpx;
-    font-size:28rpx;
-}
-.item-con text.desc{
+    height: 45rpx; 
     color:#bfbfbf;
-    height:70rpx;
+    font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
     font-size:26rpx;
+}
+.item-con text.desc{ 
+    height:70rpx; 
     line-height:35rpx;
 }
+
+.item-con text.active .t-head{
+    display: inline-block;
+    line-height: 26rpx;
+    height: 26rpx; 
+    padding:4rpx 6rpx;
+    color:white;
+    margin-right:8rpx;
+    border-radius: 4rpx;
+}
+.t-head.t-head-1{
+  background-color: rgb(241, 136, 79);
+}
+.t-head.t-head-1::before{
+ content:"特"; 
+}
+.t-head.t-head-2{
+  background-color: rgb(112, 188, 70);
+}
+.t-head.t-head-2::before{
+    content: "减";
+}
+
+
+.item-con text.price{
+    color: red;
+    font-size: 28rpx;
+}
+.item-con text.price::before,.lay-item .price::before{
+    font-weight: 400;
+    content: "\A5";
+    font-size: 22rpx;
+    margin-right: .053333rem;
+    margin-right: .533333vw;
+    display: inline-block;
+}
+
 .item-btn{
     position: absolute;
     right:20rpx;
@@ -56,3 +91,115 @@ width:100%;
     color:#000;
     padding:0rpx  10rpx;
 }
+
+/****购物车****/
+.view-lay-car{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:6;
+    background:#fff;
+}
+
+.car-title{
+    padding:5rpx 20rpx;
+    border-bottom: 2rpx solid #ddd;
+    background-color:#cfcfcf;
+    font-size:32rpx;
+    color:white;
+}
+.car-title .img-car{
+    width:45rpx;
+    height:45rpx;
+    margin-right:6rpx;
+    position:relative;
+    top:6rpx;
+}
+
+.car-title .car-title-text{
+   font-size: 28rpx;
+   position: relative;
+   top: -4rpx;
+}
+.car-title .icon-close{
+    position:relative;
+    top:6rpx;
+    float:right;
+    color:white;
+}
+
+
+.car-body{
+    padding:0rpx 20rpx;
+    max-height: 400rpx;
+    min-height: 80rpx;
+    overflow-y: scroll;
+}
+
+.lay-item{
+    position:relative;
+    border-bottom: 1px solid #eee;
+    padding:28rpx 0rpx;
+}
+
+.lay-item:last-child{
+    border-bottom: none;
+}
+
+.lay-item .price{
+    position: absolute;
+    right: 170rpx;
+    color: red;
+} 
+
+.item-btn.lay-car{
+    right: 0rpx;
+    bottom: inherit;
+}
+
+
+/****购物车按钮****/
+.view-car{
+    position:fixed;
+    background: radial-gradient(circle at center,#0af,#0085ff);
+    right:20rpx;
+    width:80rpx;
+    z-index:7;
+    height:80rpx;
+    border-radius:50%;
+    bottom:18%;
+}
+.view-car .img-car{
+    width:36rpx;
+    height:36rpx;
+    position:absolute;
+    top:50%;
+    right:50%;
+    margin:-18rpx -18rpx 0rpx 0rpx;
+}
+.view-car .txt-car{
+    position: absolute;
+    right: -8rpx;
+    display: inline-block;
+    padding: 0rpx 8rpx;
+    background: radial-gradient(circle at center,#ff00a5,#ff0000);
+    color: white; 
+    font-size: 20rex;
+    border-radius: 50%;
+}
+.view-car .txt-car.txt-car-len{
+    padding: 1rpx 3rpx;
+}
+
+/**遮罩层***/
+.view-mark{
+    background: rgba(0, 0, 0,0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+}
+
