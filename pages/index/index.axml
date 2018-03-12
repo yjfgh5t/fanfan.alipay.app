@@ -17,15 +17,20 @@
                 <text class="title">{{item.title}}</text>
                 <text class="price">{{item.price}}</text>
                 <label class="item-btn lay-car">
-                    <image src="{{btnMinus}}" />
-                    <text>1</text>
-                    <image src="{{btnAdd}}"/>
+                    <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="minus" src="{{btnMinus}}" />
+                    <text>{{carData.itemIdArry[item.id]}}</text>
+                    <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="add" src="{{btnAdd}}"/>
                 </label>
         </view>
+        
+        <view class="no-select-item" a:if="{{carData.itemArry.length==0}}">
+          购物车还是空的哦！
+        </view>
+        
     </view>
-    <view class="car-foot" style="line-height:100rpx;height:100rpx;background:rgba(0,0,0,0.6);overflow: hidden;">
-        <text style="margin-left:20rpx;font-size:32rpx;color:#fff;">￥34</text><text style="font-size:22rpx;color:#999;margin-left:3rpx;display:inline-block;">|共6份</text>
-        <text style="float:right;background-color:#4cd964;color:#fff;padding:0rpx 40rpx;">去结算</text>
+    <view class="car-foot">
+        <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份</text>
+        <text class="cf-btn {{carData.itemArry.length==0?'disable':''}}">去结算</text>
     </view>
 
 </view>
@@ -33,7 +38,7 @@
 <!--购物车按钮-->
 <view class="view-car" hidden="{{carData.show}}" onTap="showCar">
     <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
-    <text style="display:{{carData.itemArry.length==0?'none':'block'}}" class="txt-car {{carData.itemArry.length>9?'txt-car-len':''}}">{{carData.itemArry.length}}</text>
+    <text style="display:{{carData.itemArry.length==0?'none':'block'}}" class="txt-car {{carData.itemArry.length>9?'txt-car-len':''}}">{{carData.count}}</text>
 </view>
 
 <!--商品列表 -->
@@ -49,12 +54,14 @@
             <text class="active" a:for="{{item.active}}" a:for-item="aitem">
                 <text class="t-head t-head-{{aitem.atype}}"></text> {{aitem.text}}
             </text>
-            <text class="price">12.5</text>
+            <text class="price">{{item.price}}</text>
         </label>
-        <label  class="item-btn">
-            <image src="{{btnMinus}}" />
-            <text>1</text>
-            <image src="{{btnAdd}}"/>
+        <label class="item-btn"> 
+            <block a:if="{{carData.itemIdArry[item.id]!=undefined}}">
+                <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="minus" src="{{btnMinus}}" />
+                <text>{{carData.itemIdArry[item.id]}}</text> 
+            </block>
+            <image onTap="itemAddMinus"  data-id="{{item.id}}" data-option="add" src="{{btnAdd}}"/>
         </label>
     </view>  
 </view>

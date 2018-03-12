@@ -158,6 +158,40 @@ width:100%;
     bottom: inherit;
 }
 
+.no-select-item{
+    width: 100%;
+    text-align: center;
+    line-height: 80rpx;
+    color: #bfbfbf;
+}
+
+.car-foot{
+    line-height:100rpx;
+    height:100rpx;
+    background:rgba(0,0,0,0.6);
+    overflow: hidden;
+}
+.cf-price{
+    margin-left:25rpx;
+    font-size:32rpx;
+    color:#fff;
+}
+.cf-desc{
+    font-size:22rpx;
+    color:#999;
+    margin-left:3rpx;
+    display:inline-block;
+}
+.cf-btn{
+    float:right;
+    background-color:#4cd964;
+    color:#fff;
+    padding:0rpx 40rpx;
+}
+.cf-btn.disable{
+    background-color:#535356;
+}
+
 
 /****购物车按钮****/
 .view-car{
