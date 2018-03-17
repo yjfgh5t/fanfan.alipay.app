@@ -1,0 +1,11 @@
+<view a:for="{{addrArry}}" class="block d-pad {{index==0?'':'d-mar'}}" style="padding-right:50rpx;position: relative;">
+        <text style="margin-right:20rpx;line-height:38rpx;">{{item.name}}</text> <text style="margin-right:20rpx;line-height:38rpx;">{{item.sex}}</text> <text>{{item.tel}}</text>
+        <text style="display:block;line-height:38rpx;" class="t-muted">{{item.addr}}{{item.addrDetail}}</text>
+        <text a:if="{{choise}}" onTap="bindChoise" data-id="{{item.id}}" style="position: absolute;right:20rpx;top:50%;margin-top:-12rpx;" class="arrow" ></text>
+        <text a:if="{{!choise}}" onTap="bindEdit" data-id="{{item.id}}" style="position: absolute;right:20rpx;top:50%;margin-top:-20rpx;" ><image src="{{btnEdit}}" mode="aspectFit" style="width:40rpx;height:40rpx;" /> </text>
+</view>
+
+<view style="position:fixed;bottom:0;width:100%;text-align:center;background-color:#00d9f1;color:white;" class="d-pad"> 
+        <image src="{{btnAdd}}" mode="aspectFit" style="width:36rpx;height:36rpx;position:relative;top:7rpx;margin-right:6rpx;" />
+        <text> 新增 </text>
+</view>

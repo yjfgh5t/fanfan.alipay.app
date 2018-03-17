@@ -26,16 +26,13 @@ Page({
             //总数量
             count:0,
             //总金额
-            price:0
+            price:0,
+            //起送价格
+            minPrice:22,
       }
     },
     //显示购物车
     showCar:function(e){
-        
-        if(this.data.carData.itemArry.length==0){
-            my.showToast({content:'购物车还是空的哦'});
-            return;
-        }
         this.setData({
             'showMark':true,
             'carData.show':true,

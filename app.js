@@ -5,6 +5,10 @@ App({
     { text: 'Learning 支付宝小程序', completed: false },
   ],
   userInfo: null,
+  globalData:{},
+  onLaunch:function(){
+   
+  },
   getUserInfo() {
     return new Promise((resolve, reject) => {
       if (this.userInfo) resolve(this.userInfo);

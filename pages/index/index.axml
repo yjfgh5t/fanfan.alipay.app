@@ -29,8 +29,9 @@
         
     </view>
     <view class="car-foot">
-        <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份</text>
-        <text class="cf-btn {{carData.itemArry.length==0?'disable':''}}">去结算</text>
+        <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份 ￥{{carData.minPrice}}起送</text>
+        <text a:if="{{carData.minPrice>carData.price}}" class="cf-btn disable">还差￥{{(carData.minPrice-carData.price).toFixed(2)}}</text>
+        <text a:if="{{carData.minPrice<=carData.price}}" class="cf-btn">去结算</text>
     </view>
 
 </view>
@@ -64,4 +65,8 @@
             <image onTap="itemAddMinus"  data-id="{{item.id}}" data-option="add" src="{{btnAdd}}"/>
         </label>
     </view>  
+</view>
+
+<!--todo商品详情-->
+<view>
 </view>

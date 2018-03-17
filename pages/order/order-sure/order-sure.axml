@@ -1,0 +1,75 @@
+<view class="block d-pad">
+    选择地址 <text class="arrow t-right">未选择</text>
+</view>
+
+<view class="block d-mar d-pad">
+    支付方式 <text class="arrow t-right">支付宝</text>
+</view>
+
+
+<view class="block d-mar d-pad border-line">
+   订单列表
+</view>  
+
+<!--遍历菜单-->
+<block a:for="{{order.menuArry}}">
+    <view a:if="{{order.menuArry.length-1>index}}" class="block d-pad">
+        {{item.title}}<text class="t-right">￥{{item.price}}</text><text class="t-right t-count t-muted">x {{item.count}}</text>
+    </view>
+
+    <view a:if="{{order.menuArry.length-1==index}}" class="block">
+        <view class="d-pad left border-line">
+            {{item.title}}<text class="t-right">￥{{item.price}}</text><text class="t-right t-count t-muted">x {{item.count}}</text>
+        </view>
+    </view> 
+</block>
+
+<!--遍历优惠券-->
+<block a:for="{{order.activeArry}}">
+    <view class="block">
+        <view class="d-pad left border-line">
+           <text class="t-active t-active-{{item.atype}}"></text> {{item.title}}<text class="t-right" style="color:red;">￥{{item.price}}</text>
+        </view>
+    </view> 
+</block>
+
+<!--其它费用 餐盒、配送费-->
+<block a:for="{{order.otherArry}}">
+    <view class="block">
+        <view class="d-pad left border-line">
+          {{item.title}}
+          <text class="t-right">￥{{item.price}}</text>
+          <text a:if="{{item.count>0}}" class="t-right t-count t-muted">x {{item.count}}</text>
+        </view>
+    </view> 
+</block>
+ 
+<view class="block d-pad txt-order" style="text-align:right;">
+    <text class="t-muted">订单￥{{order.total}}</text> <text class="t-muted">优惠￥{{order.discount}}</text> <text>待支付￥{{order.pay}}</text>
+</view>
+
+<view class="block d-mar" >
+  <view class="d-pad left border-line v-picker">
+   用餐人数 <view style="display:inline-block;" class="t-muted t-right arrow">
+       <picker value="{{index}}" range="{{dinner}}" onChange="bindDinner" range-key="text">
+           <text>
+           {{dinnerIndex>-1?dinner[dinnerIndex].text:'便于商家带够餐具'}}
+        </text>
+    </picker></view>
+</view>
+</view>
+<view class="block" >
+  <view class="d-pad left border-line">
+   订单备注<text class="t-muted t-right arrow" style="max-width:500rpx; height:32rpx;overflow:hidden;" onTap="bindRemark" >{{order.remark==""?"口味，偏好等":order.remark}}</text>
+</view>
+</view>
+<view class="block" >
+  <view class="d-pad left">
+   发票信息<text class="t-muted t-right arrow">商家不支持开发票</text>
+</view>
+</view> 
+<view style="height:100rpx;"></view>
+<view class="car-foot">
+    <text class="cf-price">待支付￥{{order.pay}}</text><text class="cf-desc">|已优惠{{order.discount}}</text> 
+    <text class="cf-btn">提交订单</text>
+</view>·

@@ -2,6 +2,10 @@ require('./config$');
 
 function success() {
 require('../..//app');
+require('../..//pages/me/me-addr/me-addr');
+require('../..//pages/order/order-sure/order-sure');
+require('../..//pages/order/order-remark/order-remark');
+require('../..//pages/order/pay-order/pay-order');
 require('../..//pages/index/index');
 require('../..//pages/order/order');
 require('../..//pages/me/me');

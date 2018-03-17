@@ -1,0 +1,20 @@
+Page({
+    data:{
+        btnEdit:'/img/icon_btn_edit.png',
+        btnAdd:'/img/icon_btn_add_white.png',
+        choise:false,
+        addrArry:[
+            {id:1001,name:'江洋',tel:'15821243531',sex:'女士',addr:'上海市松江区城鸿路222号',addrDetail:'鸿路222号4号楼1103室',lon:145568.123,lat:123123},
+            {id:1001,name:'江洋',tel:'15821243531',sex:'先生',addr:'上海市松江区城鸿路222号',addrDetail:'鸿路222号4号楼1103室',lon:145568.123,lat:123123},
+            {id:1001,name:'江洋',tel:'15821243531',sex:'女士',addr:'上海市松江区城鸿路222号',addrDetail:'鸿路222号4号楼1103室',lon:145568.123,lat:123123},
+            {id:1001,name:'江洋',tel:'15821243531',sex:'先生',addr:'上海市松江区城鸿路222号',addrDetail:'鸿路222号4号楼1103室',lon:145568.123,lat:123123},
+        ]
+    },
+    //选择地址
+    bindChoise:function(e){
+        console.log(e.currentTarget.id);
+    },
+    bindEdit:function(e){
+        console.log(e);
+    }
+});

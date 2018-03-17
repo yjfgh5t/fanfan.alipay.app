@@ -1,7 +1,11 @@
 {
   "pages": [
+    "pages/me/me-addr/me-addr",
+    "pages/order/order-sure/order-sure",
+    "pages/order/order-remark/order-remark",
+    "pages/order/pay-order/pay-order",
     "pages/index/index",
-    "pages/order/order",
+    "pages/order/order", 
     "pages/me/me",
     "pages/todos/todos",    
     "pages/add-todo/add-todo"

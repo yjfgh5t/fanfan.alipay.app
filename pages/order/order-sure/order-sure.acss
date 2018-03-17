@@ -1,0 +1,82 @@
+.txt-order text{
+ margin-right: 20rpx;
+}
+.txt-order text:last-child{
+    margin-right: 0rpx;
+}
+.t-right{
+    float: right;
+}
+.t-count{
+    margin-right:40rpx;
+}
+
+.arrow:after,.arrow::before{
+     border: 12rpx solid transparent;
+     border-left-color: #ccc;
+     top: 4rpx;
+}
+
+.arrow:after{
+    right: -10rpx;
+    border-left-color:#fff;
+}
+
+
+.v-picker div{
+    display: inline;
+}
+
+/**下单按钮**/
+.car-foot{
+    line-height:100rpx;
+    height:100rpx;
+    background-color:#666;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0; 
+    width: 100%;
+}
+.cf-price{
+    margin-left:25rpx;
+    font-size:32rpx;
+    color:#fff;
+}
+.cf-desc{
+    font-size:22rpx;
+    color:#999;
+    margin-left:3rpx;
+    display:inline-block;
+}
+.cf-btn{
+    float:right;
+    background-color:#4cd964;
+    color:#fff;
+    padding:0rpx 40rpx;
+}
+.cf-btn.disable{
+    background-color:#535356;
+}
+
+/****优惠券****/
+.t-active{
+    display: inline-block;
+    line-height: 26rpx;
+    height: 26rpx; 
+    padding:4rpx 6rpx;
+    color:white;
+    margin-right:8rpx;
+    border-radius: 4rpx;
+}
+.t-active.t-active-1{
+  background-color: rgb(241, 136, 79);
+}
+.t-active.t-active-1::before{
+ content:"特"; 
+}
+.t-active.t-active-2{
+  background-color: rgb(112, 188, 70);
+}
+.t-active.t-active-2::before{
+    content: "减";
+}
