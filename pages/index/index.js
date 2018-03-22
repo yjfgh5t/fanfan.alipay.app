@@ -105,5 +105,10 @@ Page({
             'carData.price':price.toFixed(2),
 
         });
+    },
+    bindSubmit:function(e){
+        my.navigateTo({
+            url:'/pages/order/order-sure/order-sure?idArray='+JSON.stringify(this.data.carData.itemIdArry)
+        });
     }
 });

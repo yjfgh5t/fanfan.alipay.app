@@ -1,5 +1,5 @@
 <view class="block d-pad">
-    选择地址 <text class="arrow t-right">未选择</text>
+    选择地址 <text class="arrow t-right" style="max-width:480rpx;height: 28rpx;overflow: hidden;" onTap="bindChoiseAddr" >{{order.addr.addrDetail==''?'未选择':order.addr.addrDetail}}</text>
 </view>
 
 <view class="block d-mar d-pad">

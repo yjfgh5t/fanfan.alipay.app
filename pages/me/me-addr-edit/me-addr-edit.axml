@@ -1,0 +1,53 @@
+
+<form onSubmit="bindSubmit">
+<view class="block noright"> 
+    <view class="d-pad noright"> 
+         <label>
+            <text class="t-title">联系人</text> 
+            <view class="border-line d-pad edit-right noright" style="width:560rpx;">
+                    <input type="text" class="from-input" value="{{model.name}}" name="name" placeholder="姓名"/> 
+            </view> 
+        </label>
+    </view>
+    <view class="d-pad border-line noright" style="padding-top:0rpx;">
+        <label>
+         <text class="t-title"></text> 
+          <button type="{{model.sex==1?'primary':'default'}}" size="mini" onTap="bindSex" data-sex="1"> 先生 </button> 
+          <button style="margin-left:10rpx;" type="{{model.sex==2?'primary':'default'}}" onTap="bindSex" data-sex="2" size="mini"> 女士 </button>
+        </label>
+    </view>
+
+     <view class="d-pad border-line">
+        <label>
+         <text class="t-title">电话</text>
+          <input type="number" class="from-input" value="{{model.tel}}" maxlength="11" name="tel"  placeholder="电话"/>
+        </label>
+    </view>
+
+     <view class="d-pad border-line">
+        <label>
+         <text class="t-title">地址</text>
+           <view class="arrow edit-right">
+                <input type="text" class="from-input" disabled="true" name="addr"  placeholder="地址" value="{{model.addr}}" />
+          </view>
+        </label>
+    </view>
+
+    <view class="d-pad border-line">
+        <label>
+         <text class="t-title">补充明细</text> 
+          <view class="edit-right">
+            <textarea placeholder="详细地址（如门牌号）" name="addrDetail" class="form-textarea" style="font-size:28rpx;color:#666;" maxlength="80" value="{{model.addrDetail}}" />
+          </view>
+        </label>
+    </view>
+
+</view>
+
+<view class="d-pad">
+    <button type="primary" style="font-size:30rpx;" formType="submit"> 确 定 </button>
+</view>
+</form>
+
+
+

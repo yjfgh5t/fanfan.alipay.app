@@ -40,10 +40,27 @@ Page({
             //用餐人数
             dinner:'',
             //订单描述
-            remark:''
+            remark:'',
+            addr:{
+                tel:'',
+                addrDetail:'',
+                lon:0,
+                lat:0,
+                sex:'',
+                name:''
+            }
         },
     },
-    onShow:function(e){
+    onLoad:function(e){
+        if(e.idArray)
+        {
+            console.log(e);
+            let idArry = JSON.parse(e.idArray);
+            console.log(idArry);
+
+        }
+    },
+    onShow:function(){
        var globalData = getApp().globalData;
        if(globalData.orderRemark)
        {
@@ -53,12 +70,24 @@ Page({
             });
             globalData.orderRemark=undefined;
        }
+       
+       if(globalData.choiseAddr)
+       {
+            this.data.order.addr=Object.assign(globalData.choiseAddr);
+            this.setData({
+               "order.addr":this.data.order.addr
+            });
+            globalData.choiseAddr=undefined;
+       }
+
     },
+    //用餐人数
     bindDinner:function(e){
         this.setData({
             dinnerIndex:parseInt(e.detail.value),
         });
     },
+    //输入描述
     bindRemark:function(e){
         //设置数据
         if(this.data.orderRemark){
@@ -66,6 +95,12 @@ Page({
         }
         my.navigateTo({
           url: '/pages/order/order-remark/order-remark', // 需要跳转的应用内非 tabBar 的页面的路径，路径后可以带参数。参数与路径之间使用
+        });
+    },
+    //选择地址
+    bindChoiseAddr:function(e){
+        my.navigateTo({
+          url: '/pages/me/me-addr/me-addr?choise=true', // 需要跳转的应用内非 tabBar 的页面的路径，路径后可以带参数。参数与路径之间使用
         });
     }
 });

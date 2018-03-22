@@ -1,0 +1,13 @@
+
+.t-title{
+    font-size:30rpx;
+    width:160rpx;
+    display:inline-block;
+}
+
+.edit-right{
+    display:inline-block;
+    width:506rpx;
+    padding-left:0rpx;
+}
+
