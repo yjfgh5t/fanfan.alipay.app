@@ -1,0 +1,64 @@
+.v-img{
+    width:100rpx;
+    height:100rpx; 
+    margin-right: 30rpx;
+    float:left
+}
+.v-img.none,.v-text.none{
+    height: 70rpx;
+}
+
+.v-text{
+    float:left;
+    width:565rpx;
+    height: 100rpx;
+    padding-right: 25rpx;
+}
+ 
+
+
+.v-text text{
+    line-height: 40rpx;
+}
+
+.v-text .title{
+    max-width: 380rpx;
+    display: inline-block;
+    overflow: hidden;
+    height: 40rpx;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.v-text .order-state{
+    float:right;
+    color:#333;
+}
+
+.v-text .time{
+    display:block;
+    color:#ccc;
+    font-size: 22rpx;
+}
+
+.v-text .remark{
+    height: 40rpx;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    max-width: 380rpx;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.arrow{
+    color: #333;
+}
+
+.arrow:before,.arrow::after{
+    top: 6rpx;
+    border-width: 12rpx;
+}
+
+.d-title.arrow:before{
+     border-left-color:#333;
+}

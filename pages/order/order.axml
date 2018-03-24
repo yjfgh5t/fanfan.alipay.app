@@ -1,3 +1,19 @@
-<view>
-    hello
+<view class="block noright d-mar" a:for="{{orders}}"> 
+    <view class="d-pad noright" style="overflow: hidden;">  
+            <image src="{{item.pic}}" class="v-img" mode="scaleToFill" />
+            <view class="border-line v-text">
+                    <text class="d-title title arrow">{{item.title}}</text>
+                    <text class="order-state">{{item.ordreState}}</text>
+                    <text class="time">{{item.orderTime}}</text>
+             </view> 
+    </view>
+     <view class="d-pad border-line noright" style="padding-top:0rpx;padding-bottom:0rpx;overflow: hidden;"> 
+         <image class="v-img none" />
+          <view class="v-text none">
+            <text class="remark">{{item.ortherRemark}}</text>
+            <text class="d-title order-state">￥{{item.pay}}</text>
+          </view>
+    </view> 
 </view>
+ 
+
