@@ -46,6 +46,14 @@
     padding-right: 0rpx;
 }
 
+.d-pad-tb{
+    padding: 28rpx 0rpx;
+}
+
+.d-pad-left{
+    padding-left: 28rpx;
+}
+
 .d-mar{
     margin-top: 20rpx;
 }

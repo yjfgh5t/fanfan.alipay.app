@@ -54,11 +54,14 @@
     color: #333;
 }
 
-.arrow:before,.arrow::after{
-    top: 6rpx;
+.arrow:before,.arrow::after{ 
     border-width: 12rpx;
+    top: 50%;
+    margin-top: -10rpx;
+    right:-8rpx;
 }
 
 .d-title.arrow:before{
-     border-left-color:#333;
+    border-left-color:#333;
+    right:-10rpx;
 }

@@ -1,0 +1,84 @@
+<view class="block d-mar">
+
+    <view class="d-pad  border-line">
+        <text>丰盛早餐油条+鸡蛋+原味豆浆原味豆浆原味豆浆原味豆浆</text>
+       
+    </view>
+
+    <view class="d-pad">
+        <text class="t-muted">丰盛早餐+鸡蛋+原味豆浆</text> 
+        <text class="t-price t-muted">￥15</text>
+        <text class="t-count t-muted">x 1</text>
+    </view>
+
+    <view class="d-pad">
+        <text class="t-muted">餐盒</text> 
+        <text class="t-price t-muted">￥15</text>
+        <text class="t-count t-muted">x 1</text>
+    </view>
+
+    <view class="d-pad border-line">
+        <text class="t-muted">配送费</text> 
+        <text class="t-price t-muted">￥15</text>
+        <text class="t-count t-muted">x 1</text>
+    </view>
+ 
+    <view class="d-pad" style="overflow: hidden;"> 
+        <text class="t-price t-pay">实付￥15</text>
+    </view>
+ 
+</view>
+
+<view class="block d-mar">
+    <view  class="d-pad border-line">
+        <text>订单信息</text>
+    </view>
+
+    <view class="d-pad-left t-muted border-line">
+        <view class="d-pad-tb border-line">
+            订单号：3024150583543213578
+        </view>
+
+         <view class="d-pad-tb border-line">
+            支付方式：在线支付
+        </view>
+
+        <view class="d-pad-tb border-line">
+            下单时间：2018-03-25 14:12:12
+        </view>
+
+        <view class="d-pad-tb border-line">
+            发票信息：不需要发票
+        </view> 
+
+        <view  class="d-pad" style="overflow: hidden;"> 
+            <text class="t-price t-pay">订单已取消</text> 
+        </view> 
+    </view>   
+</view>
+
+
+<view class="block d-mar">
+    <view  class="d-pad border-line">
+        <text>配送信息</text>
+    </view>
+
+    <view class="d-pad-left t-muted">
+        <view class="d-pad-tb border-line">
+            送达时间：尽快送达
+        </view>
+
+        <view class="d-pad-tb border-line"> 
+            <text style="display:block">送货地址：江洋(先生)</text>
+            <text style="display:block;margin-left:140rpx;">15821243531</text>  
+            <text style="display:block;margin-left:140rpx;">上海市松江区泗泾镇 城鸿路新凯 城</text>   
+        </view> 
+
+        <view class="d-pad-tb border-line">
+            配送方式：蜂鸟快送
+        </view> 
+    </view> 
+</view>
+
+
+ <view class="block d-mar"></view>

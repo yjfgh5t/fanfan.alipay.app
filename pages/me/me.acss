@@ -1,0 +1,46 @@
+.coupon{
+    background-image: url('/img/icon_me_coupon.png');
+    
+}
+
+.addr{
+    background-image: url('/img/icon_me_addr.png');
+}
+
+.icon{
+    width: 42rpx;
+    height: 42rpx;
+    display: inline-block;
+    background-size: cover;
+    line-height: 42rpx;
+    position: relative;
+    top: 11rpx;
+    margin-right: 15rpx;
+}
+
+
+.i-title{
+    display:inline-block;
+    line-height:42rpx;
+}
+
+.arrow{
+    color: #333;
+}
+.arrow::before,.arrow::after{
+    top: 50%;
+    margin-top:-14rpx; 
+    right: 20rpx;
+    border-left-color: #fff;
+}
+
+.arrow::before{
+   border-left-color: #333;
+    right: 18rpx;
+}
+
+.btn{
+    padding: 18rpx;
+    text-align: center;
+    color: orangered;
+}

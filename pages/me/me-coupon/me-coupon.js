@@ -1,0 +1,9 @@
+Page({
+    data:{
+        couponArry:[
+            {id:1001,price:10},
+            {id:1001,price:10},
+            {id:1001,price:10},
+        ]
+    }
+});

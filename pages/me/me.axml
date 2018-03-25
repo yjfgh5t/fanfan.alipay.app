@@ -1,3 +1,19 @@
-<view>
- <text>{{name}}</text>
+<view class="block d-pad" style="background-color:#0085ff;overflow:hidden;">
+    <image src="{{model.icon}}" style="width:120rpx;height:120rpx;display:inline-block;float:left;" mode="aspectFit" />
+    <text style="display:inline-block;color:white;line-height:120rpx;height:120rpx;float:left;margin-left:20rpx;">yhfgh5t</text>
 </view>
+<view class="block d-pad arrow" onTap="bindCoupon">
+    <text class="icon coupon"></text>
+    <text class="i-title">我的优惠券</text>
+</view>
+
+<view class="block d-pad arrow d-mar" onTap="bindAddr" >
+    <text class="icon addr"></text>
+    <text class="i-title">收货地址</text>
+</view>
+
+
+<view style="margin-top:50rpx;"></view>
+<view onTap="bindExit" class="d-mar block btn">
+    <text>退出登录</text>
+</view> 

@@ -1,0 +1,23 @@
+
+.t-price{
+    float: right;
+}
+
+.t-count{
+    float: right;
+    padding-right: 50rpx;
+}
+
+.t-pay{
+    color: orangered;
+}
+
+.order-title{
+    max-width:520rpx;
+    display:inline-block;
+}
+
+.order-state{
+    color: orange;
+    float: right;
+}

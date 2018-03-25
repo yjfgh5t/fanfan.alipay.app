@@ -1,13 +1,15 @@
 {
   "pages": [
-    "pages/order/order", 
     "pages/index/index",
-    "pages/order/order-sure/order-sure",
+    "pages/order/order", 
+    "pages/me/me", 
     "pages/me/me-addr/me-addr",
     "pages/me/me-addr-edit/me-addr-edit",
+    "pages/me/me-coupon/me-coupon",
+    "pages/order/order-detail/order-detail",  
+    "pages/order/order-sure/order-sure",
     "pages/order/order-remark/order-remark",
-    "pages/order/pay-order/pay-order",
-    "pages/me/me",
+    "pages/order/pay-order/pay-order", 
     "pages/todos/todos",    
     "pages/add-todo/add-todo"
   ],
