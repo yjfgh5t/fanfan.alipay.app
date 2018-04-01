@@ -62,10 +62,25 @@ width:100%;
 
 
 .item-con text.price{
-    color: red;
     font-size: 28rpx;
+    position: absolute;
+    bottom: 10rpx;
 }
-.item-con text.price::before,.lay-item .price::before{
+
+.price .cost{
+    margin-left: 8rpx;
+    color: #999;
+    text-decoration: line-through;
+    display:inline-block
+}
+
+.price .salePrice{ 
+    display:inline-block;
+    color: #ff3618; 
+    font-size: 32rpx;
+}
+
+.mark-price::before{
     font-weight: 400;
     content: "\A5";
     font-size: 22rpx;
@@ -73,6 +88,15 @@ width:100%;
     margin-right: .533333vw;
     display: inline-block;
 }
+
+/* .item-con text.price::before,.lay-item .price::before{
+    font-weight: 400;
+    content: "\A5";
+    font-size: 22rpx;
+    margin-right: .053333rem;
+    margin-right: .533333vw;
+    display: inline-block;
+} */
 
 .item-btn{
     position: absolute;

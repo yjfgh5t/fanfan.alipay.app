@@ -1,3 +1,4 @@
+import {tools} from '/common/js/common.js'
 Page({
     data:{
         name:'hellow',
@@ -8,7 +9,7 @@ Page({
         btnCar:'/img/icon_btn_car.png',
         showMark:false,
         itemArry:[
-            {id:'1001',title:'招聘黄焖鸡米饭-A',active:[{atype:1,text:'前场九折起'}],price:18.1,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄'},
+            {id:'1001',title:'招聘黄焖鸡米饭-A',active:[{atype:1,text:'前场九折起'}],price:18.1,salePrice:12, icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄'},
             {id:'1002',title:'招聘黄焖鸡米饭-B',active:[{atype:2,text:'满30减20'}],price:12.1,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄'},
             {id:'1003',title:'招聘黄焖鸡米饭-C',active:[{atype:2,text:'满30减20'}],price:13.1,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄'},
             {id:'1004',title:'招聘黄焖鸡米饭-D',active:[],price:16.1,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄'},
@@ -21,7 +22,7 @@ Page({
             show:false,
             //{id:'',title:'',}
             itemArry:[],
-            //id
+            //{id:count }
             itemIdArry:{},
             //总数量
             count:0,
@@ -30,6 +31,19 @@ Page({
             //起送价格
             minPrice:22,
       }
+    },
+    onLoad:function(){
+        this.loadData();
+    },
+    //加载数据
+    loadData:function(){
+        let page = this;  
+        tools.ajax('api/commodity/',{},'GET',function(res){
+            console.log(res.data);
+            if(res.code==0){ 
+                page.setData({itemArry:res.data}); 
+            }
+        });
     },
     //显示购物车
     showCar:function(e){
@@ -69,7 +83,7 @@ Page({
                  model=item;
                  //设置默认数据
                  carItemIds[target.id]=0;
-                 carItemData.push({id:item.id,title:item.title,price:item.price});
+                 carItemData.push({id:item.id,title:item.title,salePrice:item.salePrice});
                 }
             });
         }
@@ -94,7 +108,7 @@ Page({
         let count=0,price=0;
         carItemData.forEach(function(item){
             count +=carItemIds[item.id];
-            price +=carItemIds[item.id]*item.price;
+            price +=carItemIds[item.id]*item.salePrice;
         });
 
         //设置数据
@@ -102,13 +116,48 @@ Page({
             'carData.itemArry':carItemData,
             'carData.itemIdArry':carItemIds,
             'carData.count':count,
-            'carData.price':price.toFixed(2),
-
+            'carData.price':price.toFixed(2), 
         });
     },
     bindSubmit:function(e){
-        my.navigateTo({
-            url:'/pages/order/order-sure/order-sure?idArray='+JSON.stringify(this.data.carData.itemIdArry)
-        });
+    
+        //选择的菜单
+       let idArry = this.data.carData.itemIdArry;
+
+       //全局变量
+       let globalData = getApp().globalData;
+
+       tools.getUserInfo(function(userInfo){
+        
+        //订单提交对象
+        let orderReq={
+            createId:userInfo.id,
+            detailList:[]
+        };
+        
+        //商品添加到集合
+        for(let key in idArry){
+            orderReq.detailList.push({
+                outId:key,
+                outSize:idArry[key],
+                outType:1
+            });
+        }
+
+        //创建临时订单
+        tools.ajax("api/order/",JSON.stringify(orderReq),"POST",function(resp){
+
+            if(resp.code==0){
+                //订单信息存入全局变量
+                globalData.temOrder=resp.data;
+
+                //跳转
+                my.navigateTo({
+                    url:'/pages/order/order-sure/order-sure'
+                });
+            }
+
+        }); 
+       });
     }
 });

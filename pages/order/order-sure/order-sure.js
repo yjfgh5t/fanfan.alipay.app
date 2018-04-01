@@ -1,3 +1,4 @@
+import {tools} from '/common/js/common.js'
 Page({
     data:{
         name:'hellow',
@@ -52,12 +53,12 @@ Page({
         },
     },
     onLoad:function(e){
-        if(e.idArray)
-        {
-            console.log(e);
-            let idArry = JSON.parse(e.idArray);
-            console.log(idArry);
 
+        let globalData = getApp().globalData;
+
+        //加载订单信息
+        if(globalData.temOrder){ 
+            this.privInitOrder(globalData.temOrder);
         }
     },
     onShow:function(){
@@ -101,6 +102,36 @@ Page({
     bindChoiseAddr:function(e){
         my.navigateTo({
           url: '/pages/me/me-addr/me-addr?choise=true', // 需要跳转的应用内非 tabBar 的页面的路径，路径后可以带参数。参数与路径之间使用
+        });
+    },
+    //加载订单信息
+    privInitOrder:function(orderInfo){
+        
+        let dataOrder ={menuArry:[],activeArry:[],otherArry:[]};
+
+        //菜单
+        dataOrder.menuArry = orderInfo.detailList
+        .filter(function(item){ return item.outType==1; })
+        .map(function(item){  return  {id:item.id,title:item.outTitle,price:item.outPrice,count:item.outSize} });
+
+        //优惠券 todo
+
+        //其它 todo
+
+        //金额
+        dataOrder.total=orderInfo.orderTotal;
+        //优惠金额
+        dataOrder.discount = orderInfo.orderDiscountTotal;
+        //支付金额 
+        dataOrder.pay = orderInfo.orderPay; 
+
+        this.setData({
+            "order.menuArry":dataOrder.menuArry,
+            "order.activeArry":dataOrder.activeArry,
+            "order.otherArry":dataOrder.otherArry,
+            "order.total":dataOrder.total,
+            "order.discount":dataOrder.discount,
+            "order.pay":dataOrder.pay,
         });
     }
 });

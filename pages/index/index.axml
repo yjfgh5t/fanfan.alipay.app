@@ -15,7 +15,7 @@
     <view class="car-body">
         <view a:for="{{carData.itemArry}}" class="lay-item">
                 <text class="title">{{item.title}}</text>
-                <text class="price">{{item.price}}</text>
+                <text class="price">{{item.salePrice}}</text>
                 <label class="item-btn lay-car">
                     <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="minus" src="{{btnMinus}}" />
                     <text>{{carData.itemIdArry[item.id]}}</text>
@@ -55,7 +55,7 @@
             <text class="active" a:for="{{item.active}}" a:for-item="aitem">
                 <text class="t-head t-head-{{aitem.atype}}"></text> {{aitem.text}}
             </text>
-            <text class="price">{{item.price}}</text>
+             <text class="price"> <text class="salePrice mark-price">{{item.salePrice}}</text>  <text class="mark-price cost">{{item.price}}</text></text>
         </label>
         <label class="item-btn"> 
             <block a:if="{{carData.itemIdArry[item.id]!=undefined}}">
