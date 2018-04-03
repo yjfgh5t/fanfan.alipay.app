@@ -11,6 +11,9 @@ let tools={
             return;
         }
 
+        if(option==undefined)
+            option={};
+
         //进度条 
         my.showLoading(); 
         let hidenLoading=false;
@@ -18,7 +21,7 @@ let tools={
         my.httpRequest({
             url: getApp().config.apiHost+pathname,
             method: method,
-            headers:{"Content-Type":"application/json"},
+            headers:option.headers,
             data: data,
             dataType: 'json',
             success: function(res) {

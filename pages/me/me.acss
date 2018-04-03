@@ -39,8 +39,3 @@
     right: 18rpx;
 }
 
-.btn{
-    padding: 18rpx;
-    text-align: center;
-    color: orangered;
-}

@@ -4,6 +4,7 @@ require('../..//pages/order/order');
 require('../..//pages/me/me');
 require('../..//pages/me/me-addr/me-addr');
 require('../..//pages/me/me-addr-edit/me-addr-edit');
+require('../..//pages/me/me-addr-search/me-addr-search');
 require('../..//pages/me/me-coupon/me-coupon');
 require('../..//pages/order/order-detail/order-detail');
 require('../..//pages/order/order-sure/order-sure');

@@ -77,3 +77,9 @@ textarea.form-textarea{
     font-size: 24rpx;
     color: #666 !important;
 }
+
+.btn{
+    padding: 18rpx;
+    text-align: center;
+    color: orangered;
+}

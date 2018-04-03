@@ -17,3 +17,4 @@
 <view onTap="bindExit" class="d-mar block btn">
     <text>退出登录</text>
 </view> 
+

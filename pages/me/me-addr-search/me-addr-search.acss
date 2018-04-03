@@ -1,0 +1,41 @@
+
+input::-ms-input-placeholder{text-align: center;}
+input::-webkit-input-placeholder{text-align: center;}
+
+.block.defcolor{
+    background-color: #fff;
+}
+
+.location{
+    color: rgb(241, 136, 79);
+}
+ 
+.d-pad.min{
+    padding-top: 12rpx;
+    padding-bottom: 12rpx;
+    color: #bbb;
+}
+
+
+.arrow:after,.arrow::before{
+    right: 0rpx; 
+}
+.arrow:before{
+    right: -4rpx; 
+}
+
+.btn-box{ 
+    position: fixed;
+    bottom:20%;
+    left:50%;
+    margin-left:-100rpx;
+}
+
+.btn-addr{
+    width:200rpx;
+    border:1rpx solid #ccc; 
+    border-radius:6rpx;
+    padding:15rpx 0rpx;
+    display:inline-block;
+    text-align:center;
+}
