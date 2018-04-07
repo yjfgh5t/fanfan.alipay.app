@@ -1,7 +1,7 @@
 require('./config$');
 require('../..//pages/index/index');
-require('../..//pages/order/order');
 require('../..//pages/me/me');
+require('../..//pages/order/order');
 require('../..//pages/me/me-addr/me-addr');
 require('../..//pages/me/me-addr-edit/me-addr-edit');
 require('../..//pages/me/me-addr-search/me-addr-search');

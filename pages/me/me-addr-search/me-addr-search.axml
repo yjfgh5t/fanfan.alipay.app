@@ -6,7 +6,7 @@
     <view  class="d-pad min">
         当前地址
     </view>
-    <view  class="block d-pad location arrow">
+    <view  class="block d-pad location arrow" onTap="bindSelected" data-index="-1">
         {{addrModel.street}}
     </view>
 </block>
@@ -15,7 +15,12 @@
     <view class="d-pad min">
         附近地址
     </view>
-    <view a:for="{{nearAddr}}" class="block d-pad-left">
+    <view a:for="{{nearAddr}}" class="block d-pad-left" onTap="bindSelected" data-index="{{index}}">
         <view class="d-pad noright border-line arrow">{{item.title}}</view>
     </view>
 </block>
+
+
+<view class="btn-box">
+    <text class="btn-addr" onTap="bindAddr">重新地位</text>
+</view>

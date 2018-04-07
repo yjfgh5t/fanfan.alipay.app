@@ -1,3 +1,8 @@
+
+.order:last-child{
+    margin-bottom: 18rpx;
+}
+
 .v-img{
     width:100rpx;
     height:100rpx; 
@@ -64,4 +69,28 @@
 .d-title.arrow:before{
     border-left-color:#333;
     right:-10rpx;
+}
+
+
+.noorder{
+    text-align: center;
+    margin-top: 30%; 
+}
+.noorder text{
+    color: #ccc;
+}
+
+
+.loadmore{
+    text-align: center;
+    margin: 20rpx 0rpx;
+}
+
+.loadmore text{
+    padding: 10rpx 20rpx;
+    text-align: center;
+    color: #999;
+    border: 1px solid #ccc;
+    border-radius: 6rpx; 
+    display: inline-block;
 }

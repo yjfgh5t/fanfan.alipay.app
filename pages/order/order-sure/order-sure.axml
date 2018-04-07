@@ -1,5 +1,7 @@
-<view class="block d-pad">
-    选择地址 <text class="arrow t-right" style="max-width:480rpx;height: 28rpx;overflow: hidden;" onTap="bindChoiseAddr" >{{order.addr.addrDetail==''?'未选择':order.addr.addrDetail}}</text>
+<view class="block d-pad" style="overflow: hidden;">
+    选择地址 <text class="arrow t-right" style="max-width:480rpx;" onTap="bindChoiseAddr" >
+        {{order.addr.addrDetail==''?'未选择':'['+order.addr.name+'] '+order.addr.addrDetail}}
+    </text>
 </view>
 
 <view class="block d-mar d-pad">
@@ -58,6 +60,7 @@
     </picker></view>
 </view>
 </view>
+
 <view class="block" >
   <view class="d-pad left border-line">
    订单备注<text class="t-muted t-right arrow" style="max-width:500rpx; height:32rpx;overflow:hidden;" onTap="bindRemark" >{{order.remark==""?"口味，偏好等":order.remark}}</text>
@@ -65,11 +68,11 @@
 </view>
 <view class="block" >
   <view class="d-pad left">
-   发票信息<text class="t-muted t-right arrow">商家不支持开发票</text>
+   发票信息<text class="t-muted t-right arrow">{{order.invoice}}</text>
 </view>
 </view> 
 <view style="height:100rpx;"></view>
 <view class="car-foot">
     <text class="cf-price">待支付￥{{order.pay}}</text><text class="cf-desc">|已优惠{{order.discount}}</text> 
-    <text class="cf-btn">提交订单</text>
+    <text class="cf-btn" onTap="bindSubmit">提交订单</text>
 </view>·

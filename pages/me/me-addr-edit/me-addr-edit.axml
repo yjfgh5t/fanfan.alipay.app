@@ -12,8 +12,8 @@
     <view class="d-pad border-line noright" style="padding-top:0rpx;">
         <label>
          <text class="t-title"></text> 
-          <button type="{{model.sex==1?'primary':'default'}}" size="mini" onTap="bindSex" data-sex="1"> 先生 </button> 
-          <button style="margin-left:10rpx;" type="{{model.sex==2?'primary':'default'}}" onTap="bindSex" data-sex="2" size="mini"> 女士 </button>
+          <button type="{{model.sex=='先生'?'primary':'default'}}" size="mini" onTap="bindSex" data-sex="先生"> 先生 </button> 
+          <button style="margin-left:10rpx;" type="{{model.sex=='女士'?'primary':'default'}}" onTap="bindSex" data-sex="女士" size="mini"> 女士 </button>
         </label>
     </view>
 
@@ -27,8 +27,8 @@
      <view class="d-pad border-line">
         <label>
          <text class="t-title">地址</text>
-           <view class="arrow edit-right">
-                <input type="text" class="from-input" disabled="true" name="addr"  placeholder="地址" value="{{model.addr}}" />
+           <view class="arrow edit-right" onTap="bindAddr">
+                <input type="text" class="from-input" disabled="true" name="addr"  placeholder="地址" value="{{model.district+model.street}}" />
           </view>
         </label>
     </view>
@@ -37,7 +37,7 @@
         <label>
          <text class="t-title">补充明细</text> 
           <view class="edit-right">
-            <textarea placeholder="详细地址（如门牌号）" name="addrDetail" class="form-textarea" style="font-size:28rpx;color:#666;" maxlength="80" value="{{model.addrDetail}}" />
+            <textarea placeholder="详细地址（如门牌号）" name="addrDetail" class="form-textarea" style="font-size:28rpx;color:#666;" maxlength="80" value="{{model.detail}}" />
           </view>
         </label>
     </view>

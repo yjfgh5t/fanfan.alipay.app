@@ -88,15 +88,7 @@ width:100%;
     margin-right: .533333vw;
     display: inline-block;
 }
-
-/* .item-con text.price::before,.lay-item .price::before{
-    font-weight: 400;
-    content: "\A5";
-    font-size: 22rpx;
-    margin-right: .053333rem;
-    margin-right: .533333vw;
-    display: inline-block;
-} */
+  
 
 .item-btn{
     position: absolute;

@@ -20,15 +20,10 @@ Page({
             //菜单
             menuArry:[
                 {id:1001,title:'黄焖鸡米饭',price:10.00,count:1},
-                {id:1002,title:'黄焖排骨饭',price:15.00,count:1},
-                {id:1003,title:'黄焖鸭腿饭',price:10,count:1},
-                {id:1004,title:'黄焖鸡米饭-小份',price:10,count:1},
-                {id:1005,title:'黄焖鸡米饭-大份',price:10,count:1},
             ],
             //优惠券
             activeArry:[
                 {id:1002,atype:1,title:'满30立减10元',price:-10},
-                {id:1003,atype:2,title:'满20立减5元',price:-10}
             ],
             //其它
             otherArry:[
@@ -42,15 +37,18 @@ Page({
             dinner:'',
             //订单描述
             remark:'',
+            invoice:'商家不支持开发票',
             addr:{
                 tel:'',
                 addrDetail:'',
-                lon:0,
+                lng:0,
                 lat:0,
                 sex:'',
                 name:''
             }
         },
+        //临时订单信息 
+        temOrder:{}
     },
     onLoad:function(e){
 
@@ -62,30 +60,27 @@ Page({
         }
     },
     onShow:function(){
-       var globalData = getApp().globalData;
-       if(globalData.orderRemark)
-       {
-           this.data.orderRemark=globalData.orderRemark; 
-           this.setData({
-               "order.remark":globalData.orderRemark.text
-            });
-            globalData.orderRemark=undefined;
+        //获取参数 
+        let  orderRemark  =tools.getParams("orderRemark",true); 
+       if(orderRemark){
+           this.data.orderRemark=orderRemark; 
+           this.setData({"order.remark":orderRemark.text}); 
        }
        
-       if(globalData.choiseAddr)
-       {
-            this.data.order.addr=Object.assign(globalData.choiseAddr);
-            this.setData({
-               "order.addr":this.data.order.addr
-            });
-            globalData.choiseAddr=undefined;
+       //获取参数 
+       let choiseAddr = tools.getParams("choiseAddr",true);
+       if(choiseAddr){
+            this.data.order.addr=Object.assign(choiseAddr);
+            this.setData({"order.addr":this.data.order.addr}); 
        }
 
     },
     //用餐人数
     bindDinner:function(e){
+        let _index =parseInt(e.detail.value);
+        this.data.order.dinner=this.data.dinner[_index].text;
         this.setData({
-            dinnerIndex:parseInt(e.detail.value),
+            dinnerIndex:_index,
         });
     },
     //输入描述
@@ -104,10 +99,42 @@ Page({
           url: '/pages/me/me-addr/me-addr?choise=true', // 需要跳转的应用内非 tabBar 的页面的路径，路径后可以带参数。参数与路径之间使用
         });
     },
+    //提交订单
+    bindSubmit:function(e){
+
+        let dataOrder  = this.data.order;
+
+        let reqOrder={
+            //用餐人数
+            orderMealsNum:this.data.dinner[this.data.dinnerIndex].text,
+            //描述
+            orderRemark:dataOrder.remark,
+            //订单发票信息
+            orderInvoice:dataOrder.invoice,
+            //订单支付类型  1:支付宝  2：微信 3：现金
+            orderPayType:1,
+            //收货人信息
+            receiver:dataOrder.addr, 
+            //设置状态 待支付 
+            orderState:102,
+        };
+
+        //合并对象
+        reqOrder = Object.assign(this.data.temOrder,reqOrder);
+ 
+
+        tools.ajax("api/order/",JSON.stringify(reqOrder),"POST",(resp)=>{
+
+        },{headers: {"Content-Type":"application/json"}});
+
+    },
     //加载订单信息
     privInitOrder:function(orderInfo){
         
-        let dataOrder ={menuArry:[],activeArry:[],otherArry:[]};
+        //保存订单数据
+        this.data.temOrder= orderInfo;
+
+        let dataOrder ={menuArry:[],activeArry:[],otherArry:[]}; 
 
         //菜单
         dataOrder.menuArry = orderInfo.detailList

@@ -132,7 +132,8 @@ Page({
         //订单提交对象
         let orderReq={
             createId:userInfo.id,
-            detailList:[]
+            detailList:[],
+            receiver:{},
         };
         
         //商品添加到集合

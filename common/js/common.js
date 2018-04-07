@@ -95,6 +95,28 @@ let tools={
             }
         });
 
+    },
+    //设置全局变量
+    setParams:function(objKey,objVal){
+        //设置本地值
+        let globalData  = getApp().globalData;
+
+        globalData[objKey]  = objVal;
+
+    },
+    //获取全局变量
+    getParams:function(objKey,del){
+        let globalData = getApp().globalData;
+
+        let val=globalData[objKey];
+
+        if(val==undefined)
+            return null;
+
+        if(del==true){
+            delete globalData[objKey];
+        } 
+        return val;
     }
 };
 export {tools};

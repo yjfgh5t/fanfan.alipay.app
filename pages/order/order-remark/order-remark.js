@@ -1,3 +1,4 @@
+import {tools} from '/common/js/common.js'
 Page({
     data:{
         remarkPepper:[
@@ -74,10 +75,8 @@ Page({
             formData.text=formData.text.substr(0,formData.text.length-1)
         } 
        
-        var globalData = getApp().globalData;
-        
-        //设置数据至全局变量中
-        globalData.orderRemark=formData;
+       //设置参数
+       tools.setParams("orderRemark",formData);
 
         my.navigateBack({delta:1}); 
     }

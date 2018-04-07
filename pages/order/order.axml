@@ -1,4 +1,4 @@
-<view class="block noright d-mar" a:for="{{orders}}"> 
+<view class="block noright d-mar order" a:for="{{orders}}"> 
     <view class="d-pad noright" style="overflow: hidden;">  
             <image src="{{item.pic}}" class="v-img" mode="scaleToFill" />
             <view class="border-line v-text">
@@ -15,5 +15,10 @@
           </view>
     </view> 
 </view>
+<view a:if="{{orders.length==0}}" class="noorder">
+    <text>您还没有下过订单哦！</text>
+</view>
  
-
+<view a:if="{{showLoadMore}}" class="loadmore">
+    <text onTap="privLoadData" >加载更多</text>
+</view>
