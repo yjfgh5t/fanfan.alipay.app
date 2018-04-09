@@ -1,9 +1,9 @@
-<view class="block noright d-mar order" a:for="{{orders}}"> 
+<view class="block noright d-mar order" a:for="{{orders}}" data-num="{{item.id}}" onTap="bindDetail" > 
     <view class="d-pad noright" style="overflow: hidden;">  
             <image src="{{item.pic}}" class="v-img" mode="scaleToFill" />
             <view class="border-line v-text">
                     <text class="d-title title arrow">{{item.title}}</text>
-                    <text class="order-state">{{item.ordreState}}</text>
+                    <text class="order-state">{{item.orderStateText}}</text>
                     <text class="time">{{item.orderTime}}</text>
              </view> 
     </view>

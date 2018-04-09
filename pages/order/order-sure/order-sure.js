@@ -124,6 +124,17 @@ Page({
  
 
         tools.ajax("api/order/",JSON.stringify(reqOrder),"POST",(resp)=>{
+            
+            if(resp.code==0){
+                console.log(resp.data);
+
+                my.tradePay({
+                        orderStr: resp.data.alipayOrderStr,  // 即上述服务端已经加签的orderSr参数
+                        success: (res) => {
+                            my.alert(res.resultCode);
+                        },
+                    }); 
+            }
 
         },{headers: {"Content-Type":"application/json"}});
 

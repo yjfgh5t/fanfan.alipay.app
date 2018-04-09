@@ -1,6 +1,6 @@
 
 <view class="head-img">
-   <image style="width:100%;" mode="scaleToFill" src="{{headImg}}" onError="imageError" onLoad="imageLoad" />
+   <image style="width:100%;height:300rpx;" mode="scaleToFill" src="{{headImg}}" onError="imageError" onLoad="imageLoad" />
 </view>
 <!--遮罩层-->
 <view class="{{showMark?'view-mark':''}}"></view>

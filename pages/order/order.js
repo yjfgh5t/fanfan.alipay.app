@@ -20,7 +20,7 @@ Page({
         tools.getUserInfo((user)=>{ 
 
             let _orders ={};
-
+0
             //获取订单列表 
             tools.ajax("api/order/",{userId:user.id,pageIndex:_this.data.pageIndex},"GET",function(resp){
                 if(resp.code!=0){
@@ -29,7 +29,7 @@ Page({
                 }
 
                 //是否显示下一页
-                _this.setData({showLoadMore:!(resp.data==null ||  resp.data.length<10)});
+                _this.setData({showLoadMore:!(resp.data==null || resp.data.length<10)});
 
                 if(resp.data==null || resp.data.length==0){
                     return;
@@ -55,5 +55,10 @@ Page({
             });
         });
 
+    },
+    bindDetail:function(e){ 
+        tools.setParams("orderNum",e.currentTarget.dataset.num);
+        //跳转
+        my.navigateTo({url:'/pages/order/order-detail/order-detail'});
     }
 });
