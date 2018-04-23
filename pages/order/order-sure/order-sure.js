@@ -37,6 +37,8 @@ Page({
             dinner:'',
             //订单描述
             remark:'',
+            //订单状态 [102:创建预付单 103:待支付]
+            orderState:102,
             invoice:'商家不支持开发票',
             addr:{
                 tel:'',
@@ -115,8 +117,8 @@ Page({
             orderPayType:1,
             //收货人信息
             receiver:dataOrder.addr, 
-            //设置状态 待支付 
-            orderState:102,
+            //设置状态 请求支付 
+            orderState:dataOrder.orderState,
         };
 
         //合并对象
@@ -125,14 +127,22 @@ Page({
 
         tools.ajax("api/order/",JSON.stringify(reqOrder),"POST",(resp)=>{
             
-            if(resp.code==0){
-                console.log(resp.data);
-
+            //状态为待支付
+            if(resp.code==0 && resp.data.orderState==103){
+                //设置请求状态
+                dataOrder.orderState=103;
                 my.tradePay({
                         orderStr: resp.data.alipayOrderStr,  // 即上述服务端已经加签的orderSr参数
                         success: (res) => {
-                            my.alert(res.resultCode);
+                             my.alert({
+	                                content: JSON.stringify(res),
+	                        });
                         },
+                         fail: (res) => {
+                            my.alert({
+                            content: JSON.stringify(res),
+                            });
+                        }
                     }); 
             }
 

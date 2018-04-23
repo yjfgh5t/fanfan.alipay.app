@@ -29,7 +29,7 @@ Page({
             //总金额
             price:0,
             //起送价格
-            minPrice:22,
+            minPrice:0.01,
       }
     },
     onLoad:function(){

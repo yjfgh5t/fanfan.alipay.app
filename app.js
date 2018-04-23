@@ -6,7 +6,7 @@ App({
   ],
   userInfo: null,
   config:{
-    apiHost:'http://m.wxcard.com.cn/',
+    apiHost:'http://localhost:8081/', //'http://wxcard.com.cn/',
     networkAvailable:true,
   },
 
