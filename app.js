@@ -6,21 +6,21 @@ App({
   ],
   userInfo: null,
   config:{
-    apiHost:'http://m.wxcard.com.cn/',
+    apiHost:'http://wxcard.com.cn/', //'http://wxcard.com.cn/',
     networkAvailable:true,
   },
-
+ 
   globalData:{},
   onLaunch:function(){
-   
+   let _this =this;
     //监听网咯状态
     my.onNetworkStatusChange(function(res){
-      this.config.networkAvailable = res.networkAvailable;
+      _this.config.networkAvailable = res.networkAvailable;
     });
 
     //获取网咯状态 
     my.getNetworkType({success: (res) => { 
-        this.config.networkAvailable = res.networkAvailable;
+        _this.config.networkAvailable = res.networkAvailable;
       }
     });
 
@@ -29,13 +29,13 @@ App({
       key: 'userInfo', // 缓存数据的 key
       success: (res) => {
         if(res!=null  &&  res.data!=null){
-          this.userInfo = res.data;
+          _this.userInfo = res.data;
         }
       },
     });
 
   },
-  getUserInfo() {
+  getUserInfo() { 
     return new Promise((resolve, reject) => {
       if (this.userInfo) resolve(this.userInfo);
 
