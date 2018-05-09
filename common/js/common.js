@@ -10,9 +10,17 @@ let tools={
             my.showToast({content:"无法连接到网络，请重试"});   
             return;
         }
+ 
 
-        if(option==undefined)
-            option={};
+        if(option==undefined) option={};
+
+        if(option.headers==undefined)option.headers={}; 
+
+        //固定信息
+        let base={clientType:app.clientType,userId:app.userInfo.id};
+
+        //设置header 固定数据
+        option.headers.base= JSON.stringify(base);
 
         //进度条 
         my.showLoading(); 
@@ -52,7 +60,7 @@ let tools={
          let app =  getApp();
 
          //判断是否已经获取到用户信息
-        if(app.userInfo!=null)
+        if(app.userInfo.id!=undefined)
         {
             success(app.userInfo);
             return;

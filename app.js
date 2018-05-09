@@ -4,9 +4,10 @@ App({
     { text: 'Learning ES2016', completed: true },
     { text: 'Learning 支付宝小程序', completed: false },
   ],
-  userInfo: null,
+  userInfo: {}, //{id:0,userNick:'',userMobile:'',userIcon:'',userSex:1,userState:1}
+  clientType:'alipay-miniprogram',
   config:{
-    apiHost:'http://wxcard.com.cn/', //'http://wxcard.com.cn/',
+    apiHost:'http://localhost:8081/', //'http://wxcard.com.cn/',
     networkAvailable:true,
   },
  
