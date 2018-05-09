@@ -1,8 +1,22 @@
-<view class="block d-mar">
 
+<view class="block" style="text-align:center;">
+
+    <image src="{{order.mainImg}}" mode="aspectFit" class="head-img" />
+    <view><text class="wait-pay">{{order.orderStateText}} </text></view>
+
+    <block a:if="{{order.orderState==103}}">
+    <view><text class="t-muted" style="line-height:50rpx;">逾期未支付，订单将自动取消</text></view>
+    <view style="line-height:80rpx;">
+        <text class="btn btn-defcolor">取消订单 </text> 
+        <text class="btn">立即支付（还剩14分29秒）</text> </view>
+    <block>
+</view>
+
+
+
+<view class="block d-mar"> 
     <view class="d-pad  border-line">
-        <text>{{order.name}}</text>
-       
+        <text>{{order.name}}</text> 
     </view>
 
     <view class="d-pad" a:for="{{order.commoditys}}" >
@@ -13,8 +27,7 @@
  
     <view class="d-pad" style="overflow: hidden;"> 
         <text class="t-price t-pay">实付￥{{order.pay}}</text>
-    </view>
- 
+    </view> 
 </view>
 
 <view class="block d-mar">
@@ -40,8 +53,8 @@
         </view> 
 
         <view  class="d-pad" style="overflow: hidden;"> 
-            <text class="t-price t-pay">{{order.orderState}}</text> 
-        </view> 
+            <text class="t-price t-pay">{{order.orderStateText}}</text> 
+        </view>
     </view>   
 </view>
 

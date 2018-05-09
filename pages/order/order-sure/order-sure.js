@@ -15,7 +15,7 @@ Page({
             {id:9,text:'9人'},
             {id:10,text:'10人以上'},
         ],
-        dinnerIndex:-1,
+        dinnerIndex:0,
         order:{
             //菜单
             menuArry:[
@@ -37,7 +37,7 @@ Page({
             dinner:'',
             //订单描述
             remark:'', 
-            //订单状态 [102:创建预付单 103:待支付]
+            //订单状态 [102:提交订单 103:待支付]
             orderState:102, 
             invoice:'商家不支持开发票',
             addr:{
@@ -54,11 +54,11 @@ Page({
     },
     onLoad:function(e){
 
-        let globalData = getApp().globalData;
+        let temOrder = tools.getParams("temOrder");
 
         //加载订单信息
-        if(globalData.temOrder){ 
-            this.privInitOrder(globalData.temOrder);
+        if(temOrder!=null){ 
+            this.privInitOrder(temOrder);
         }
     },
     onShow:function(){
@@ -102,7 +102,7 @@ Page({
         });
     },
     //提交订单
-    bindSubmit:function(e){
+    bindSubmit:function(e){ 
 
         let dataOrder  = this.data.order;
 
@@ -121,16 +121,17 @@ Page({
             orderState:dataOrder.orderState, 
         };
 
+        if(!this.privVerifyOrder(reqOrder)) return;
+
         //合并对象
         reqOrder = Object.assign(this.data.temOrder,reqOrder);
- 
-
+  
         tools.ajax("api/order/",JSON.stringify(reqOrder),"POST",(resp)=>{
              
             //状态为待支付
             if(resp.code==0 && resp.data.orderState==103){
                 //设置请求状态
-                dataOrder.orderState=103;
+                dataOrder.orderState=resp.data.orderState;
                 my.tradePay({
                         orderStr: resp.data.alipayOrderStr,  // 即上述服务端已经加签的orderSr参数
                         success: (res) => {
@@ -146,8 +147,7 @@ Page({
                     }); 
             }
 
-        },{headers: {"Content-Type":"application/json"}});
-
+        },{headers: {"Content-Type":"application/json"}}); 
     },
     //加载订单信息
     privInitOrder:function(orderInfo){
@@ -181,5 +181,15 @@ Page({
             "order.discount":dataOrder.discount,
             "order.pay":dataOrder.pay,
         });
+    },
+    //验证订单内容
+    privVerifyOrder:function(orderInfo){
+
+        if(orderInfo.receiver.addrDetail==''){
+            my.alert({title:"提示",content:"请选择收货地址"});
+            return false;
+        }
+
+        return true; 
     }
 });

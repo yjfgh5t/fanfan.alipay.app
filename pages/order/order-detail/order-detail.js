@@ -5,11 +5,12 @@ Page({
             name:"",
             commoditys:[{id:1001,title:'',price:10,size:10}],
             pay:15.00,
-            orderNum:'',
+            orderNum:'', 
             payType:'',
             createTime:'',
             invoice:'',
             orderState:'',
+            mainImg:'',
             receiver:{
                 name:'',
                 sex:'',
@@ -19,7 +20,7 @@ Page({
         }
     },
     onLoad:function(){
-        let orderNum = tools.getParams("orderNum",true); 
+        let orderNum ="1525873138056231"; //tools.getParams("orderNum",true); 
         console.log(orderNum);
         //加载数据
         this.privLoadData(orderNum);
@@ -39,7 +40,9 @@ Page({
                orderNum:orderNum,
                createTime:resp.data.createTime,
                invoice:resp.data.invoice,
-               orderState:resp.data.orderStateText,
+               orderState:resp.data.orderState,
+               orderStateText:resp.data.orderStateText,
+               mainImg:resp.data.mainImg,
                commoditys:[],
                receiver:{
                 name:resp.data.receiver.name,
@@ -59,5 +62,5 @@ Page({
             _this.setData({order:tmpOrder});
         });
 
-    }
+    }, 
 })

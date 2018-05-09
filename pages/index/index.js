@@ -151,7 +151,7 @@ Page({
 
             if(resp.code==0){
                 //订单信息存入全局变量
-                globalData.temOrder=resp.data;
+                 tools.setParams("temOrder",resp.data);
 
                 //跳转
                 my.navigateTo({
