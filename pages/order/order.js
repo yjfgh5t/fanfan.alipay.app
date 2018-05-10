@@ -8,8 +8,8 @@ Page({
         //显示加载更多
         showLoadMore:false,
     },
-    onLoad:function(e){
-      this.privLoadData();
+    onShow:function(){
+        this.privLoadData();
     },
     privLoadData:function(){
  

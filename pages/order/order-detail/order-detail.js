@@ -22,10 +22,18 @@ Page({
         endPayText:'',
     },
     onLoad:function(){
-        let orderNum ="1525945932973231"; //tools.getParams("orderNum",true); 
+        let orderNum =tools.getParams("orderNum",true); 
         console.log(orderNum);
         //加载数据
         this.privLoadData(orderNum);
+    },
+    //取消订单
+    bindChanel:function(){
+        
+        my.confirm({title: '提示',content: '确认取消改订单吗',success:function(){
+            
+        }})
+
     },
     privLoadData:function(orderNum){
 
@@ -81,9 +89,9 @@ Page({
             if(endTiemSecond<0) {
                 clearInterval(interval);
                 //设置参数
-                tools.setParams("orderNum",_this.data.order.orderNum);
-                //刷新
-                my.redirectTo("/pages/order/order-detail/order-detail");
+                //tools.setParams("orderNum",_this.data.order.orderNum);
+                //跳转值首页
+                my.redirectTo("/pages/index/index");
             };
 
             let second=endTiemSecond%60,minute=parseInt(endTiemSecond/60);
