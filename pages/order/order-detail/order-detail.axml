@@ -8,7 +8,7 @@
     <view><text class="t-muted" style="line-height:50rpx;">逾期未支付，订单将自动取消</text></view>
     <view style="line-height:80rpx;">
         <text class="btn btn-defcolor">取消订单 </text> 
-        <text class="btn">立即支付（还剩14分29秒）</text> </view>
+        <text class="btn">立即支付（{{endPayText}}）</text> </view>
     <block>
 </view>
 
