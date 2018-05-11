@@ -1,4 +1,5 @@
 import {tools} from '/common/js/common.js'
+import {pay} from '/common/js/pay.js'
 Page({
     data:{
         name:'hellow',
@@ -132,19 +133,11 @@ Page({
             if(resp.code==0 && resp.data.orderState==103){
                 //设置请求状态
                 dataOrder.orderState=resp.data.orderState;
-                my.tradePay({
-                        orderStr: resp.data.alipayOrderStr,  // 即上述服务端已经加签的orderSr参数
-                        success: (res) => {
-                             my.alert({
-	                                content: JSON.stringify(res),
-	                        });
-                        },
-                         fail: (res) => {
-                            my.alert({
-                            content: JSON.stringify(res),
-                            });
-                        } 
-                    }); 
+
+                //支付
+                pay.tradePay(resp.data.alipayOrderStr,(succes)=>{
+                    my.redirectTo("/pages/order/order-detail/order-detail");
+                });
             }
 
         },{headers: {"Content-Type":"application/json"}}); 

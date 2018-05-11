@@ -39,7 +39,7 @@ Page({
                     //设置key
                     let _parmKey="orders["+index+i+"]"; 
                     _orders[_parmKey]={
-                            id:item.orderNum,
+                            id:item.id,
                             title:item.title,
                             orderStateText:item.orderStateText,
                             orderTime:item.createTime,
@@ -57,7 +57,7 @@ Page({
 
     },
     bindDetail:function(e){ 
-        tools.setParams("orderNum",e.currentTarget.dataset.num);
+        tools.setParams("orderId",e.currentTarget.dataset.id);
         //跳转
         my.navigateTo({url:'/pages/order/order-detail/order-detail'});
     }

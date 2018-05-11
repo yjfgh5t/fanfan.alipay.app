@@ -5,7 +5,7 @@ Page({
         btnAdd:'/img/icon_btn_add_white.png',
         choise:false,
         addrArry:[
-            {id:1001,name:'江洋',canChoise:true,tel:'15821243531',sex:'女士',district:'上海市松江区城鸿路222号',street:'',detail:'鸿路222号4号楼1103室',lng:145568.123,lat:123123},
+            //{id:1001,name:'江洋',canChoise:true,tel:'15821243531',sex:'女士',district:'上海市松江区城鸿路222号',street:'',detail:'鸿路222号4号楼1103室',lng:145568.123,lat:123123},
         ]
     },
     onLoad:function(e){

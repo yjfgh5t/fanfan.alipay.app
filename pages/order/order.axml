@@ -1,4 +1,4 @@
-<view class="block noright d-mar order" a:for="{{orders}}" data-num="{{item.id}}" onTap="bindDetail" > 
+<view class="block noright d-mar order" a:for="{{orders}}" data-id="{{item.id}}" onTap="bindDetail" > 
     <view class="d-pad noright" style="overflow: hidden;">  
             <image src="{{item.pic}}" class="v-img" mode="scaleToFill" />
             <view class="border-line v-text">

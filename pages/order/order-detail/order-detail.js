@@ -1,10 +1,12 @@
-import {tools} from '/common/js/common.js'
+import {tools} from '/common/js/common.js';
+import {pay} from '/common/js/pay.js';
 Page({
     data:{
         order:{
             name:"",
             commoditys:[{id:1001,title:'',price:10,size:10}],
             pay:15.00,
+            orderId:0,
             orderNum:'', 
             payType:'',
             createTime:'',
@@ -12,6 +14,7 @@ Page({
             invoice:'',
             orderState:'',
             mainImg:'',
+            alipayOrderStr:'',
             receiver:{
                 name:'',
                 sex:'',
@@ -22,38 +25,59 @@ Page({
         endPayText:'',
     },
     onLoad:function(){
-        let orderNum =tools.getParams("orderNum",true); 
-        console.log(orderNum);
+        let orderId =tools.getParams("orderId",true); 
+        console.log(orderId);
         //加载数据
-        this.privLoadData(orderNum);
+        this.privLoadData(orderId);
     },
     //取消订单
     bindChanel:function(){
         
+        let _this = this;
+
         my.confirm({title: '提示',content: '确认取消改订单吗',success:function(){
             
-        }})
+            tools.ajax("api/order/cancel/"+_this.data.order.orderId,null,"POST",function(resp){
+                if(resp.code==0){
+                     my.redirectTo("/pages/index/index");
+                }
+            });
+
+        }});
 
     },
-    privLoadData:function(orderNum){
+    //支付
+    binPay:function(){
+
+        let _this = this;
+
+        //支付
+        pay.tradePay(_this.data.order.alipayOrderStr,(succes)=>{
+            my.redirectTo("/pages/order/order-detail/order-detail");
+        });
+
+    },
+    privLoadData:function(orderId){
 
         let _this =  this;
 
         //读取数据
-        tools.ajax("api/order/"+orderNum,null,"GET",function(resp){
+        tools.ajax("api/order/"+orderId,null,"GET",function(resp){
             if(resp.code!=0){
                 return;
             }
 
            let tmpOrder={
                pay:resp.data.orderPay,
-               orderNum:orderNum,
+               orderId:orderId,
+               orderNum:resp.data.orderNum,
                createTime:resp.data.createTime,
                lastPayTime:resp.data.lastPayTime,
                invoice:resp.data.invoice,
                orderState:resp.data.orderState,
                orderStateText:resp.data.orderStateText,
                mainImg:resp.data.mainImg,
+               alipayOrderStr:resp.data.alipayOrderStr,
                commoditys:[],
                receiver:{
                 name:resp.data.receiver.name,

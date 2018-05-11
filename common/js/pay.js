@@ -1,26 +1,17 @@
-
-let pay={
-
-    tradePay:function(orderStr){
-
+let pay={ 
+    tradePay:function(orderStr,callback){ 
          my.tradePay({
-            orderStr: resp.data.alipayOrderStr,  // 即上述服务端已经加签的orderSr参数
-            success: (res) => {
-                    my.alert({
-                        content: JSON.stringify(res),
-                });
+            orderStr: orderStr,  // 即上述服务端已经加签的orderSr参数
+            success: (res) => { 
+               callback(true);
             },
             fail: (res) => {
-                my.alert({
-                    content: JSON.stringify(res),
-                });
+             callback(false);
             } 
-         }); 
-
-
+         });  
     },
-
-}
+};
+export {pay};
 
 
 
