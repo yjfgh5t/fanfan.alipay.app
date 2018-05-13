@@ -93,3 +93,9 @@
     border-radius: 6rpx; 
     display: inline-block;
 }
+
+.btn{
+    line-height:40rpx;
+    border:1px solid orangered;
+    padding:8rpx 20rpx;
+}

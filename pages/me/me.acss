@@ -1,6 +1,5 @@
 .coupon{
-    background-image: url('/img/icon_me_coupon.png');
-    
+    background-image: url('/img/icon_me_coupon.png'); 
 }
 
 .addr{
@@ -16,6 +15,24 @@
     position: relative;
     top: 11rpx;
     margin-right: 15rpx;
+}
+
+.head-img{
+    width:120rpx;
+    height:120rpx;
+    display:inline-block;
+    float:left;
+    border:1rpx solid #fff;
+    border-radius: 50%;
+}
+
+.head-text{
+    display:inline-block;
+    color:white;
+    line-height:120rpx;
+    height:120rpx;
+    float:left;
+    margin-left:20rpx;
 }
 
 

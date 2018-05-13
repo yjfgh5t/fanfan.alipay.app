@@ -24,7 +24,7 @@ Page({
         },
         endPayText:'',
     },
-    onLoad:function(){
+    onShow:function(){
         let orderId =tools.getParams("orderId",true); 
         console.log(orderId);
         //加载数据
@@ -35,27 +35,31 @@ Page({
         
         let _this = this;
 
-        my.confirm({title: '提示',content: '确认取消改订单吗',success:function(){
-            
-            tools.ajax("api/order/cancel/"+_this.data.order.orderId,null,"POST",function(resp){
-                if(resp.code==0){
-                     my.redirectTo("/pages/index/index");
+        my.confirm({
+            title: '提示',
+            content: '确认取消改订单吗',
+            success:(result)=>{
+                if(result.confirm){ 
+                    tools.ajax("api/order/cancel/"+_this.data.order.orderId,null,"POST",function(resp){
+                        if(resp.code==0){
+                            my.redirectTo({url:"/pages/index/index"}); 
+                        }
+                    }); 
                 }
-            });
-
-        }});
+            }
+        });
 
     },
     //支付
-    binPay:function(){
-
-        let _this = this;
-
+    binPay:function(){ 
+        let _this= this;
         //支付
         pay.tradePay(_this.data.order.alipayOrderStr,(succes)=>{
-            my.redirectTo("/pages/order/order-detail/order-detail");
-        });
-
+            if(succes){
+                tools.setParams("orderId",_this.data.order.orderId);
+                _this.onShow();
+            }
+        }); 
     },
     privLoadData:function(orderId){
 

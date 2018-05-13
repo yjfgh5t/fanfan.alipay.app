@@ -1,4 +1,5 @@
 import {tools} from '/common/js/common.js'
+import {pay} from '/common/js/pay.js'
 Page({
     data:{
         orders:[
@@ -7,9 +8,36 @@ Page({
         pageIndex:1,
         //显示加载更多
         showLoadMore:false,
+        //计算器
+        intervalArray:[]
     },
     onShow:function(){
+        //数据初始化
+        this.data.orders=[];
+        this.data.pageIndex=1;
+        //停止计时器 
+        this.data.intervalArray.forEach((item)=>{
+            clearInterval(item);
+        });
+        this.data.intervalArray=[];
         this.privLoadData();
+    },
+    //查看详情
+    bindDetail:function(e){ 
+        tools.setParams("orderId",e.currentTarget.dataset.id);
+        //跳转
+        my.navigateTo({url:'/pages/order/order-detail/order-detail'});
+    }, 
+    //支付
+    bindPay:function(e){
+        
+        //支付
+        pay.tradePay(e.currentTarget.dataset.alipay,(succes)=>{
+            tools.setParams("orderId",e.currentTarget.dataset.id);
+            my.navigateTo({url:"/pages/order/order-detail/order-detail"});
+        });
+
+        return false;
     },
     privLoadData:function(){
  
@@ -20,7 +48,7 @@ Page({
         tools.getUserInfo((user)=>{ 
 
             let _orders ={};
-0
+
             //获取订单列表 
             tools.ajax("api/order/",{userId:user.id,pageIndex:_this.data.pageIndex},"GET",function(resp){
                 if(resp.code!=0){
@@ -46,7 +74,15 @@ Page({
                             ortherRemark:"共"+item.commodityTotal+"件商品",
                             pay:item.orderPay,
                             pic:item.commoditImg,
-                    }; 
+                            orderState:item.orderState,
+                            endPayText:'',
+                            alipayOrderStr:item.alipayOrderStr,
+                    };
+
+                    //更新最后支付时间
+                    if(item.orderState==103){
+                        _this.privEndPayTime(item.lastPayTime,_parmKey); 
+                    }
                 });
  
                 _this.setData(_orders); 
@@ -56,9 +92,46 @@ Page({
         });
 
     },
-    bindDetail:function(e){ 
-        tools.setParams("orderId",e.currentTarget.dataset.id);
-        //跳转
-        my.navigateTo({url:'/pages/order/order-detail/order-detail'});
+    //显示支付倒计时
+    privEndPayTime:function(endTiemSecond,paramKey){
+ 
+        let _this =this;
+        console.log(endTiemSecond);
+        //刷新文本函数
+        let _refshText = function(){
+
+         let refshParam={};
+
+            //刷新当前订单
+            if(endTiemSecond<0) {
+                clearInterval(interval);
+                //设置参数 
+                refshParam[paramKey+".orderState"]=105;
+                refshParam[paramKey+".orderStateText"]="超时未支付"; 
+            };
+
+            let second=endTiemSecond%60,minute=parseInt(endTiemSecond/60);
+
+            let endPayText="还剩";
+            //拼接分
+            if(minute>0) endPayText+= minute+"分";
+            //拼接秒
+            endPayText+= second+"秒";
+          
+            //设置倒计时文本
+            refshParam[paramKey+".endPayText"]=endPayText;
+
+            _this.setData(refshParam);
+
+            endTiemSecond--; 
+        };
+
+        let interval = setInterval(_refshText,1000);
+
+        //添加至集合
+        _this.data.intervalArray.push(interval);
+
+        //初始执行一次
+        _refshText();
     }
 });

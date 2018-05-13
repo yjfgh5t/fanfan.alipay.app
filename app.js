@@ -7,7 +7,7 @@ App({
   userInfo: {}, //{id:0,userNick:'',userMobile:'',userIcon:'',userSex:1,userState:1}
   clientType:'alipay-miniprogram',
   config:{
-    apiHost:'http://wxcard.com.cn/', //'http://localhost:8081/', 
+    apiHost:'http://wxcard.com.cn/',   //'http://localhost:8081/',
     networkAvailable:true,
   },
  

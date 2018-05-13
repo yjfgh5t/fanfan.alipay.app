@@ -1,5 +1,5 @@
 <view class="block noright d-mar order" a:for="{{orders}}" data-id="{{item.id}}" onTap="bindDetail" > 
-    <view class="d-pad noright" style="overflow: hidden;">  
+    <view class="d-pad noright" style="overflow: hidden;" >  
             <image src="{{item.pic}}" class="v-img" mode="scaleToFill" />
             <view class="border-line v-text">
                     <text class="d-title title arrow">{{item.title}}</text>
@@ -7,13 +7,17 @@
                     <text class="time">{{item.orderTime}}</text>
              </view> 
     </view>
-     <view class="d-pad border-line noright" style="padding-top:0rpx;padding-bottom:0rpx;overflow: hidden;"> 
+     <view class="d-pad border-line noright" style="padding-top:0rpx;padding-bottom:0rpx;overflow: hidden;clear:both;"> 
          <image class="v-img none" />
           <view class="v-text none">
             <text class="remark">{{item.ortherRemark}}</text>
             <text class="d-title order-state">￥{{item.pay}}</text>
           </view>
     </view> 
+    <view a:if="{{item.orderState==103 && item.endPayText!=''}}" class="d-pad border-line" style="overflow: hidden;text-align:right;">
+          <text class="btn" catchTap="bindPay" data-id="{{item.id}}" data-alipay="{{item.alipayOrderStr}}">立即支付（{{item.endPayText}}）</text> </view>
+    </view>    
+
 </view>
 <view a:if="{{orders.length==0}}" class="noorder">
     <text>您还没有下过订单哦！</text>
