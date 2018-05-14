@@ -1,15 +1,24 @@
+import {tools} from '/common/js/common.js'
+
+
 let pay={ 
-    tradePay:function(orderStr,callback){ 
+    tradePay:function(orderStr,orderId,callback){ 
          my.tradePay({
-            orderStr: orderStr,  // 即上述服务端已经加签的orderSr参数
-            success: (res) => { 
-                if(res.resultCode!=9000){
-                    my.alert({title:"支付失败!支付宝返回"+res.resultCode});
-                } 
-               callback(true);
+            //tradeNO:orderStr,  // 即上述服务端已经加签的orderSr参数
+            orderStr:orderStr,
+            success: (res) => {  
+                console.log(res.result);
+                let responData=JSON.parse(res.result); 
+                //验证支付
+                tools.ajax("api/alipay/"+orderId,{orderNum:responData.alipay_trade_app_pay_response.trade_no},"GET",function(httpRes){
+                    if(httpRes){
+                        callback(true);
+                    }else{
+                        callback(true);
+                    }
+                });
             },
-            fail: (res) => {
-             my.alert({title:"支付失败!支付宝返回"+res.resultCode}); 
+            fail: (res) => { 
              callback(false);
             } 
          });  

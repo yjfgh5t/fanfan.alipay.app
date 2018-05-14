@@ -54,7 +54,7 @@ Page({
     binPay:function(){ 
         let _this= this;
         //支付
-        pay.tradePay(_this.data.order.alipayOrderStr,(succes)=>{
+        pay.tradePay(_this.data.order.alipayOrderStr,_this.data.order.orderId,(succes)=>{
             if(succes){
                 tools.setParams("orderId",_this.data.order.orderId);
                 _this.onShow();

@@ -29,10 +29,9 @@ Page({
         my.navigateTo({url:'/pages/order/order-detail/order-detail'});
     }, 
     //支付
-    bindPay:function(e){
-        
+    bindPay:function(e){ 
         //支付
-        pay.tradePay(e.currentTarget.dataset.alipay,(succes)=>{
+        pay.tradePay(e.currentTarget.dataset.alipay,e.currentTarget.dataset.id,(succes)=>{
             tools.setParams("orderId",e.currentTarget.dataset.id);
             my.navigateTo({url:"/pages/order/order-detail/order-detail"});
         });
