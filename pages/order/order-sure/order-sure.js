@@ -134,6 +134,9 @@ Page({
                 //设置请求状态
                 dataOrder.orderState=resp.data.orderState;
 
+                //清空首页购物车
+                tools.setParams("clearCar",true); 
+
                 //支付
                 pay.tradePay(resp.data.alipayOrderStr,resp.data.id,(succes)=>{
                     tools.setParams("orderId",resp.data.id);

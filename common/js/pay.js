@@ -9,17 +9,26 @@ let pay={
             success: (res) => {  
                 console.log(res.result);
                 let responData=JSON.parse(res.result); 
+                //提交数据
+                let reqModel={
+                    appId:responData.app_id,
+                    appId:responData.out_trade_no,
+                    tradeNo:responData.trade_no,
+                    totalAmount:responData.total_amount,
+                    sellerId:responData.seller_id,
+                    notifyTime:responData.timestamp, 
+                };
                 //验证支付
-                tools.ajax("api/alipay/"+orderId,{orderNum:responData.alipay_trade_app_pay_response.trade_no},"GET",function(httpRes){
+                tools.ajax("api/order/checkPay/"+orderId,JSON.stringify(reqModel),"POST",function(httpRes){
                     if(httpRes){
                         callback(true);
                     }else{
-                        callback(true);
+                        callback(false);
                     }
-                });
+                },{headers: {"Content-Type":"application/json"}});
             },
             fail: (res) => { 
-             callback(false);
+                callback(false);
             } 
          });  
     },

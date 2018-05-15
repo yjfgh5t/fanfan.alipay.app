@@ -25,8 +25,7 @@ Page({
         endPayText:'',
     },
     onShow:function(){
-        let orderId =tools.getParams("orderId",true); 
-        console.log(orderId);
+        let orderId =this.data.order.orderId==0?tools.getParams("orderId",true):this.data.order.orderId;  
         //加载数据
         this.privLoadData(orderId);
     },

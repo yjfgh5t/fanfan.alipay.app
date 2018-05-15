@@ -10,14 +10,7 @@ Page({
         btnClose:'/img/icon_btn_add_white.png',
         showMark:false,
         itemArry:[
-            {id:'1001',title:'招聘黄焖鸡米饭-A',active:[{atype:1,text:'前场九折起'}],price:18.1,salePrice:12, icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄'},
-            {id:'1002',title:'招聘黄焖鸡米饭-B',active:[{atype:2,text:'满30减20'}],price:12.1,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄'},
-            {id:'1003',title:'招聘黄焖鸡米饭-C',active:[{atype:2,text:'满30减20'}],price:13.1,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄'},
-            {id:'1004',title:'招聘黄焖鸡米饭-D',active:[],price:16.1,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄'},
-            {id:'1005',title:'招聘黄焖鸡米饭-E',price:25,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄'},
-            {id:'1006',title:'招聘黄焖鸡米饭-F',price:25,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄'},
-            {id:'1007',title:'招聘黄焖鸡米饭',price:25,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄'},
-            {id:'1008',title:'招聘黄焖鸡米饭',price:25,icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄'},
+            //{id:'1001',title:'招聘黄焖鸡米饭-A',active:[{atype:1,text:'前场九折起'}],price:18.1,salePrice:12, icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄'},
         ],
         carData:{
             show:false,
@@ -35,6 +28,11 @@ Page({
     },
     onLoad:function(){
         this.loadData();
+    },
+    onShow:function(){
+         
+         //清空购物车
+         this.privClearCar();  
     },
     //加载数据
     loadData:function(){
@@ -120,6 +118,7 @@ Page({
             'carData.price':price.toFixed(2), 
         });
     },
+    //提交按钮
     bindSubmit:function(e){
     
         //选择的菜单
@@ -162,5 +161,21 @@ Page({
         },{headers: {"Content-Type":"application/json"}}); 
 
        });
+    },
+    //清空购物车
+    privClearCar:function(){
+
+        //是否清空购物车
+        let clearCar = tools.getParams("clearCar",true); 
+
+        if(clearCar!=null){ 
+            this.setData({
+                'showMark':false,
+                'carData.show':false,
+                'carData.itemArry':[],
+                'carData.count':0,
+                'carData.price':0,
+            });
+        }
     }
 });
