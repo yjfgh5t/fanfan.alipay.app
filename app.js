@@ -1,18 +1,28 @@
+import {tools} from '/common/js/common.js'
 App({
-  todos: [
-    { text: 'Learning Javascript', completed: true },
-    { text: 'Learning ES2016', completed: true },
-    { text: 'Learning 支付宝小程序', completed: false },
-  ],
+  //用户信息
   userInfo: {}, //{id:0,userNick:'',userMobile:'',userIcon:'',userSex:1,userState:1}
+  //客户端类型
   clientType:'alipay-miniprogram',
+  //应用顾客id
+  appCustomerId:1,
+  //配置信息
   config:{
-    apiHost:'http://wxcard.com.cn/',   //'http://localhost:8081/',
+    apiHost:'http://localhost:8081/',   //'http://wxcard.com.cn/',
     networkAvailable:true,
+    //店铺名称
+    showName:"",
+    //最低起送价 
+    minTakePrice:0.0,
+    //店铺营业开始时间,
+    startBusiTime:"09:00",
+    //结束营业时间
+    endBusiTime:"10:00",
   },
- 
+  //全局对象
   globalData:{},
-  onLaunch:function(){
+
+  onLaunch:function(option){
    let _this =this;
     //监听网咯状态
     my.onNetworkStatusChange(function(res){
@@ -34,34 +44,33 @@ App({
         }
       },
     });
-
+ 
+    //加载数据
+    _this.privInitParams();
   },
-  getUserInfo() { 
-    return new Promise((resolve, reject) => {
-      if (this.userInfo) resolve(this.userInfo);
-
-      my.getAuthCode({
-        scopes: ['auth_user'],
-        success: (authcode) => {
-          console.info(authcode);
-
-          my.getAuthUserInfo({
-            success: (res) => {
-              this.userInfo = res;
-              resolve(this.userInfo);
-            },
-            fail: () => {
-              reject({});
-            },
-          });
-        },
-        fail: () => {
-          reject({});
-        },
-      });
-    });
-  },
-  onShow:function(){
+  onShow:function(option){
      
+     if(option.query){
+       if(option.query.customerId){
+         this.appCustomerId=option.query.customerId;
+       }
+     }
   },
+  //获取基础信息 
+  privInitParams:function(){
+ 
+    let _this = this;
+
+      tools.ajax("api/info/",{},"GET",(resp)=>{
+
+        //设置值
+        if(resp.data.dict){
+          _this.config.shopName=resp.data.dict[1021];
+          _this.config.minTakePrice=parseFloat(resp.data.dict[1022]);
+          _this.config.startBusiTime=resp.data.dict[1011];
+          _this.config.endBusiTime=resp.data.dict[1012];
+        };
+
+      }); 
+  }
 });

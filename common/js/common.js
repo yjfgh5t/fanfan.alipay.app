@@ -10,14 +10,17 @@ let tools={
             my.showToast({content:"无法连接到网络，请重试"});   
             return;
         }
- 
 
         if(option==undefined) option={};
 
         if(option.headers==undefined)option.headers={}; 
 
         //固定信息
-        let base={clientType:app.clientType,userId:app.userInfo.id};
+        let base={
+            clientType:app.clientType,
+            userId:app.userInfo.id,
+            customerId:app.appCustomerId,
+            };
 
         //设置header 固定数据
         option.headers.base= JSON.stringify(base);

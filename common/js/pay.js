@@ -4,7 +4,7 @@ import {tools} from '/common/js/common.js'
 let pay={ 
     tradePay:function(orderStr,orderId,callback){ 
          my.tradePay({
-            //tradeNO:orderStr,  // 即上述服务端已经加签的orderSr参数
+            //tradeNO:orderStr,  //即上述服务端已经加签的orderSr参数
             orderStr:orderStr,
             success: (res) => {  
                 console.log(res.result);

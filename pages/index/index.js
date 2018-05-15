@@ -23,24 +23,25 @@ Page({
             //总金额
             price:0,
             //起送价格
-            minPrice:0.01,
+            minPrice:0.0,
       }
     },
     onLoad:function(){
         this.loadData();
     },
     onShow:function(){
-         
          //清空购物车
          this.privClearCar();  
     },
     //加载数据
     loadData:function(){
-        let page = this;  
+        let _this = this;  
+        let _app = getApp();
         tools.ajax('api/commodity/',{},'GET',function(res){
             console.log(res.data);
             if(res.code==0){ 
-                page.setData({itemArry:res.data}); 
+                _this.setData({"itemArry":res.data,"carData.minPrice":_app.config.minTakePrice});   
+                my.setNavigationBar({title:_app.config.shopName});
             }
         });
     },
