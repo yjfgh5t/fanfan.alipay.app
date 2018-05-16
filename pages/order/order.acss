@@ -99,3 +99,73 @@
     border:1px solid orangered;
     padding:8rpx 20rpx;
 }
+
+
+.process{
+    position:relative; 
+    overflow: hidden;
+    height: 40rpx;
+}
+
+.process .line{
+    background-color:#ccc;
+    height:14rpx;
+    border-radius:10rpx;
+    position:absolute;
+    width:100%;
+    top:30%;
+}
+
+.process .line.active-1{
+    background-color:#1afa29; 
+    width: 10%;
+}
+
+.process .line.active-2{
+    background-color:#1afa29; 
+    width: 50%;
+}
+
+.process .line.active-3{
+    background-color:#1afa29; 
+    width: 100%;
+}
+
+.process .point{
+    display:inline-block;
+    width:28rpx;
+    height:28rpx;
+    background-color:#ccc;
+    border-radius:50%;
+    position:absolute;
+    top:30%; 
+    margin-top: -8rpx;
+}
+
+.process .point.active{
+     background-color:#1afa29;
+}
+
+
+.process  .point .state-text{
+    position:absolute;
+    width:160rpx;
+    top:36rpx;
+    font-size:18rpx;
+    left:-60rpx;
+    text-align:center;
+}
+
+.process .point.point-1{
+    left:10%;
+}
+
+.process .point.point-2{
+    left:50%;
+    margin-left:14rpx;
+}
+
+.process .point.point-3{
+    right:10%;
+}
+

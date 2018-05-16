@@ -13,12 +13,24 @@
             <text class="remark">{{item.ortherRemark}}</text>
             <text class="d-title order-state">￥{{item.pay}}</text>
           </view>
-    </view> 
-    <view a:if="{{item.orderState==103 && item.endPayText!=''}}" class="d-pad border-line" style="overflow: hidden;text-align:right;">
-          <text class="btn" catchTap="bindPay" data-id="{{item.id}}" data-alipay="{{item.alipayOrderStr}}">立即支付（{{item.endPayText}}）</text> </view>
-    </view>    
+    </view>   
+        
+    <view class="d-pad border-line process">
+        <view class="line"></view> 
+        <view class="line active-3"></view>
+        <text class="point point-1 active"><text class="state-text">商家正在备货</text></text>
+        <text class="point point-2 active"><text class="state-text">小哥正在配送中</text></text>
+        <text class="point point-3 active"><text class="state-text">订单已签收</text></text>
+    </view>
+
+    <block a:if="{{item.orderState==103 && item.endPayText!=''}}">
+        <view class="d-pad border-line" style="overflow: hidden;text-align:right;">
+            <text class="btn" catchTap="bindPay" data-id="{{item.id}}" data-alipay="{{item.alipayOrderStr}}">立即支付（{{item.endPayText}}）</text> </view>
+        </view>
+    </block>      
 
 </view>
+
 <view a:if="{{orders.length==0}}" class="noorder">
     <text>您还没有下过订单哦！</text>
 </view>
