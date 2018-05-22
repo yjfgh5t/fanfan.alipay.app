@@ -100,7 +100,6 @@
     padding:8rpx 20rpx;
 }
 
-
 .process{
     position:relative; 
     overflow: hidden;
@@ -111,9 +110,9 @@
     background-color:#ccc;
     height:14rpx;
     border-radius:10rpx;
-    position:absolute;
-    width:100%;
+    position:absolute; 
     top:30%;
+    width: 694rpx;
 }
 
 .process .line.active-1{
@@ -128,7 +127,7 @@
 
 .process .line.active-3{
     background-color:#1afa29; 
-    width: 100%;
+    width: 694rpx;
 }
 
 .process .point{
