@@ -49,7 +49,7 @@ Page({
             let _orders ={};
 
             //获取订单列表 
-            tools.ajax("api/order/",{userId:user.id,pageIndex:_this.data.pageIndex},"GET",function(resp){
+            tools.ajax("api/order/query",JSON.stringify({userId:user.id,pageIndex:_this.data.pageIndex}),"POST",function(resp){
                 if(resp.code!=0){
                     my.alert({title: '获取数据失败'});
                     return;
@@ -87,7 +87,7 @@ Page({
                 _this.setData(_orders); 
 
                 _this.data.pageIndex++;
-            });
+            },{headers: {"Content-Type":"application/json"}});
         });
 
     },
