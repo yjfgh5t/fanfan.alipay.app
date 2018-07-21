@@ -72,7 +72,6 @@ let tools={
          my.getAuthCode({
             scopes: 'auth_user',
             success: (res) => {
-
                 //获取用户信息
                 tools.ajax("api/user/",{code:res.authCode,type:1},"POST",function(resp){
                     console.log(resp);
@@ -89,9 +88,7 @@ let tools={
                         success(resp.data);
                         return;
                     }
-                    
-                    my.showToast({content:"获取用户信息失败，请稍后重试"});   
-
+                    my.showToast({content:"获取用户信息失败，请稍后重试"});
                 });
             },
             fail:(res)=>{
@@ -105,7 +102,6 @@ let tools={
                 });
             }
         });
-
     },
     //设置全局变量
     setParams:function(objKey,objVal){

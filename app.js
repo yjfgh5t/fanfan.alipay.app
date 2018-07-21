@@ -8,7 +8,7 @@ App({
   appCustomerId:1,
   //配置信息
   config:{
-    apiHost:'http://localhost:8081/',   //'http://wxcard.com.cn/',
+    apiHost:'http://wxcard.com.cn/',   //'http://localhost:8081/',
     networkAvailable:true,
     //店铺名称
     showName:"",
@@ -26,7 +26,7 @@ App({
    let _this =this;
     //监听网咯状态
     my.onNetworkStatusChange(function(res){
-      _this.config.networkAvailable = res.networkAvailable;
+      _this.config.networkAvailable = res.isConnected;
     });
 
     //获取网咯状态 

@@ -132,7 +132,7 @@ Page({
         
         //订单提交对象
         let orderReq={
-            createId:userInfo.id,
+            userId:userInfo.id,
             detailList:[],
             receiver:{},
         };
