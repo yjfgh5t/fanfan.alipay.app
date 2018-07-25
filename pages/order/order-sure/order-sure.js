@@ -140,7 +140,7 @@ Page({
                 //支付
                 pay.tradePay(resp.data.alipayOrderStr,resp.data.id,(succes)=>{
                     tools.setParams("orderId",resp.data.id);
-                    my.redirectTo({url:"/pages/order/order-detail/order-detail?123"});
+                    my.redirectTo({url:"/pages/order/order-detail/order-detail"});
                 });
             }
 

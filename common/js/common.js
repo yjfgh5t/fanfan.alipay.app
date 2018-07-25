@@ -3,11 +3,18 @@ let tools={
     //异步请求
     ajax:function(pathname,data,method,success,option){
 
+        //进度条 
+        my.showLoading(); 
+
         let app =  getApp();
-        console.log(app.config.networkAvailable);
         if(!app.config.networkAvailable)
         {
-            my.showToast({content:"无法连接到网络，请重试"});   
+            my.hideLoading();
+            if(option!=undefined && option.network){
+                option.network(false);
+            }else{
+                my.showToast({content:"无法连接到网络，请重试"});
+            }
             return;
         }
 
@@ -24,9 +31,7 @@ let tools={
 
         //设置header 固定数据
         option.headers.base= JSON.stringify(base);
-
-        //进度条 
-        my.showLoading(); 
+ 
         let hidenLoading=false;
         //请求
         my.httpRequest({
@@ -48,7 +53,11 @@ let tools={
                 }
             },
             fail: function(res) {
-                my.showToast({content: '无法连接到网络，请重试'});
+                if(option!=undefined && option.network){
+                    option.network(false);
+                }else{
+                    my.showToast({content:"无法连接到网络，请重试"});
+                }
             },
             complete: function(res) {
                 if(!hidenLoading)

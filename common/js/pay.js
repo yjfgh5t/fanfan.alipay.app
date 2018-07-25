@@ -8,31 +8,42 @@ let pay={
             orderStr:orderStr,
             success: (res) => {  
                 console.log(res.result);
-                let responData=JSON.parse(res.result); 
-                //提交数据
-                let reqModel={
-                    appId:responData.app_id,
-                    appId:responData.out_trade_no,
-                    tradeNo:responData.trade_no,
-                    totalAmount:responData.total_amount,
-                    sellerId:responData.seller_id,
-                    notifyTime:responData.timestamp, 
-                };
-                //验证支付
-                tools.ajax("api/order/checkPay/"+orderId,JSON.stringify(reqModel),"POST",function(httpRes){
-                    if(httpRes){
-                        callback(true);
-                    }else{
-                        callback(false);
-                    }
-                },{headers: {"Content-Type":"application/json"}});
+                pay.checkPay(orderId,callback,1000);
             },
             fail: (res) => { 
-                callback(false);
-            } 
+                pay.checkPay(orderId,callback,1000);
+            }
          });  
     },
+    //验证是否已经支付
+    checkPay:function(orderId,callback,time){
+        my.showLoading();
+        //进度条
+        window.setInterval(function(){
+            my.hideLoading();
+            //验证支付
+            tools.ajax("api/order/checkPay/"+orderId,{},"POST",function(res){
+                if(res.code==0 && res.data==true){
+                    callback(true);
+                }else{
+                    callback(false);
+                }
+            },{
+            network:function(fail){
+                //提示重试
+                my.confirm({
+                title:"网络提示",
+                content:"无法连接到网络！",
+                confirmButtonText:"重试",
+                success: (res) => {
+                    pay.checkPay(orderId,callback,1000);
+                  },
+                });
+            }});
+        },time)
+    }
 };
+
 export {pay};
 
 
