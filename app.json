@@ -1,7 +1,7 @@
 {
-  "pages": [  
-    "pages/order/order", 
+  "pages": [
     "pages/index/index",
+    "pages/order/order",
     "pages/me/me",   
     "pages/order/order-detail/order-detail",
     "pages/me/me-addr/me-addr",

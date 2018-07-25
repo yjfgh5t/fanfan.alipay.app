@@ -8,10 +8,10 @@ let pay={
             orderStr:orderStr,
             success: (res) => {  
                 console.log(res.result);
-                pay.checkPay(orderId,callback,1000);
+                pay.checkPay(orderId,callback,2000);
             },
             fail: (res) => { 
-                pay.checkPay(orderId,callback,1000);
+                pay.checkPay(orderId,callback,2000);
             }
          });  
     },
@@ -19,7 +19,7 @@ let pay={
     checkPay:function(orderId,callback,time){
         my.showLoading();
         //进度条
-        window.setInterval(function(){
+       let inter = setTimeout(function(){
             my.hideLoading();
             //验证支付
             tools.ajax("api/order/checkPay/"+orderId,{},"POST",function(res){

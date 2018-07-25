@@ -10,7 +10,7 @@
 
 
 <view class="block d-mar d-pad border-line">
-   订单列表
+   商品列表
 </view>  
 
 <!--遍历菜单-->

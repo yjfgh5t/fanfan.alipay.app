@@ -5,10 +5,10 @@ App({
   //客户端类型
   clientType:'alipay-miniprogram',
   //应用顾客id
-  appCustomerId:1,
+  appCustomerId:132,
   //配置信息
   config:{
-    apiHost:'http://wxcard.com.cn/',   //'http://localhost:8081/',
+    apiHost:'http://localhost:8081/',   //'http://wxcard.com.cn/',
     networkAvailable:true,
     //店铺名称
     showName:"",
