@@ -3,17 +3,29 @@ import {tools} from '/common/js/common.js'
 
 let pay={ 
     tradePay:function(orderStr,orderId,callback){ 
-         my.tradePay({
-            //tradeNO:orderStr,  //即上述服务端已经加签的orderSr参数
-            orderStr:orderStr,
-            success: (res) => {  
-                console.log(res.result);
-                pay.checkPay(orderId,callback,2000);
-            },
-            fail: (res) => { 
-                pay.checkPay(orderId,callback,2000);
+
+        //支付之前验证该订单是否已经支付
+        pay.checkPay(orderId,function(hasPay){
+
+            //是否支付
+            if(hasPay){
+                return callback(true);
             }
-         });  
+
+            //唤醒支付窗口
+            my.tradePay({
+                //tradeNO:orderStr,  //即上述服务端已经加签的orderSr参数
+                orderStr:orderStr,
+                success: (res) => {  
+                    console.log(res.result);
+                    pay.checkPay(orderId,callback,2000);
+                },
+                fail: (res) => { 
+                    pay.checkPay(orderId,callback,2000);
+                }
+            });
+
+        },0);
     },
     //验证是否已经支付
     checkPay:function(orderId,callback,time){
