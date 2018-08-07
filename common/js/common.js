@@ -33,6 +33,7 @@ let tools={
         option.headers.base= JSON.stringify(base);
  
         let hidenLoading=false;
+
         //请求
         my.httpRequest({
             url: getApp().config.apiHost+pathname,

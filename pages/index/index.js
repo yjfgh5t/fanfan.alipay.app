@@ -174,6 +174,7 @@ Page({
                 'showMark':false,
                 'carData.show':false,
                 'carData.itemArry':[],
+                'carData.itemIdArry':{},
                 'carData.count':0,
                 'carData.price':0,
             });

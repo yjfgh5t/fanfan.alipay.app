@@ -113,7 +113,7 @@ Page({
         let _refshText = function(){
 
             //刷新当前订单
-            if(endTiemSecond<0) {
+            if(endTiemSecond<=0) {
                 clearInterval(interval);
                 //设置参数
                 //tools.setParams("orderNum",_this.data.order.orderNum);
@@ -132,7 +132,6 @@ Page({
             _this.setData({"endPayText":endPayText});
 
             endTiemSecond--;
-
         }
 
         let interval = setInterval(_refshText,1000);
