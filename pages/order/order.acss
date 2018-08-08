@@ -15,7 +15,6 @@
 .v-text{
     float:left;
     width:565rpx;
-    height: 100rpx;
     padding-right: 25rpx;
 }
  
@@ -40,6 +39,12 @@
 }
 
 .v-text .time{
+    display:block;
+    color:#ccc;
+    font-size: 22rpx;
+}
+
+.v-text .commodity-size{
     display:block;
     color:#ccc;
     font-size: 22rpx;
@@ -104,6 +109,7 @@
     position:relative; 
     overflow: hidden;
     height: 40rpx;
+    display: none;
 }
 
 .process .line{

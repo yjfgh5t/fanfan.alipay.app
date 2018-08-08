@@ -39,6 +39,12 @@
         <view class="d-pad-tb border-line">
             订单号：{{order.orderNum}}
         </view>
+        <view class="d-pad-tb border-line">
+            编号：{{order.dateNum}}
+        </view> 
+        <view class="d-pad-tb border-line">
+            桌号：{{order.deskNum}}
+        </view> 
 
          <view class="d-pad-tb border-line">
             支付方式：在线支付

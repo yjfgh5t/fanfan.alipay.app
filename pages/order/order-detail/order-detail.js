@@ -80,6 +80,8 @@ Page({
                orderState:resp.data.orderState,
                orderStateText:resp.data.orderStateText,
                mainImg:resp.data.mainImg,
+               dateNum:resp.data.orderDateNum==null?'':('#'+resp.data.orderDateNum),
+               deskNum:resp.data.orderDeskNum,
                alipayOrderStr:resp.data.alipayOrderStr,
                commoditys:[],
                receiver:{

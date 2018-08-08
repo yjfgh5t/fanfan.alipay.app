@@ -5,15 +5,16 @@
                     <text class="d-title title arrow">{{item.title}}</text>
                     <text class="order-state">{{item.orderStateText}}</text>
                     <text class="time">{{item.orderTime}}</text>
-             </view> 
+                    <text class="commodity-size">{{item.ortherRemark}}</text>
+             </view>
     </view>
      <view class="d-pad border-line noright" style="padding-top:0rpx;padding-bottom:0rpx;overflow: hidden;clear:both;"> 
          <image class="v-img none" />
           <view class="v-text none">
-            <text class="remark">{{item.ortherRemark}}</text>
+            <text class="remark">{{item.dateNum}}</text>
             <text class="d-title order-state">￥{{item.pay}}</text>
           </view>
-    </view>   
+    </view>
         
     <view class="d-pad border-line process">
         <view class="line"></view> 

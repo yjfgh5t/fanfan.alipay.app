@@ -76,6 +76,7 @@ Page({
                             orderState:item.orderState,
                             endPayText:'',
                             alipayOrderStr:item.alipayOrderStr,
+                            dateNum:item.orderDateNum==null?'':('#'+item.orderDateNum)
                     };
 
                     //更新最后支付时间
