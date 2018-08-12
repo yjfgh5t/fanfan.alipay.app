@@ -3,7 +3,7 @@ App({
   //用户信息
   userInfo: {}, //{id:0,userNick:'',userMobile:'',userIcon:'',userSex:1,userState:1}
   //客户端类型
-  clientType:'alipay-miniprogram',
+  clientType:'AlipayMiniprogram',
   //应用顾客id
   appCustomerId:132,
   //配置信息

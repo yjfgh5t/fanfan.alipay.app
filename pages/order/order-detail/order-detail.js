@@ -24,8 +24,14 @@ Page({
         },
         endPayText:'',
     },
-    onShow:function(){
-        let orderId =this.data.order.orderId==0?tools.getParams("orderId",true):this.data.order.orderId;  
+    onShow:function(options){
+        let orderId;  
+        if(options.query && options.query.orderId){
+            orderId = options.query.orderId
+        }else{
+            orderId = this.data.order.orderId==0?tools.getParams("orderId",true):this.data.order.orderId;  
+        }
+      
         //加载数据
         this.privLoadData(orderId);
     },

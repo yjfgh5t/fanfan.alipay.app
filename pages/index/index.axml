@@ -6,35 +6,36 @@
 
 <!--购物车弹出层 -->
 <view class="view-lay-car" hidden="{{!carData.show}}">
-    <view class="car-title"> 
-        <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
-        <text class="car-title-text">购物车</text>
-        <text onTap="closeCar" class="icon-close"> 
-            <image src="{{btnClose}}" mode="aspectFit"  class="img-car"/>
-        </text>
-    </view>
-    <view class="car-body">
-        <view a:for="{{carData.itemArry}}" class="lay-item">
-                <text class="title">{{item.title}}</text>
-                <text class="price">{{item.salePrice}}</text>
-                <label class="item-btn lay-car">
-                    <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="minus" src="{{btnMinus}}" />
-                    <text>{{carData.itemIdArry[item.id]}}</text>
-                    <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="add" src="{{btnAdd}}"/>
-                </label>
+    <form onSubmit="formSubmit" report-submit="true">
+        <view class="car-title"> 
+            <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
+            <text class="car-title-text">购物车</text>
+            <text onTap="closeCar" class="icon-close"> 
+                <image src="{{btnClose}}" mode="aspectFit"  class="img-car"/>
+            </text>
         </view>
-        
-        <view class="no-select-item" a:if="{{carData.itemArry.length==0}}">
-          购物车还是空的哦！
+        <view class="car-body">
+            <view a:for="{{carData.itemArry}}" class="lay-item">
+                    <text class="title">{{item.title}}</text>
+                    <text class="price">{{item.salePrice}}</text>
+                    <label class="item-btn lay-car">
+                        <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="minus" src="{{btnMinus}}" />
+                        <text>{{carData.itemIdArry[item.id]}}</text>
+                        <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="add" src="{{btnAdd}}"/>
+                    </label>
+            </view>
+            
+            <view class="no-select-item" a:if="{{carData.itemArry.length==0}}">
+            购物车还是空的哦！
+            </view>
+            
         </view>
-        
-    </view>
-    <view class="car-foot">
-        <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份 ￥{{carData.minPrice}}起送</text>
-        <text a:if="{{carData.minPrice>carData.price}}" class="cf-btn disable">还差￥{{(carData.minPrice-carData.price).toFixed(2)}}</text>
-        <text a:if="{{carData.minPrice<=carData.price}}" onTap="bindSubmit" class="cf-btn">去结算</text>
-    </view>
-
+        <view class="car-foot">
+            <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份 ￥{{carData.minPrice}}起送</text>
+            <text a:if="{{carData.minPrice>carData.price}}" class="cf-btn disable">还差￥{{(carData.minPrice-carData.price).toFixed(2)}}</text>
+            <button a:if="{{carData.minPrice<=carData.price}}" formType="submit" onTap="bindSubmit" class="cf-btn">去结算</button>
+        </view>
+    </form>
 </view>
 
 <!--购物车按钮-->

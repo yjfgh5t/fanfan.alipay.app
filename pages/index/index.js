@@ -163,6 +163,14 @@ Page({
 
        });
     },
+    //form提交事件
+    formSubmit:function(e){
+        if(e.detail.formId){
+           tools.ajax('api/formId/',{formId:e.detail.formId},'POST',function(res){
+            console.log(res.code)
+           })
+        }
+    },
     //清空购物车
     privClearCar:function(){
 

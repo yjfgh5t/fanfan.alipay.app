@@ -208,6 +208,8 @@
     background-color:#4cd964;
     color:#fff;
     padding:0rpx 40rpx;
+    border:none;
+    font-size: 36rpx;
 }
 .cf-btn.disable{
     background-color:#535356;
