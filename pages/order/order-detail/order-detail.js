@@ -24,16 +24,19 @@ Page({
         },
         endPayText:'',
     },
-    onShow:function(options){
-        let orderId;  
-        if(options.query && options.query.orderId){
-            orderId = options.query.orderId
+    onLoad:function(query){
+         let orderId;   
+        if(query && query.orderId){
+            orderId = query.orderId
         }else{
             orderId = this.data.order.orderId==0?tools.getParams("orderId",true):this.data.order.orderId;  
         }
-      
+
         //加载数据
         this.privLoadData(orderId);
+    },
+    onShow:function(options){
+       
     },
     //取消订单
     bindChanel:function(){
