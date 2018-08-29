@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/order/order",
     "pages/index/index",
-    
     "pages/me/me",   
     "pages/order/order-detail/order-detail",
     "pages/me/me-addr/me-addr",
@@ -21,26 +21,6 @@
   "tabBar":{
     "textColor": "#515151",
     "selectedColor": "#1afa29",
-    "backgroundColor": "#ffffff",
-    "items": [
-      {
-        "pagePath": "pages/index/index",
-        "name": "饭饭",
-        "icon":"img/icon_menu_fan.png",
-        "activeIcon":"img/icon_menu_fan_active.png"
-      },
-      {
-        "pagePath": "pages/order/order",
-        "name": "订单",
-        "icon":"img/icon_menu_order.png",
-        "activeIcon":"img/icon_menu_order_active.png"
-      },
-      {
-        "pagePath": "pages/me/me",
-        "name": "我的",
-        "icon":"img/icon_menu_me.png",
-        "activeIcon":"img/icon_menu_me_active.png"
-      }
-    ]
+    "backgroundColor": "#ffffff"
   }
 }

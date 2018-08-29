@@ -60,15 +60,14 @@ App({
   privInitParams:function(){
  
     let _this = this;
-
       tools.ajax("api/info/",{},"GET",(resp)=>{
-
         //设置值
         if(resp.data.dict){
           _this.config.shopName=resp.data.dict[1021];
           _this.config.minTakePrice=parseFloat(resp.data.dict[1022]);
           _this.config.startBusiTime=resp.data.dict[1011];
           _this.config.endBusiTime=resp.data.dict[1012];
+           my.setNavigationBar({title:_this.config.shopName});
         };
 
       }); 
