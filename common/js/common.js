@@ -24,9 +24,9 @@ let tools={
 
         //固定信息
         let base={
-            clientType:app.clientType,
+            clientType:app.config.clientType,
             userId:app.userInfo.id,
-            customerId:app.appCustomerId,
+            customerId:app.config.customerId,
             };
 
         //设置header 固定数据
