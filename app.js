@@ -11,7 +11,7 @@ App({
   },
   //配置信息
   config:{
-    apiHost:'http://localhost:8081/',   //'http://wxcard.com.cn/',
+    apiHost:'http://wxcard.com.cn/',   //'http://localhost:8081/',
     networkAvailable:true,
     //店铺名称
     showName:"",
@@ -61,10 +61,11 @@ App({
     //设置配置信息
      if(this.config.customerId==-1){
        let config =  my.getStorageSync({key:'app.config'});
-       if(config!=null && config.customerId!=-1){
+       if(config!=null && config.customerId){
+         debugger
           this.config = config;
        }
-     }
+     } 
   },
   //获取基础信息 
   privInitParams:function(option){
@@ -75,7 +76,7 @@ App({
          temcode = temcode.split('qrcode=')[1];
          if(temcode.length==32){
            qrcode = temcode;
-         }
+         } 
        }
     }
 
@@ -87,7 +88,7 @@ App({
           _this.config.minTakePrice=parseFloat(resp.data.dict[1022]);
           _this.config.startBusiTime=resp.data.dict[1011];
           _this.config.endBusiTime=resp.data.dict[1012];
-          _this.appCustomerId=resp.data.dict[9101];
+          _this.config.customerId=resp.data.dict[9101];
           if(resp.data.dict[9102]){
             _this.config.deskId = resp.data.dict[9102];
           }

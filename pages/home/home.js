@@ -27,7 +27,19 @@ Page({
       }
     },
     onLoad:function(){
-        this.loadData();
+        let _this = this;
+       if(getApp().config.customerId==-1){ 
+            my.showLoading();
+           let interval =  setInterval(function(){
+                if(getApp().config.customerId!=1){
+                    my.hideLoading();
+                    _this.loadData();
+                    clearInterval(interval);
+                }
+           },500);
+       }else{
+           this.loadData(); 
+       }
     },
     onShow:function(){
          //清空购物车
@@ -119,8 +131,7 @@ Page({
         });
     },
     //提交按钮
-    bindSubmit:function(e){
-    
+    bindSubmit:function(e){ 
         //选择的菜单
        let idArry = this.data.carData.itemIdArry;
 
@@ -143,8 +154,7 @@ Page({
                 outSize:idArry[key],
                 outType:1
             });
-        }
-
+        } 
         //创建临时订单
         tools.ajax("api/order/",JSON.stringify(orderReq),"POST",function(resp){
 

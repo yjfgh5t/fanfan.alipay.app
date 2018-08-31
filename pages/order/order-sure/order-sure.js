@@ -40,6 +40,8 @@ Page({
             remark:'', 
             //订单状态 [102:提交订单 103:待支付]
             orderState:102, 
+            //订单类型 [1：堂吃 2：打包 3：外卖]
+            orderType:1,
             invoice:'商家不支持开发票',
             addr:{
                 tel:'',
@@ -120,6 +122,8 @@ Page({
             receiver:dataOrder.addr,  
             //设置状态 请求支付 
             orderState:dataOrder.orderState, 
+            //订单类型
+            orderType:dataOrder.orderType,
         };
 
         if(!this.privVerifyOrder(reqOrder)) return;
@@ -182,7 +186,7 @@ Page({
     //验证订单内容
     privVerifyOrder:function(orderInfo){
 
-        if(orderInfo.receiver.addrDetail==''){
+        if(orderInfo.orderType==3 && orderInfo.receiver.addrDetail==''){
             my.alert({title:"提示",content:"请选择收货地址"});
             return false;
         }
