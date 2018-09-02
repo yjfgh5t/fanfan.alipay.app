@@ -73,7 +73,7 @@ let tools={
          let app =  getApp();
 
          //判断是否已经获取到用户信息
-        if(app.userInfo.id!=undefined)
+        if(app.userInfo.id!=-1)
         {
             success(app.userInfo);
             return;

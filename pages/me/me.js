@@ -23,5 +23,8 @@ Page({
     },
     bindExit:function(){
         
-    }    
+    },
+    bindOrder:function(e){
+        my.navigateTo({url:"/pages/order/order"});
+    }
 });

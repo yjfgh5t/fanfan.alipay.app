@@ -12,6 +12,26 @@
  position: relative;
 }
 
+/**用户头像**/
+.view-user{
+    width:80rpx;
+    height: 80rpx;
+    position: absolute;
+    right: 20rpx;
+    bottom: 300rpx;
+    background: radial-gradient(circle at center,#97fc9e,#1afa29);
+    border-radius: 50%;
+    border:2rpx solid white;
+    text-align: center;
+    line-height: 95rpx;
+    z-index: 6;
+}
+.img-user{
+    width:40rpx;
+    height:40rpx;
+}
+
+
 .item-img{
     width: 180rpx;
     height: 180rpx; 

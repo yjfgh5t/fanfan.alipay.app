@@ -8,6 +8,7 @@ Page({
         btnAdd:'/img/icon_btn_add.png',
         btnCar:'/img/icon_btn_car.png',
         btnClose:'/img/icon_btn_add_white.png',
+        btnUser:'/img/icon_user_def.png',
         showMark:false,
         itemArry:[
             //{id:'1001',title:'招聘黄焖鸡米饭-A',active:[{atype:1,text:'前场九折起'}],price:18.1,salePrice:12, icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄'},
@@ -196,5 +197,10 @@ Page({
                 'carData.price':0,
             });
         }
+    },
+    userClick:function(){
+        my.navigateTo({
+                    url:'/pages/me/me'
+                })
     }
 });

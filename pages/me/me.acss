@@ -6,6 +6,10 @@
     background-image: url('/img/icon_me_addr.png');
 }
 
+.order{
+    background-image: url('/img/icon_menu_order_active.png');
+}
+
 .icon{
     width: 42rpx;
     height: 42rpx;

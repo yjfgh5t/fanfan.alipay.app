@@ -12,6 +12,10 @@
     <text class="icon addr"></text>
     <text class="i-title">收货地址</text>
 </view>
+<view class="block d-pad arrow d-mar" onTap="bindOrder" >
+    <text class="icon order"></text>
+    <text class="i-title">我的订单</text>
+</view>
 
 <view style="margin-top:50rpx;"></view>
 <view onTap="bindExit" class="d-mar block btn">

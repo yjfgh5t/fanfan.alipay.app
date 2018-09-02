@@ -56,7 +56,6 @@ Page({
                 }
             }
         });
-
     },
     //支付
     binPay:function(){ 
@@ -65,7 +64,7 @@ Page({
         pay.tradePay(_this.data.order.alipayOrderStr,_this.data.order.orderId,(succes)=>{
             if(succes){
                 tools.setParams("orderId",_this.data.order.orderId);
-                _this.onShow();
+                _this.onLoad();
             }
         }); 
     },
