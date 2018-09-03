@@ -48,7 +48,6 @@ let tools={
                 if(res.data.code!=0){
                     my.showToast({content: res.data.msg});
                 }
-
                 if(success){
                     success(res.data);
                 }

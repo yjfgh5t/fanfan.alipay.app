@@ -32,12 +32,10 @@ Page({
        if(getApp().config.customerId==-1){ 
             my.showLoading();
            let interval =  setInterval(function(){
-                if(getApp().config.customerId!=1){
                     my.hideLoading();
                     _this.loadData();
                     clearInterval(interval);
-                }
-           },500);
+           },2000);
        }else{
            this.loadData(); 
        }

@@ -36,16 +36,17 @@
     </view>
 
     <view class="d-pad-left t-muted border-line">
-        <view class="d-pad-tb border-line">
-            订单号：{{order.orderNum}}
-        </view>
-        <view class="d-pad-tb border-line">
-            编号：{{order.dateNum}}
-        </view> 
-        <view class="d-pad-tb border-line">
-            桌号：{{order.deskNum}}
-        </view> 
-
+        <block a:if="{{order.orderState!=103}}">
+            <view class="d-pad-tb border-line">
+                订单号：{{order.orderNum}}
+            </view>
+            <view class="d-pad-tb border-line">
+                编号：{{order.dateNum}}
+            </view> 
+            <view class="d-pad-tb border-line" hidden="">
+                桌号：{{order.deskNum}}
+            </view>
+        </block> 
          <view class="d-pad-tb border-line">
             支付方式：在线支付
         </view>
@@ -65,7 +66,7 @@
 </view>
 
 
-<view class="block d-mar">
+<view class="block d-mar" a:if="{{order.orderType==3}}">
     <view  class="d-pad border-line">
         <text>配送信息</text>
     </view>

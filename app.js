@@ -11,7 +11,7 @@ App({
   },
   //配置信息
   config:{
-    apiHost:'http://localhost:8081/',   //'http://wxcard.com.cn/',
+    apiHost:'http://wxcard.com.cn/',   //'http://localhost:8081/',
     networkAvailable:true,
     //店铺名称
     showName:"",
@@ -33,6 +33,9 @@ App({
 
   onLaunch:function(option){
    let _this =this;
+    //加载数据
+    _this.privInitParams(option);
+
     //监听网咯状态
     my.onNetworkStatusChange(function(res){
       _this.config.networkAvailable = res.isConnected;
@@ -53,9 +56,6 @@ App({
         }
       },
     });
- 
-    //加载数据
-    _this.privInitParams(option);
   },
   onShow:function(option){
     //设置配置信息
@@ -79,7 +79,6 @@ App({
          } 
        }
     }
-
     let _this = this;
       tools.ajax("api/info/",{qrcode:qrcode},"GET",(resp)=>{
         //设置值
