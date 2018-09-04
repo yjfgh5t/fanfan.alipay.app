@@ -45,12 +45,12 @@ Page({
 
         my.confirm({
             title: '提示',
-            content: '确认取消改订单吗',
+            content: '确认取消订单吗',
             success:(result)=>{
                 if(result.confirm){ 
-                    tools.ajax("api/order/cancel/"+_this.data.order.orderId,null,"POST",function(resp){
+                    tools.ajax("api/order/state/"+_this.data.order.orderId,{'state':'user-cancel',customerRemark:''},"POST",function(resp){
                         if(resp.code==0){
-                            my.redirectTo({url:"/pages/index/index"}); 
+                            my.redirectTo({url:"/pages/home/home"}); 
                         }
                     }); 
                 }
