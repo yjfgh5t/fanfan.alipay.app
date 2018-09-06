@@ -8,7 +8,7 @@
     "pages/me/me-addr/me-addr",
     "pages/me/me-addr-edit/me-addr-edit", 
     "pages/me/me-addr-search/me-addr-search", 
-    "pages/me/me-coupon/me-coupon",   
+    "pages/me/me-coupon/me-coupon",
     "pages/order/order-sure/order-sure",
     "pages/order/order-remark/order-remark",
     "pages/order/pay-order/pay-order", 

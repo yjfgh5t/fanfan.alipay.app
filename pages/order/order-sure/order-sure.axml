@@ -51,7 +51,7 @@
     <text class="t-muted">订单￥{{order.total}}</text> <text class="t-muted">优惠￥{{order.discount}}</text> <text>待支付￥{{order.pay}}</text>
 </view>
 
-<view class="block d-mar" >
+<view class="block d-mar">
   <view class="d-pad left border-line v-picker">
    用餐人数 <view style="display:inline-block;" class="t-muted t-right arrow">
        <picker value="{{index}}" range="{{dinner}}" onChange="bindDinner" range-key="text">
@@ -62,7 +62,7 @@
 </view>
 </view>
 
-<view class="block" >
+<view class="block">
   <view class="d-pad left border-line">
    订单备注<text class="t-muted t-right arrow" style="max-width:500rpx; height:32rpx;overflow:hidden;" onTap="bindRemark" >{{order.remark==""?"口味，偏好等":order.remark}}</text>
 </view>
@@ -70,6 +70,16 @@
 <view class="block" >
   <view class="d-pad left">
    发票信息<text class="t-muted t-right arrow">{{order.invoice}}</text>
+</view>
+<view class="block d-mar">
+    <view class="view-type {{order.orderType==2?'active':''}}" data-value="2" onTap="bindOrderType">
+     <image src="{{order.orderType==2?orderImg.tangchiA:orderImg.tangchi}}" mode="aspectFit" />
+     <text>堂吃</text>
+    </view>
+    <view class="view-type {{order.orderType==1?'active':''}}" data-value="1" onTap="bindOrderType">
+        <image src="{{order.orderType==1?orderImg.dabaoA:orderImg.dabao}}" mode="aspectFit" />
+        <text>打包</text>
+    </view>
 </view>
 </view> 
 <view style="height:100rpx;"></view>

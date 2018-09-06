@@ -91,6 +91,7 @@ Page({
                dateNum:resp.data.orderDateNum==null?'':('#'+resp.data.orderDateNum),
                deskNum:resp.data.orderDeskNum,
                alipayOrderStr:resp.data.alipayOrderStr,
+               orderTypeText:resp.data.orderTypeText,
                commoditys:[],
                receiver:{
                 name:resp.data.receiver.name,

@@ -50,7 +50,9 @@
          <view class="d-pad-tb border-line">
             支付方式：在线支付
         </view>
-
+       <view class="d-pad-tb border-line">
+            堂吃/打包：{{order.orderTypeText}}
+        </view>
         <view class="d-pad-tb border-line">
             下单时间：{{order.createTime}}
         </view>

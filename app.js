@@ -11,7 +11,7 @@ App({
   },
   //配置信息
   config:{
-    apiHost:'http://wxcard.com.cn/',   //'http://localhost:8081/',
+    apiHost:'http://localhost:8081/',   //'http://wxcard.com.cn/',
     networkAvailable:true,
     //店铺名称
     showName:"",
@@ -30,11 +30,13 @@ App({
   },
   //全局对象
   globalData:{},
-
+onError:function(){
+  console.log('出错')
+},
   onLaunch:function(option){
+     console.log(this.globalData.option)
    let _this =this;
-    //加载数据
-    _this.privInitParams(option);
+   this.globalData.option = option;
 
     //监听网咯状态
     my.onNetworkStatusChange(function(res){
@@ -57,7 +59,11 @@ App({
       },
     });
   },
-  onShow:function(option){
+  onShow:function(){
+    //加载数据
+    if(this.globalData.option){
+      this.privInitParams(this.globalData.option);
+  }
     //设置配置信息
      if(this.config.customerId==-1){
        let config =  my.getStorageSync({key:'app.config'});
