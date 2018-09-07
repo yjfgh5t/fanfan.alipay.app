@@ -4,6 +4,7 @@ Page({
     data:{
         name:'hellow',
         defaultImg:'/img/img_item_default.png',
+        orderImg:{dabao:'/img/icon_order_db_0.png',dabaoA:'/img/icon_order_db_1.png',tangchi:'/img/icon_order_tc_0.png',tangchiA:'/img/icon_order_tc_1.png'},
         dinner: [
             {id:1,text:'1人'},
             {id:2,text:'2人'},
@@ -41,7 +42,7 @@ Page({
             //订单状态 [102:提交订单 103:待支付]
             orderState:102, 
             //订单类型 [1：堂吃 2：打包 3：外卖]
-            orderType:1,
+            orderType:0,
             invoice:'商家不支持开发票',
             addr:{
                 tel:'',
@@ -191,6 +192,15 @@ Page({
             return false;
         }
 
+        if(orderInfo.orderType<1){
+            my.alert({title:"提示",content:"请选择堂吃或打包"});
+            return false;
+        }
+
         return true; 
+    },
+    bindOrderType:function(e){
+      let val = e.target.dataset.value; 
+       this.setData({"order.orderType":val}); 
     }
 });
