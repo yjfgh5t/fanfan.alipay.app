@@ -43,7 +43,7 @@
             <view class="d-pad-tb border-line">
                 编号：{{order.dateNum}}
             </view> 
-            <view class="d-pad-tb border-line" hidden="">
+            <view class="d-pad-tb border-line" hidden="order.deskNum==''">
                 桌号：{{order.deskNum}}
             </view>
         </block> 
