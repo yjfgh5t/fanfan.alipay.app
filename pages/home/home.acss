@@ -14,12 +14,12 @@
 
 /**用户头像**/
 .view-user{
-    width:80rpx;
-    height: 80rpx;
+    width:70rpx;
+    height: 70rpx;
     position: fixed;
     right: 20rpx;
     bottom: 300rpx;
-    background: radial-gradient(circle at center,#97fc9e,#1afa29);
+    background: radial-gradient(circle at center,#FD5E02,#FD5E02);
     border-radius: 50%;
     border:2rpx solid white;
     text-align: center;
@@ -30,7 +30,6 @@
     width:40rpx;
     height:40rpx;
 }
-
 
 .item-img{
     width: 180rpx;
@@ -141,19 +140,20 @@
     background-color: #0085ff;
     font-size:32rpx;
     color:white;
+    height: 56rpx;
 }
 .car-title .img-car{
-    width:45rpx;
-    height:45rpx;
-    margin-right:6rpx;
+    width:40rpx;
+    height:40rpx;
+    margin-right:14rpx;
     position:relative;
-    top:6rpx;
+    vertical-align: middle;
 }
 
 .car-title .car-title-text{
    font-size: 28rpx;
    position: relative;
-   top: -4rpx;
+   line-height: 52rpx;
 }
 .car-title .icon-close{
     position:relative;
