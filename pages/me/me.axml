@@ -1,7 +1,7 @@
 <view class="block d-pad" style="background-color:#0085ff;overflow:hidden;">
     <image src="{{model.icon}}" class="head-img" mode="aspectFit" />
     <view class="user-dec">
-    	<text class="flt head-text">用户名</text>
+    	<text class="flt head-text">{{model.nick}}</text>
     	<text class="flt head-dec">这是美食描述</text>
     </view>
 </view>
