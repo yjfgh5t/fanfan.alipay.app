@@ -1,6 +1,9 @@
 <view class="block d-pad" style="background-color:#0085ff;overflow:hidden;">
     <image src="{{model.icon}}" class="head-img" mode="aspectFit" />
-    <text class="head-text">yhfgh5t</text>
+    <view class="user-dec">
+    	<text class="flt head-text">用户名</text>
+    	<text class="flt head-dec">这是美食描述</text>
+    </view>
 </view>
 
 <view class="block d-pad arrow" onTap="bindCoupon">
@@ -8,17 +11,17 @@
     <text class="i-title">我的优惠券</text>
 </view>
 
-<view class="block d-pad arrow d-mar" onTap="bindAddr" hidden="true" >
+<view class="block d-pad arrow" onTap="bindAddr" hidden="true" >
     <text class="icon addr"></text>
     <text class="i-title">收货地址</text>
 </view>
-<view class="block d-pad arrow d-mar" onTap="bindOrder" >
+<view class="block d-pad arrow" onTap="bindOrder" >
     <text class="icon order"></text>
     <text class="i-title">我的订单</text>
 </view>
 
 <view style="margin-top:50rpx;"></view>
-<view onTap="bindExit" class="d-mar block btn">
+<view onTap="bindExit" class="login-bnt">
     <text>退出登录</text>
 </view> 
 
