@@ -34,7 +34,7 @@
         </view>
         <view class="car-foot">
             <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份</text>
-            <button class="cf-btn bnt-bg" disabled="{{carData.price<carData.minPrice}}" formType="submit" onTap="bindSubmit">去结算</button>
+            <button class="cf-btn bnt-bg" disabled="{{carData.price<carData.minPrice && isBusiness}}" formType="submit" onTap="bindSubmit">去结算</button>
         </view>
     </form>
 </view>

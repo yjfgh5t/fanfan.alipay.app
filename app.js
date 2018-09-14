@@ -11,7 +11,7 @@ App({
   },
   //配置信息
   config:{
-    apiHost:'http://wxcard.com.cn/', //'http://localhost:8081/',
+    apiHost:'http://localhost:8081/', //'http://wxcard.com.cn/',
     networkAvailable:true,
     //店铺名称
     showName:"",
@@ -21,6 +21,8 @@ App({
     startBusiTime:"09:00",
     //结束营业时间
     endBusiTime:"10:00",
+    //店铺状态 1:营业 2:休息中
+    shopState:1,
     //客桌Id
     deskId:-1,
     //商户Id 
@@ -88,16 +90,22 @@ onError:function(){
     let _this = this;
       tools.ajax("api/info/",{qrcode:qrcode},"GET",(resp)=>{
         //设置值
-        if(resp.data.dict){
-          _this.config.shopName=resp.data.dict[1021];
-          _this.config.minTakePrice=parseFloat(resp.data.dict[1022]);
-          _this.config.startBusiTime=resp.data.dict[1011];
-          _this.config.endBusiTime=resp.data.dict[1012];
-          _this.config.customerId=resp.data.dict[9101];
-          if(resp.data.dict[9102]){
-            _this.config.deskId = resp.data.dict[9102];
+        if(resp.data){
+         //商户id
+          _this.config.customerId=resp.data.customerId;
+          //桌号
+          if(resp.data.deskId){
+            _this.config.deskId = resp.data.deskId;
           }
-           my.setNavigationBar({title:_this.config.shopName});
+          //设置店铺信息
+          if(resp.data.shop){
+            _this.config.shopName=resp.data.shop.name;
+            _this.config.minTakePrice=resp.data.shop.minOrderPrice;
+            _this.config.startBusiTime=resp.data.shop.businessStart;
+            _this.config.endBusiTime=resp.data.shop.businessEnd;
+            _this.config.shopState = resp.data.shop.state;
+            my.setNavigationBar({title:_this.config.shopName});
+          }
            //添加至缓存
            my.setStorageSync({
              key: 'app.config', // 缓存数据的key
