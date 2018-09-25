@@ -117,7 +117,6 @@ Page({
     }, 
     //显示支付倒计时
     privEndPayTime:function(endTiemSecond){
-        return;
         let _this =this;
 
         //刷新文本函数
