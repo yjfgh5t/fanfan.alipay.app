@@ -2,11 +2,11 @@
     <image src="{{model.icon}}" class="head-img" mode="aspectFit" />
     <view class="user-dec">
     	<text class="flt head-text">{{model.nick}}</text>
-    	<text class="flt head-dec">这是美食描述</text>
+    	<text class="flt head-dec"></text>
     </view>
 </view>
 
-<view class="block d-pad arrow" onTap="bindCoupon">
+<view class="block d-pad arrow" onTap="bindCoupon" hidden="true" >
     <text class="icon coupon"></text>
     <text class="i-title">我的优惠券</text>
 </view>

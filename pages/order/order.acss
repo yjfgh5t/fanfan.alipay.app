@@ -35,18 +35,18 @@
 
 .v-text .order-state{
     float:right;
-    color:#333;
+    color:rgba(0, 0, 0, .65);
 }
 
 .v-text .time{
     display:block;
-    color:#ccc;
+    color:rgba(0, 0, 0, .65);
     font-size: 22rpx;
 }
 
 .v-text .commodity-size{
     display:block;
-    color:#ccc;
+    color:rgba(0, 0, 0, .65);
     font-size: 22rpx;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .arrow{
-    color: #333;
+    color: rgba(0, 0, 0, .65);
 }
 
 .arrow:before,.arrow::after{ 
@@ -71,7 +71,7 @@
 }
 
 .d-title.arrow:before{
-    border-left-color:#333;
+    border-left-color:rgba(0, 0, 0, .65);
     right:-10rpx;
 }
 

@@ -29,22 +29,22 @@ Page({
             minPrice:0.0
       }
     },
-    onLoad:function(){
-        let _this = this;
-       if(getApp().config.customerId==-1){ 
-            my.showLoading();
-           let interval =  setInterval(function(){
-                    my.hideLoading();
-                    _this.loadData();
-                    clearInterval(interval);
-           },2000);
-       }else{
-           this.loadData(); 
-       }
+    onReady:function(){
+        //my.showLoading();
+        this.lazyLoad(this);
     },
     onShow:function(){
          //清空购物车
          this.privClearCar();  
+    },
+    lazyLoad:function(that){
+        if(getApp().config.customerId==-1){
+           console.log(1);
+           setTimeout(()=>{that.lazyLoad(that)},1000);
+       }else{
+           console.log(2);
+           that.loadData(); 
+       }
     },
     //加载数据
     loadData:function(){
