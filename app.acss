@@ -15,7 +15,7 @@ page{
 }
 
 .t-muted{
-    color: #ccc;
+    color: rgba(0, 0, 0, .65);;
 }
 
 .d-title{

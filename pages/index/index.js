@@ -1,4 +1,4 @@
-import {tools} from '/common/js/common.js'
+﻿import {tools} from '/common/js/common.js'
 Page({
     data:{
         name:'hellow',
@@ -26,12 +26,22 @@ Page({
             minPrice:0.0,
       }
     },
-    onLoad:function(){
-        this.loadData();
+    onReady:function(){
+        //my.showLoading();
+        this.lazyLoad(this);
     },
     onShow:function(){
          //清空购物车
          this.privClearCar();  
+    },
+    lazyLoad:function(that){
+        if(getApp().config.customerId==-1){
+           console.log(1);
+           setTimeout(()=>{that.lazyLoad(that)},1000);
+       }else{
+           console.log(2);
+           that.loadData(); 
+       }
     },
     //加载数据
     loadData:function(){

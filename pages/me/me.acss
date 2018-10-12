@@ -69,9 +69,10 @@
 .head-dec{
     color: #f7f6f6;
 }
+/** 当需要head-dec时 padding-top: 30rpx;**/
 .user-dec .flt{
     display: block;
-    padding-top: 30rpx;
+    padding-top: 50rpx;
 }
 .login-bnt{
     color: orangered;
