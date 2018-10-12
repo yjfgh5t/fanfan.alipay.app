@@ -41,6 +41,7 @@ let tools={
             headers:option.headers,
             data: data,
             dataType: 'json',
+            timeout: 60000,
             success: function(res) {
                 hidenLoading=true;
                 //隐藏加载条
