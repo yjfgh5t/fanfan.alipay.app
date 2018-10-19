@@ -47,7 +47,7 @@
     height: 45rpx; 
     color:#bfbfbf;
     font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
-    font-size:26rpx;
+    font-size:28rpx;
 }
 .item-con text.desc{ 
     height:70rpx; 
@@ -78,7 +78,7 @@
 
 
 .item-con text.price{
-    font-size: 28rpx;
+    font-size: 30rpx;
     position: absolute;
     bottom: 10rpx;
 }
@@ -93,13 +93,13 @@
 .price .salePrice{ 
     display:inline-block;
     color: #ff3618; 
-    font-size: 32rpx;
+    font-size: 34rpx;
 }
 
 .mark-price::before{
     font-weight: 400;
     content: "\A5";
-    font-size: 22rpx;
+    font-size: 24rpx;
     margin-right: .053333rem;
     margin-right: .533333vw;
     display: inline-block;
@@ -151,7 +151,7 @@
 }
 
 .car-title .car-title-text{
-   font-size: 28rpx;
+   font-size: 30rpx;
    position: relative;
    line-height: 52rpx;
 }
@@ -218,7 +218,7 @@
     color:#fff;
 }
 .cf-desc{
-    font-size:22rpx;
+    font-size:26rpx;
     color:#999;
     margin-left:3rpx;
     display:inline-block;
@@ -264,14 +264,16 @@
     position: absolute;
     right: -0.04rem;
     display: inline-block;
-    width: 0.42rem;
-    height: 0.42rem;
+    width: 0.34rem;
+    height: 0.34rem;
     text-align: center;
     line-height: 0.38rem;
     background: radial-gradient(circle at center,#ff00a5,#ff0000);
     color: white;
     font-size: 20rex;
     border-radius: 50%;
+    margin: 0rem;
+    padding: 0rem;
 }
 .view-car .txt-car.txt-car-len{
     padding: 1rpx 3rpx;

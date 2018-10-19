@@ -1,3 +1,4 @@
+
 .txt-order text{
  margin-right: 20rpx;
 }
@@ -43,7 +44,7 @@
     color:#fff;
 }
 .cf-desc{
-    font-size:22rpx;
+    font-size:24rpx;
     color:#999;
     margin-left:3rpx;
     display:inline-block;

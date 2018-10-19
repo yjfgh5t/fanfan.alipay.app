@@ -1,3 +1,7 @@
+page {
+  background-color: #eee;
+}
+
 .order:last-child{
     margin-bottom: 18rpx;
 }
@@ -31,6 +35,7 @@
     height: 40rpx;
     text-overflow:ellipsis;
     white-space: nowrap;
+    font-size: 30rpx;
 }
 
 .v-text .order-state{
@@ -41,13 +46,13 @@
 .v-text .time{
     display:block;
     color:rgba(0, 0, 0, .65);
-    font-size: 22rpx;
+    font-size: 28rpx;
 }
 
 .v-text .commodity-size{
     display:block;
     color:rgba(0, 0, 0, .65);
-    font-size: 22rpx;
+    font-size: 28rpx;
 }
 
 .v-text .remark{
@@ -87,14 +92,13 @@
 
 .loadmore{
     text-align: center;
-    margin: 20rpx 0rpx;
+    padding: 0.1rem 0rem;
 }
 
 .loadmore text{
     padding: 10rpx 20rpx;
     text-align: center;
-    color: #999;
-    border: 1px solid #ccc;
+    color: #000;
     border-radius: 6rpx; 
     display: inline-block;
 }
@@ -156,7 +160,7 @@
     position:absolute;
     width:160rpx;
     top:36rpx;
-    font-size:18rpx;
+    font-size:24rpx;
     left:-60rpx;
     text-align:center;
 }

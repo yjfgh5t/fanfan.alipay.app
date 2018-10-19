@@ -30,12 +30,8 @@
         </view>
     </block>      
 
-</view>
-
-<view a:if="{{orders.length==0}}" class="noorder">
-    <text>您还没有下过订单哦！</text>
-</view>
+</view> 
  
-<view a:if="{{showLoadMore}}" class="loadmore">
-    <text onTap="privLoadData" >加载更多</text>
+<view class="loadmore">
+    <text onTap="privLoadData">{{loadMoerText}}</text>
 </view>
