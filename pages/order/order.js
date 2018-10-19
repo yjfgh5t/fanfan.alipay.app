@@ -7,7 +7,7 @@ Page({
         ],
         pageIndex:1,
         //显示加载更多
-        showLoadMore:false,
+        loadMoerText:'正在加载数据...',
         //计算器
         intervalArray:[]
     },
@@ -39,8 +39,10 @@ Page({
         return false;
     },
     privLoadData:function(){
- 
         let _this=this;
+        if(_this.loadMoerText==='已全部加载'){
+            return;
+        }
 
         let index= (_this.data.pageIndex-1)*10;
  
@@ -49,16 +51,24 @@ Page({
             let _orders ={};
 
             //获取订单列表 
-            tools.ajax("api/order/query",JSON.stringify({userId:user.id,pageIndex:_this.data.pageIndex}),"POST",function(resp){
+            tools.ajax("api/order/query",JSON.stringify({userId:user.id,pageIndex:_this.data.pageIndex,pageSize:10}),"POST",function(resp){
                 if(resp.code!=0){
                     my.alert({title: '获取数据失败'});
                     return;
                 }
+                console.log('总条数：'+resp.data.length)
+                let loadMoerText = '加载更多';
+                if(resp.data.length<10){
+                    loadMoerText = '已全部加载';
+                    if(resp.length==0 && _this.orders.length===0){
+                        loadMoerText = '您还没有下过单哦';
+                    }
+                }
 
-                //是否显示下一页
-                _this.setData({showLoadMore:!(resp.data==null || resp.data.length<10)});
+                //设置显示文本
+                _this.setData({loadMoerText:loadMoerText});
 
-                if(resp.data==null || resp.data.length==0){
+                if(resp.data.length==0){
                     return;
                 }
                
