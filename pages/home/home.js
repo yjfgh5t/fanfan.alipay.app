@@ -8,6 +8,7 @@ Page({
         btnAdd:'/img/icon_btn_add.png',
         btnCar:'/img/icon_btn_car.png',
         btnClose:'/img/icon_btn_add_white.png',
+        btnUser:'/img/icon_user_def.png',
         showMark:false,
         itemArry:[
             //{id:'1001',title:'招聘黄焖鸡米饭-A',active:[{atype:1,text:'前场九折起'}],price:18.1,salePrice:12, icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄'},
@@ -27,7 +28,17 @@ Page({
       }
     },
     onLoad:function(){
-        this.loadData();
+        let _this = this;
+       if(getApp().config.customerId==-1){ 
+            my.showLoading();
+           let interval =  setInterval(function(){
+                    my.hideLoading();
+                    _this.loadData();
+                    clearInterval(interval);
+           },2000);
+       }else{
+           this.loadData(); 
+       }
     },
     onShow:function(){
          //清空购物车
@@ -40,8 +51,7 @@ Page({
         tools.ajax('api/commodity/',{},'GET',function(res){
             console.log(res.data);
             if(res.code==0){ 
-                _this.setData({"itemArry":res.data,"carData.minPrice":_app.config.minTakePrice});   
-                my.setNavigationBar({title:_app.config.shopName});
+                _this.setData({"itemArry":res.data,"carData.minPrice":_app.config.minTakePrice});
             }
         });
     },
@@ -120,8 +130,7 @@ Page({
         });
     },
     //提交按钮
-    bindSubmit:function(e){
-    
+    bindSubmit:function(e){ 
         //选择的菜单
        let idArry = this.data.carData.itemIdArry;
 
@@ -144,8 +153,7 @@ Page({
                 outSize:idArry[key],
                 outType:1
             });
-        }
-
+        } 
         //创建临时订单
         tools.ajax("api/order/",JSON.stringify(orderReq),"POST",function(resp){
 
@@ -187,5 +195,10 @@ Page({
                 'carData.price':0,
             });
         }
+    },
+    userClick:function(){
+        my.navigateTo({
+                    url:'/pages/me/me'
+                })
     }
 });

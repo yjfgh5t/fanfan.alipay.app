@@ -1,0 +1,45 @@
+.t-price{
+    float: right;
+}
+
+.t-count{
+    float: right;
+    padding-right: 50rpx;
+}
+
+.t-pay{
+    color: orangered;
+}
+
+.order-title{
+    max-width:520rpx;
+    display:inline-block;
+}
+
+.order-state{
+    color: orange;
+    float: right;
+}
+
+.head-img{
+    width:128rpx;
+    height:128rpx;
+    border:1rpx solid #ccc;
+    border-radius: 50%;
+}
+
+.wait-pay{
+    font-size:32rpx;
+    line-height:60rpx;
+}
+
+.btn{
+    line-height:40rpx;
+    border:1px solid #ccc;
+    padding:8rpx 30rpx;
+}
+
+.btn-defcolor{
+    color: #000;
+    margin-right: 20rpx;
+}

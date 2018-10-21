@@ -1,0 +1,45 @@
+
+.addr-block{
+    padding-right:50rpx;position: relative;
+}
+
+.name,.sex{
+    margin-right:20rpx;line-height:38rpx;
+}
+
+.addrDetail{
+    display:block;line-height:38rpx;
+}
+
+.choise{
+    position: absolute;right:20rpx;top:50%;margin-top:-12rpx;
+}
+
+.edit{
+    position: absolute;right:20rpx;top:50%;margin-top:-20rpx;
+}
+
+.add{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    text-align:center;
+    background-color:#00d9f1;
+    color:white;
+}
+
+.add-img{
+    width:36rpx;
+    height:36rpx;
+    position:relative;
+    top:7rpx;
+    margin-right:6rpx;
+}
+
+.noorder{
+    text-align: center;
+    margin-top: 30%; 
+}
+.noorder text{
+    color: #ccc;
+}

@@ -1,0 +1,26 @@
+<view style="background-color:rgb(0, 133, 255);text-align:center;padding:20rpx;">
+    <input type="text" onBlur="bindChange" class="from-input" style="width:700rpx;line-height:56rpx;border-radius:5rpx;text-align:center;" placeholder="请输入地址" auto-focus />
+</view>
+
+<block a:if="{{addrModel.street!=''}}">
+    <view  class="d-pad min">
+        当前地址
+    </view>
+    <view  class="block d-pad location arrow" onTap="bindSelected" data-index="-1">
+        {{addrModel.street}}
+    </view>
+</block>
+
+<block a:if="{{nearAddr.length>0}}">
+    <view class="d-pad min">
+        附近地址
+    </view>
+    <view a:for="{{nearAddr}}" class="block d-pad-left" onTap="bindSelected" data-index="{{index}}">
+        <view class="d-pad noright border-line arrow">{{item.title}}</view>
+    </view>
+</block>
+
+
+<view class="btn-box">
+    <text class="btn-addr" onTap="bindAddr">重新地位</text>
+</view>

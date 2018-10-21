@@ -12,6 +12,26 @@
  position: relative;
 }
 
+/**用户头像**/
+.view-user{
+    width:80rpx;
+    height: 80rpx;
+    position: fixed;
+    right: 20rpx;
+    bottom: 300rpx;
+    background: radial-gradient(circle at center,#97fc9e,#1afa29);
+    border-radius: 50%;
+    border:2rpx solid white;
+    text-align: center;
+    line-height: 95rpx;
+    z-index: 6;
+}
+.img-user{
+    width:40rpx;
+    height:40rpx;
+}
+
+
 .item-img{
     width: 180rpx;
     height: 180rpx; 
@@ -193,7 +213,7 @@
     overflow: hidden;
 }
 .cf-price{
-    margin-left:25rpx;
+    margin-left:130rpx;
     font-size:32rpx;
     color:#fff;
 }
@@ -215,17 +235,22 @@
     background-color:#535356;
 }
 
+.cf-btn:active:after{
+    color: white;
+    background: initial;
+}
 
 /****购物车按钮****/
 .view-car{
-    position:fixed;
+    position: fixed;
     background: radial-gradient(circle at center,#0af,#0085ff);
-    right:20rpx;
-    width:80rpx;
+    left:20rpx;
+    width:100rpx;
     z-index:7;
-    height:80rpx;
+    height:100rpx;
     border-radius:50%;
-    bottom:18%;
+    bottom:20rpx;
+    border:1rpx solid white;
 }
 .view-car .img-car{
     width:36rpx;
@@ -237,11 +262,14 @@
 }
 .view-car .txt-car{
     position: absolute;
-    right: -8rpx;
+    right: -0.04rem;
     display: inline-block;
-    padding: 0rpx 8rpx;
+    width: 0.42rem;
+    height: 0.42rem;
+    text-align: center;
+    line-height: 0.38rem;
     background: radial-gradient(circle at center,#ff00a5,#ff0000);
-    color: white; 
+    color: white;
     font-size: 20rex;
     border-radius: 50%;
 }
@@ -260,3 +288,7 @@
     z-index: 5;
 }
 
+.view-empty{
+    width:100%;
+    height: 100rpx;
+}

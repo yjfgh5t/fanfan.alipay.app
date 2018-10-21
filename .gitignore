@@ -1,5 +1,1 @@
-.tea/entryFiles-production/index$.worker.js
-.tea/entryFiles-production/index$.web.js
-.tea/entryFiles-production/importScripts$.js
-.tea/entryFiles-production/config$.js
-.tea/entryFiles-development/importScripts$.js
+.tea/*

@@ -1,0 +1,94 @@
+
+<view class="block" style="text-align:center;">
+
+    <image src="{{order.mainImg}}" mode="aspectFit" class="head-img" />
+    <view><text class="wait-pay">{{order.orderStateText}} </text></view>
+
+    <block a:if="{{order.orderState==103}}">
+    <view><text class="t-muted" style="line-height:50rpx;">逾期未支付，订单将自动取消</text></view>
+    <view style="line-height:80rpx;">
+        <text class="btn btn-defcolor" onTap="bindChanel" >取消订单 </text> 
+        <text class="btn" onTap="binPay">立即支付（{{endPayText}}）</text> </view>
+    <block>
+</view>
+
+
+
+<view class="block d-mar"> 
+    <view class="d-pad  border-line">
+        <text>{{order.name}}</text> 
+    </view>
+
+    <view class="d-pad" a:for="{{order.commoditys}}" >
+        <text class="t-muted">{{item.title}}</text> 
+        <text class="t-price t-muted">￥{{item.price}}</text>
+        <text class="t-count t-muted">x {{item.size}}</text>
+    </view> 
+ 
+    <view class="d-pad" style="overflow: hidden;"> 
+        <text class="t-price t-pay">实付￥{{order.pay}}</text>
+    </view> 
+</view>
+
+<view class="block d-mar">
+    <view  class="d-pad border-line">
+        <text>订单信息</text>
+    </view>
+
+    <view class="d-pad-left t-muted border-line">
+        <block a:if="{{order.orderState!=103}}">
+            <view class="d-pad-tb border-line">
+                订单号：{{order.orderNum}}
+            </view>
+            <view class="d-pad-tb border-line">
+                编号：{{order.dateNum}}
+            </view> 
+            <view class="d-pad-tb border-line" hidden="order.deskNum==''">
+                桌号：{{order.deskNum}}
+            </view>
+        </block> 
+         <view class="d-pad-tb border-line">
+            支付方式：在线支付
+        </view>
+       <view class="d-pad-tb border-line">
+            堂吃/打包：{{order.orderTypeText}}
+        </view>
+        <view class="d-pad-tb border-line">
+            下单时间：{{order.createTime}}
+        </view>
+
+        <view class="d-pad-tb border-line">
+            发票信息：不需要发票
+        </view> 
+
+        <view  class="d-pad" style="overflow: hidden;"> 
+            <text class="t-price t-pay">{{order.orderStateText}}</text> 
+        </view>
+    </view>   
+</view>
+
+
+<view class="block d-mar" a:if="{{order.orderType==3}}">
+    <view  class="d-pad border-line">
+        <text>配送信息</text>
+    </view>
+
+    <view class="d-pad-left t-muted">
+        <view class="d-pad-tb border-line">
+            送达时间：尽快送达
+        </view>
+
+        <view class="d-pad-tb border-line"> 
+            <text style="display:block">送货地址：{{order.receiver.name}}({{order.receiver.sex}})</text>
+            <text style="display:block;margin-left:140rpx;">{{order.receiver.tel}}</text>  
+            <text style="display:block;margin-left:140rpx;">{{order.receiver.addrDetail}}</text>   
+        </view> 
+
+        <view class="d-pad-tb border-line">
+            配送方式：蜂鸟快送
+        </view> 
+    </view> 
+</view>
+
+
+ <view class="block d-mar"></view>

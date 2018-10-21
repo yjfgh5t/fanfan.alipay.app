@@ -1,33 +1,110 @@
+import {tools} from '/common/js/common.js'
 App({
-  todos: [
-    { text: 'Learning Javascript', completed: true },
-    { text: 'Learning ES2016', completed: true },
-    { text: 'Learning 支付宝小程序', completed: false },
-  ],
-  userInfo: null,
-  getUserInfo() {
-    return new Promise((resolve, reject) => {
-      if (this.userInfo) resolve(this.userInfo);
+  //用户信息
+  userInfo: {
+    id: -1,
+    userNick: '',
+    userMobile: '',
+    userIcon: '',
+    userSex: 1,
+    userState:1
+  },
+  //配置信息
+  config:{
+    apiHost:'http://wxcard.com.cn/', //'http://localhost:8081/',
+    networkAvailable:true,
+    //店铺名称
+    showName:"",
+    //最低起送价
+    minTakePrice:0.0,
+    //店铺营业开始时间,
+    startBusiTime:"09:00",
+    //结束营业时间
+    endBusiTime:"10:00",
+    //客桌Id
+    deskId:-1,
+    //商户Id 
+    customerId:-1,
+    //客户端类型
+    clientType:'AlipayMiniprogram',
+  },
+  //全局对象
+  globalData:{},
+onError:function(){
+  console.log('出错')
+},
+  onLaunch:function(option){
+     console.log(this.globalData.option)
+   let _this =this;
+   this.globalData.option = option;
 
-      my.getAuthCode({
-        scopes: ['auth_user'],
-        success: (authcode) => {
-          console.info(authcode);
+    //监听网咯状态
+    my.onNetworkStatusChange(function(res){
+      _this.config.networkAvailable = res.isConnected;
+    });
 
-          my.getAuthUserInfo({
-            success: (res) => {
-              this.userInfo = res;
-              resolve(this.userInfo);
-            },
-            fail: () => {
-              reject({});
-            },
-          });
-        },
-        fail: () => {
-          reject({});
-        },
-      });
+    //获取网咯状态 
+    my.getNetworkType({success: (res) => { 
+        _this.config.networkAvailable = res.networkAvailable;
+      }
+    });
+
+    //设置用户信息
+    my.getStorage({
+      key: 'userInfo', // 缓存数据的 key
+      success: (res) => {
+        if(res!=null  &&  res.data!=null){
+          _this.userInfo = res.data;
+        }
+      },
     });
   },
+  onShow:function(){
+    //加载数据
+    if(this.globalData.option){
+      this.privInitParams(this.globalData.option);
+  }
+    //设置配置信息
+     if(this.config.customerId==-1){
+       let config =  my.getStorageSync({key:'app.config'});
+       if(config!=null && config.customerId){
+         debugger
+          this.config = config;
+       }
+     } 
+  },
+  //获取基础信息 
+  privInitParams:function(option){
+    let qrcode='';
+    if(option.query && option.query.qrCode){
+       let temcode = option.query.qrCode;
+       if(temcode.indexOf('qrcode=')>0){
+         temcode = temcode.split('qrcode=')[1];
+         if(temcode.length==32){
+           qrcode = temcode;
+         } 
+       }
+    }
+    let _this = this;
+      tools.ajax("api/info/",{qrcode:qrcode},"GET",(resp)=>{
+        //设置值
+        if(resp.data.dict){
+          _this.config.shopName=resp.data.dict[1021];
+          _this.config.minTakePrice=parseFloat(resp.data.dict[1022]);
+          _this.config.startBusiTime=resp.data.dict[1011];
+          _this.config.endBusiTime=resp.data.dict[1012];
+          _this.config.customerId=resp.data.dict[9101];
+          if(resp.data.dict[9102]){
+            _this.config.deskId = resp.data.dict[9102];
+          }
+           my.setNavigationBar({title:_this.config.shopName});
+           //添加至缓存
+           my.setStorageSync({
+             key: 'app.config', // 缓存数据的key
+             data: _this.config, // 要缓存的数据
+           });
+        };
+
+      }); 
+  }
 });

@@ -1,0 +1,21 @@
+<view style="margin:28rpx;">
+    <view class="block d-mar coupon" a:for="{{couponArry}}" >
+        <view class="d-pad cou-head">
+            <view class="t-price">
+                <text class="money"><text style="font-size:32rpx;">￥</text>10</text>
+                <text>满39元可用</text>
+            </view>
+            <view class="cou-right">
+                <text class="cou-right-title">新用户专享</text>
+                <text class="cou-right-item">限2018-03-25当天使用</text>
+                <text class="cou-right-item">限2018-03-25当天使用</text>
+            </view>
+        </view>
+        <view class="cou-bottom"> </view> 
+    </view>
+
+    <view a:if="{{couponArry.length==0}}"  style="margin-top:60%;text-align:center;">
+        <text class="t-muted">您还没有优惠券</text>
+    </view>
+
+</view>

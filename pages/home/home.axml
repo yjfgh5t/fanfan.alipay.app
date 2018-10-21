@@ -1,20 +1,26 @@
 <view class="head-img">
    <image style="width:100%;height:300rpx;display: block;" mode="scaleToFill" src="{{headImg}}" onError="imageError" onLoad="imageLoad" />
 </view>
+
+<!--用户按钮-->
+<view class="view-user" onTap="userClick">
+    <image src="{{btnUser}}" mode="aspectFit" class="img-user" />
+</view>
+
 <!--遮罩层-->
 <view class="{{showMark?'view-mark':''}}" onTouchMove="bindMarkMove"></view>
 
 <!--购物车弹出层 -->
-<view class="view-lay-car" hidden="{{!carData.show}}">
+<view class="view-lay-car">
     <form onSubmit="formSubmit" report-submit="true">
-        <view class="car-title"> 
+        <view class="car-title" hidden="{{!carData.show}}"> 
             <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
             <text class="car-title-text">购物车</text>
             <text onTap="closeCar" class="icon-close"> 
                 <image src="{{btnClose}}" mode="aspectFit"  class="img-car"/>
             </text>
         </view>
-        <view class="car-body">
+        <view class="car-body" hidden="{{!carData.show}}">
             <view a:for="{{carData.itemArry}}" class="lay-item">
                     <text class="title">{{item.title}}</text>
                     <text class="price">{{item.salePrice}}</text>
@@ -24,22 +30,17 @@
                         <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="add" src="{{btnAdd}}"/>
                     </label>
             </view>
-            
-            <view class="no-select-item" a:if="{{carData.itemArry.length==0}}">
-            购物车还是空的哦！
-            </view>
-            
+            <view class="no-select-item" a:if="{{carData.itemArry.length==0}}">购物车还是空的哦！</view>
         </view>
         <view class="car-foot">
-            <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份 ￥{{carData.minPrice}}起送</text>
-            <text a:if="{{carData.minPrice>carData.price}}" class="cf-btn disable">还差￥{{(carData.minPrice-carData.price).toFixed(2)}}</text>
-            <button a:if="{{carData.minPrice<=carData.price}}" formType="submit" onTap="bindSubmit" class="cf-btn">去结算</button>
+            <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份</text>
+            <button class="cf-btn" disabled="{{carData.price<carData.minPrice}}" formType="submit" onTap="bindSubmit">去结算</button>
         </view>
     </form>
 </view>
 
 <!--购物车按钮-->
-<view class="view-car" hidden="{{carData.show}}" onTap="showCar">
+<view class="view-car" onTap="showCar">
     <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
     <text style="display:{{carData.itemArry.length==0?'none':'block'}}" class="txt-car {{carData.itemArry.length>9?'txt-car-len':''}}">{{carData.count}}</text>
 </view>
@@ -49,7 +50,6 @@
     <view style="float:left;">
         <image src="{{item.icon}}" class="item-img" />
     </view>
-    
     <view style="float:left;margin-left:10rpx;">
         <label class="item-con">
             <text style="color:#000;font-weight:700;">{{item.title}}</text>
@@ -66,8 +66,6 @@
             </block>
             <image onTap="itemAddMinus"  data-id="{{item.id}}" data-option="add" src="{{btnAdd}}"/>
         </label>
-    </view>  
+    </view>
 </view>
-
-<!--todo商品详情-->
-<view> </view>
+<view class="view-empty"></view>
