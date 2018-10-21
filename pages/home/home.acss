@@ -47,11 +47,11 @@
     height: 45rpx; 
     color:#bfbfbf;
     font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
-    font-size:28rpx;
 }
 .item-con text.desc{ 
     height:70rpx; 
     line-height:35rpx;
+    font-size:30rpx;
 }
 
 .item-con text.active .t-head{
@@ -63,6 +63,11 @@
     margin-right:8rpx;
     border-radius: 4rpx;
 }
+.item-con text.price{
+    position: absolute;
+    bottom: 10rpx;
+}
+
 .t-head.t-head-1{
   background-color: rgb(241, 136, 79);
 }
@@ -76,13 +81,6 @@
     content: "减";
 }
 
-
-.item-con text.price{
-    font-size: 30rpx;
-    position: absolute;
-    bottom: 10rpx;
-}
-
 .price .cost{
     margin-left: 8rpx;
     color: #999;
@@ -93,13 +91,20 @@
 .price .salePrice{ 
     display:inline-block;
     color: #ff3618; 
-    font-size: 34rpx;
 }
 
+.mark-price.cost::before{
+    font-size: 24rpx;
+}
+
+.mark-price.cost{
+    margin-left: 20rpx;
+    display: inline-block;
+    font-size: 30rpx;
+}
 .mark-price::before{
     font-weight: 400;
     content: "\A5";
-    font-size: 24rpx;
     margin-right: .053333rem;
     margin-right: .533333vw;
     display: inline-block;
@@ -122,6 +127,72 @@
     float:left;
     color:#000;
     padding:0rpx  10rpx;
+    font-size: 30rpx;
+}
+
+/*****规格******/
+.view-lay-norms{
+    position: absolute;
+    width: 80%;
+    left: 10%;
+    z-index: 5;
+    top: 30%;
+    background-color: white;
+}
+.lay-norms-title{
+    line-height: 0.8rem;
+    text-align: center;
+    color: white;
+    background: radial-gradient(circle at center,#0af,#0085ff);
+}
+.lay-norms-con{
+    padding: 0.5rem;
+}
+
+.lay-norms-con > text{
+    display: block;
+    margin-bottom: 20rpx;
+    color: #ccc;
+}
+
+.lay-norms-con .price > text{
+    color: orangered;
+}
+
+.view-norms{
+    margin-top: 10rpx;
+    overflow: hidden;
+}
+
+.view-norms text{
+    padding: 10rpx 28rpx;
+    margin-left: 30rpx;
+    border-radius: 10%;
+    color: white;
+    background:  #e1e1e1;
+    display: inline-block;
+}
+.view-norms text:first-child{
+    margin-left: 0rpx;
+}
+.view-norms text.active{
+     background: radial-gradient(circle at center,#0af,#0085ff);
+}
+
+.lay-norms-foot{
+    line-height: 1rem;
+    text-align: right;
+}
+.lay-norms-foot text{
+    margin-right: 20rpx;
+    padding: 10rpx 25rpx;
+    color: white;
+}
+.lay-norms-foot text.cancel{
+    background-color: orange;
+}
+.lay-norms-foot text.sure{
+    background: radial-gradient(circle at center,#0af,#0085ff);
 }
 
 /****购物车****/
@@ -270,7 +341,7 @@
     line-height: 0.38rem;
     background: radial-gradient(circle at center,#ff00a5,#ff0000);
     color: white;
-    font-size: 20rex;
+    font-size: 30rpx;
     border-radius: 50%;
     margin: 0rem;
     padding: 0rem;
