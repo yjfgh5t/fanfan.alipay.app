@@ -161,7 +161,7 @@ Page({
 
         //菜单
         dataOrder.menuArry = orderInfo.detailList
-        .filter(function(item){ return item.outType==1; })
+        .filter(function(item){ return item.outType==1 || item.outType==5;})
         .map(function(item){  return  {id:item.id,title:item.outTitle,price:item.outPrice,count:item.outSize} });
 
         //优惠券 todo

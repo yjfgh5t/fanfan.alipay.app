@@ -17,7 +17,7 @@ Page({
         ],
         carData:{
             show:false,
-            //{id:'',title:'',}
+            //{id:'',title:'',type:1/5}
             itemArry:[],
             //{id:count }
             itemIdArry:{},
@@ -27,6 +27,12 @@ Page({
             price:0,
             //起送价格
             minPrice:0.0
+      },
+      norms:{
+          show: false,
+          selected:{},
+          commodity:{},
+          items:[]
       }
     },
     onReady:function(){
@@ -52,12 +58,14 @@ Page({
         let _app = getApp();
         tools.ajax('api/commodity/',{},'GET',function(res){
             console.log(res.data);
-            if(res.code==0){ 
+            if(res.code==0){
+
                 _this.setData({
-                    "itemArry":res.data,
+                    "itemArry": _this.convertComodity(res.data),
                     "carData.minPrice":_app.config.minTakePrice,
                     "isBusiness": _app.config.shopState==1
                     });
+                //设置商品数据
             }
         });
     },
@@ -76,48 +84,99 @@ Page({
             'carData.show':false,
         });
     },
-    minusClick:function(e){
-     console.log(e.target.id);
-    },
-    addClick:function(e){
-        console.log(e.target.id);
+    itemAddMinus: function(e){
+        const option = e.target.dataset.option;
+        const commodity ={id:e.target.dataset.id};
+
+        //购物车中的commodityid
+        if( e.target.dataset.commodityId){
+            commodity.commodityId = e.target.dataset.commodityId;
+        }
+
+        let model=null;
+   
+        for(let i=0;i<this.data.itemArry.length;i++){
+            if(this.data.itemArry[i].id==commodity.id){
+                model = this.data.itemArry[i];
+                break;
+            }
+        }
+        
+        //判断规格
+        if(model !=null && model.norms.length>0){
+            if(option==='add'){
+                //显示规格
+                    let norms = {
+                        commodity:model,
+                        selected: model.norms[0],
+                        show:true,
+                        items:model.norms
+                    }
+                this.setData({norms:norms,showMark:true});
+                return;
+            }else{
+                return my.showToast({content:'多规格商品需在购物车中删除'});
+            }
+        }
+        //包装数据
+        if(model !=null){
+            commodity.id = model.id;
+            commodity.title = model.title;
+            commodity.salePrice = model.salePrice;
+            commodity.commodityId = model.id;
+        }
+
+        //类型 1:商品 5:商品规格
+        commodity.type = (commodity.id == commodity.commodityId?1:5);
+
+        //执行添加或减去
+        this.addMinus(option,commodity);
     },
     //添加减去商品
-    itemAddMinus:function(e){
-       const target = e.target.dataset;
-       let  model={};
+    addMinus:function(option,commodity){
        //选种的商品数据
        let carItemData=this.data.carData.itemArry;
        //商品Id数据
        let carItemIds=this.data.carData.itemIdArry;
+
        //设置数据
-       if(carItemIds[target.id]==undefined)
+       if(carItemIds[commodity.id]==undefined)
         {
-            //添加数据
-            this.data.itemArry.forEach(function(item) {
-                if(item.id==target.id){
-                 model=item;
-                 //设置默认数据
-                 carItemIds[target.id]=0;
-                 carItemData.push({id:item.id,title:item.title,salePrice:item.salePrice});
-                }
-            });
+            //设置默认数据
+            carItemIds[commodity.id]=0;
+            carItemData.push({id:commodity.id,title:commodity.title,salePrice:commodity.salePrice,commodityId:commodity.commodityId,type:commodity.type});
         }
 
         //添加数量
-        let addCount= target.option=='add'?1:-1; 
+        let addCount= option=='add'?1:-1; 
 
-        if(carItemIds[target.id]+addCount<=0){
+        if((carItemIds[commodity.id]+addCount)<=0){
             //删除数据 
-            delete carItemIds[target.id];
+            delete carItemIds[commodity.id];
             //删除数组
             for(let i in carItemData){
-                if(carItemData[i].id==target.id){
+                if(carItemData[i].id==commodity.id){
                     carItemData.splice(i,1);
                 }
             }
+            //删除规格-商品的数据
+            if(commodity.id !== commodity.commodityId){
+                //删除数据 
+                if((carItemIds[commodity.commodityId]+addCount)<=0){
+                    delete carItemIds[commodity.commodityId];
+                }else{
+                      carItemIds[commodity.commodityId]=carItemIds[commodity.commodityId]+addCount;
+                }
+            }
         }else{
-           carItemIds[target.id]=carItemIds[target.id]+addCount;
+           carItemIds[commodity.id]=carItemIds[commodity.id]+addCount;
+           //如果id未规格id
+           if(commodity.id !== commodity.commodityId){
+               if(carItemIds[commodity.commodityId]==undefined){
+                   carItemIds[commodity.commodityId]=0;
+               }
+              carItemIds[commodity.commodityId]=carItemIds[commodity.commodityId]+addCount;
+           }
         }
 
         //计算总数量
@@ -135,10 +194,38 @@ Page({
             'carData.price':price.toFixed(2), 
         });
     },
+    //选择规格
+    bindSelNorms:function(e){
+        const id =  e.target.dataset.id;
+        let _this = this;
+        this.data.norms.items.forEach(function(item){
+            if(item.id===id){
+                _this.setData({"norms.selected":item});
+                return false;
+            }
+        });
+    },
+    bindChoiseNorms:function(e){
+        let sure = e.target.dataset.sure;
+        if(sure=='true'){
+            let norms = this.data.norms;
+            let commodity ={
+                id: norms.selected.id,
+                title: norms.commodity.title+"-"+norms.selected.title,
+                salePrice: norms.selected.price,
+                commodityId: norms.commodity.id,
+                type:5
+            };
+            this.addMinus('add',commodity);
+        }
+        this.setData({"norms.show":false,"showMark":false});
+    },
     //提交按钮
     bindSubmit:function(e){ 
         //选择的菜单
        let idArry = this.data.carData.itemIdArry;
+
+       let itemArry = this.data.carData.itemArry;
 
        //全局变量
        let globalData = getApp().globalData;
@@ -153,13 +240,15 @@ Page({
         };
         
         //商品添加到集合
-        for(let key in idArry){
+        itemArry.forEach(function(item){
             orderReq.detailList.push({
-                outId:key,
-                outSize:idArry[key],
-                outType:1
+                outId:item.id,
+                outSize:idArry[item.id],
+                outType:item.type,
+                commodityId:item.commodityId
             });
-        } 
+        })
+       
         //创建临时订单
         tools.ajax("api/order/",JSON.stringify(orderReq),"POST",function(resp){
 
@@ -206,5 +295,35 @@ Page({
         my.navigateTo({
                     url:'/pages/me/me'
                 })
+    },
+    //转换商品数据
+    convertComodity:function(commoditys){
+        let tempCommodity=[];
+        commoditys.forEach(function(item){
+
+            let norms = [];
+            if(item.extendList!=null && item.extendList.length>0){
+               norms = item.extendList.map(function(item){
+                    return {
+                        id:item.id,
+                        price:item.commodityPrice,
+                        title:item.title
+                    }
+                });
+            }
+
+            tempCommodity.push({
+                id: item.id,
+                title: item.title,
+                price: item.price,
+                salePrice: item.salePrice,
+                icon: item.icon,
+                desc: item.desc,
+                active: item.active,
+                norms: norms
+            })
+        })
+
+        return tempCommodity;
     }
 });

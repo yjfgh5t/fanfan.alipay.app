@@ -1,6 +1,6 @@
 page{
   font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
-  font-size:30rpx; 
+  font-size:32rpx; 
 }
 
 .block{

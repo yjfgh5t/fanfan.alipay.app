@@ -78,6 +78,16 @@ Page({
                 return;
             }
 
+            let receiver={};
+            if(resp.data.receiver!=null){
+                receiver={
+                name:resp.data.receiver.name,
+                sex:resp.data.receiver.sex,
+                tel:resp.data.receiver.tel,
+                addrDetail:resp.data.receiver.addrDetail,
+               }
+            }
+
            let tmpOrder={
                pay:resp.data.orderPay,
                orderId:orderId,
@@ -93,12 +103,7 @@ Page({
                alipayOrderStr:resp.data.alipayOrderStr,
                orderTypeText:resp.data.orderTypeText,
                commoditys:[],
-               receiver:{
-                name:resp.data.receiver.name,
-                sex:resp.data.receiver.sex,
-                tel:resp.data.receiver.tel,
-                addrDetail:resp.data.receiver.addrDetail,
-               }
+               receiver:receiver
                };
 
             resp.data.detailList.forEach((item)=>{
