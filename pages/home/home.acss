@@ -280,7 +280,7 @@
 .car-foot{
     line-height:100rpx;
     height:100rpx;
-    background:rgba(0,0,0,0.6);
+    background-color:#2e2e2e;
     overflow: hidden;
 }
 .cf-price{
@@ -366,7 +366,6 @@
     height: 100rpx;
 }
 
-/*******************************联系我们*********************/
 .view-contact-msg{
     font-size: 28rpx;
     width: 80%;
