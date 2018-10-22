@@ -365,3 +365,21 @@
     width:100%;
     height: 100rpx;
 }
+
+/*******************************联系我们*********************/
+.view-contact-msg{
+    font-size: 28rpx;
+    width: 80%;
+    left: 10%;
+    border-radius: 20rpx;
+    padding: 10rpx 20rpx;
+    background: rgba(7, 133, 253,0.9);
+    color: white;
+    position: fixed;
+    text-align: center;
+    display: block;
+    top: 5rpx;
+}
+.view-contact-msg .install{
+    color:#f7e607;
+}

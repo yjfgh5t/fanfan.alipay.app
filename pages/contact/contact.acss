@@ -1,0 +1,45 @@
+.view-describe{
+    margin-bottom: 20rpx;
+}
+.view-describe text{
+    font-size: 30rpx;
+    display: block;
+    line-height: 50rpx;
+}
+
+.form{
+    padding: 20rpx 30rpx;
+}
+.section{
+    padding: 10 20rpx;
+    display: block;
+    margin-top: 20rpx;
+}
+
+.view-lable{
+    line-height: 70rpx;
+    float: left;
+    font-size: 32rpx;
+    margin-right: 10rpx;
+}
+.inp-lpaceholder{
+    font-size: 32rpx;
+}
+.input{
+    line-height: 70rpx;
+}
+
+.btn-submit{
+    width: 200rpx;
+    padding: 0rpx;
+    font-size: 32rpx;
+}
+
+.view-btn{
+    margin-top: 30rpx;
+}
+
+.view-line{
+    border-top: 1rpx solid #ccc;
+    width: 100%;
+}

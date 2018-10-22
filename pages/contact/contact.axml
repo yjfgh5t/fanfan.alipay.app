@@ -1,0 +1,26 @@
+<form onSubmit="bindSubmit" onReset="formReset" class="form">
+
+ <view class="view-describe">
+     <text>1. 欢迎您使用本小程序。</text>
+     <text>2. 本程序是基于线下实体店扫码点餐使用</text>
+     <text style="padding-left:35rpx;">主要用户快餐店、餐馆内顾客自助点餐。</text>
+     <text>3. 如您需要本程序，请提交您的联系方式</text>
+    <text style="padding-left:35rpx;">我们将在三个工作日内联系您。</text>
+ </view>
+
+ <view class="view-line"></view>
+
+  <view class="section">
+    <view class="view-lable">联系人:</view>
+    <view class="view-form"> <input type="text" class="input" name="name" placeholder-class="inp-lpaceholder" placeholder="请输入联系人姓名" auto-focus/> </view>
+  </view>
+  
+  <view class="section">
+    <view class="view-lable">联电话:</view>
+    <view class="view-form"> <input type="text" class="input" name="tel" placeholder-class="inp-lpaceholder" placeholder="请输入联系人电话" auto-focus/> </view>
+  </view>
+
+  <view class="view-btn">
+    <button formType="submit" type="primary" size="mini" class="btn-submit">提交</button>
+  </view>
+</form>

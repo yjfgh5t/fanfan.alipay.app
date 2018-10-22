@@ -1,4 +1,4 @@
-
+import md5 from '/common/js/md5.js'
 let tools={
     //异步请求
     ajax:function(pathname,data,method,success,option){
@@ -27,7 +27,11 @@ let tools={
             clientType:app.config.clientType,
             userId:app.userInfo.id,
             customerId:app.config.customerId,
+            version: app.config.version,
+            time: new Date().getTime()
             };
+        //设置签名
+        base.sign = md5(base.clientType+''+base.userId+''+base.customerId+''+base.version+''+ base.time+'miniprogram');
 
         //设置header 固定数据
         option.headers.base= JSON.stringify(base);
@@ -134,6 +138,9 @@ let tools={
             delete globalData[objKey];
         } 
         return val;
+    },
+    getSign:function(params){
+
     }
 };
 export {tools};

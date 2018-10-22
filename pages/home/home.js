@@ -8,6 +8,7 @@ Page({
         btnAdd:'/img/icon_btn_add.png',
         btnCar:'/img/icon_btn_car.png',
         btnClose:'/img/icon_btn_add_white.png',
+        btnUser:'/img/icon_head.png',
         showMark:false,
         itemArry:[
             //{id:'1001',title:'招聘黄焖鸡米饭-A',active:[{atype:1,text:'前场九折起'}],price:18.1,salePrice:12, icon:'/img/img_item_default.png',desc:'黄焖鸡米饭 、红烧排骨粉黄焖鸡米饭黄黄'},
@@ -30,10 +31,11 @@ Page({
           selected:{},
           commodity:{},
           items:[]
-      }
+      },
+      //是否显示提示
+      showContact:false
     },
     onReady:function(){
-        //my.showLoading();
         this.lazyLoad(this);
     },
     onShow:function(){
@@ -62,7 +64,8 @@ Page({
                 _this.setData({
                     "itemArry": _this.convertComodity(res.data),
                     "carData.minPrice":_app.config.minTakePrice,
-                    "isBusiness": _app.config.shopState==1
+                    "isBusiness": _app.config.shopState==1,
+                    "showContact": _app.config.showContact
                     });
             }
         });
@@ -323,5 +326,8 @@ Page({
         })
 
         return tempCommodity;
+    },
+    bindContact:function(){
+        my.navigateTo({url:'/pages/contact/contact'})
     }
 });

@@ -80,4 +80,10 @@
         </label>
     </view>
 </view>
+
+<!--提示层-->
+<view class="view-contact-msg" onTap="bindContact" hidden="{{!showContact}}">
+    此为体验版、若您需要本程序请点此<text class="install">免费安装</text>
+</view>
+
 <view class="view-empty"></view>

@@ -29,6 +29,10 @@ App({
     customerId:-1,
     //客户端类型
     clientType:'AlipayMiniprogram',
+    //是否显示跳转提交联系人我们提示
+    showContact:false,
+    //版本
+    version: "1.0.1"
   },
   //全局对象
   globalData:{},
@@ -105,6 +109,7 @@ App({
             _this.config.startBusiTime=resp.data.shop.businessStart;
             _this.config.endBusiTime=resp.data.shop.businessEnd;
             _this.config.shopState = resp.data.shop.state;
+            _this.config.showContact = (resp.data.showContact==="true");
             my.setNavigationBar({title:_this.config.shopName});
           }
            //添加至缓存
