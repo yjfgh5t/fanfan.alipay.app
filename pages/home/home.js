@@ -250,23 +250,23 @@ Page({
                    outType: item.type,
                    commodityId: item.commodityId
                });
-           })
-       });
+           });
 
-       //创建临时订单
-       tools.ajax("api/order/",JSON.stringify(orderReq),"POST",function(resp){
+            //创建临时订单
+            tools.ajax("api/order/",JSON.stringify(orderReq),"POST",function(resp){
 
-            if(resp.code==0){
-                //订单信息存入全局变量
-                 tools.setParams("temOrder",resp.data);
+                    if(resp.code==0){
+                        //订单信息存入全局变量
+                        tools.setParams("temOrder",resp.data);
 
-                //跳转
-                my.navigateTo({
-                    url:'/pages/order/order-sure/order-sure'
-                });
-            }
+                        //跳转
+                        my.navigateTo({
+                            url:'/pages/order/order-sure/order-sure'
+                        });
+                    }
 
-        },{headers: {"Content-Type":"application/json"}});
+                },{headers: {"Content-Type":"application/json"}});
+         });
     },
     //form提交事件
     formSubmit:function(e){ 
@@ -327,11 +327,8 @@ Page({
         })
 
         return tempCommodity;
-<<<<<<< HEAD
     },
     bindContact:function(){
-        my.navigateTo({url:'/pages/contact/contact'})
-=======
->>>>>>> 1862e29590ebdcbed8d120a1bba55e86e368e75c
+        my.navigateTo({url:'/pages/contact/contact'});
     }
 });
