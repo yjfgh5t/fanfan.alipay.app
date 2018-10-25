@@ -1,3 +1,4 @@
+
 <form onSubmit="bindSubmit" onReset="formReset" class="form">
 
  <view class="view-describe">

@@ -18,7 +18,7 @@ Page({
             return;
         }
 
-        tools.ajax('api/concat/',JSON.stringify({contact:name,telephone:tel}),'post',function(res){
+        tools.ajax('api/concat/',JSON.stringify({contact:name,telephone:tel}),'POST',function(res){
            if(res.code==0){
                my.alert({
                  title: '提交成功',

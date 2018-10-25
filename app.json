@@ -12,9 +12,10 @@
     "pages/order/order-sure/order-sure",
     "pages/order/order-remark/order-remark",
     "pages/order/pay-order/pay-order", 
+    "pages/contact/contact",
     "pages/todos/todos",    
-    "pages/add-todo/add-todo",
-    "pages/contact/contact"
+   
+    "pages/add-todo/add-todo"
   ],
   "window": {
     "defaultTitle": "Todo App"
