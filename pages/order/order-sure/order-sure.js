@@ -1,5 +1,6 @@
 import {tools} from '/common/js/common.js'
 import {pay} from '/common/js/pay.js'
+import {order} from '/common/js/create-order.js'
 Page({
     data:{
         name:'hellow',
@@ -120,11 +121,11 @@ Page({
             //订单支付类型  1:支付宝  2：微信 3：现金
             orderPayType:1,
             //收货人信息
-            receiver:dataOrder.addr,  
-            //设置状态 请求支付 
-            orderState:dataOrder.orderState, 
+            receiver:dataOrder.addr,
             //订单类型
             orderType:dataOrder.orderType,
+            //订单商品详情
+            detailList: this.getCommodityDetails()
         };
 
         if(!this.privVerifyOrder(reqOrder)) return;
@@ -160,9 +161,15 @@ Page({
         let dataOrder ={menuArry:[],activeArry:[],otherArry:[]}; 
 
         //菜单
-        dataOrder.menuArry = orderInfo.detailList
-        .filter(function(item){ return item.outType==1 || item.outType==5;})
-        .map(function(item){  return  {id:item.id,title:item.outTitle,price:item.outPrice,count:item.outSize} });
+        dataOrder.menuArry = orderInfo.detailList.map(function(item){ 
+            return{
+                id:item.id,
+                title:item.outTitle,
+                price:item.outPrice,
+                count:item.outSize,
+                showCount: item.outType==1 || item.outType==5
+            }
+        });
 
         //优惠券 todo
 
@@ -174,7 +181,8 @@ Page({
         dataOrder.discount = orderInfo.orderDiscountTotal;
         //支付金额 
         dataOrder.pay = orderInfo.orderPay; 
-
+        //订单类型
+        dataOrder.orderType = orderInfo.orderType | 0;
         this.setData({
             "order.menuArry":dataOrder.menuArry,
             "order.activeArry":dataOrder.activeArry,
@@ -182,6 +190,7 @@ Page({
             "order.total":dataOrder.total,
             "order.discount":dataOrder.discount,
             "order.pay":dataOrder.pay,
+            "order.orderType":dataOrder.orderType
         });
     },
     //验证订单内容
@@ -199,8 +208,36 @@ Page({
 
         return true; 
     },
+    //订单类型
     bindOrderType:function(e){
       let val = e.target.dataset.value; 
-       this.setData({"order.orderType":val}); 
+      this.setData({"order.orderType":val}); 
+      this.refshCalculate();
+    },
+    //重新刷新订单
+    refshCalculate:function(){
+        let _this = this;
+       let orderDetails = this.getCommodityDetails();
+      //生成新订单
+      order.calculate({detailList:orderDetails,orderType:this.data.order.orderType},function(resp){
+          if(resp.code==0){
+            //刷新数据
+            _this.privInitOrder(resp.data);
+          }
+      })
+
+    },
+    //获取订单商品详情
+    getCommodityDetails(){
+        return this.data.temOrder.detailList
+       .filter(function(item){ return (item.outType==1 || item.outType==5);})
+       .map(function(item){
+           return {
+                outId: item.outId,
+                outSize: item.outSize,
+                outType: item.outType,
+                commodityId: item.commodityId
+            };
+       });
     }
 });

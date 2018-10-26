@@ -1,4 +1,5 @@
 import {tools} from '/common/js/common.js'
+import {order} from '/common/js/create-order.js'
 Page({
     data:{
         name:'hellow',
@@ -231,42 +232,28 @@ Page({
 
        let itemArry = this.data.carData.itemArry;
 
-       //全局变量
-       let globalData = getApp().globalData;
+       //订单详情集合
+       let details = itemArry.map(function(item){
+           return {
+                outId: item.id,
+                outSize: idArry[item.id],
+                outType: item.type,
+                commodityId: item.commodityId
+            }
+       });
 
-       tools.getUserInfo(function(userInfo) {
-           //订单提交对象
-           let orderReq = {
-               userId: userInfo.id,
-               detailList: [],
-               receiver: {},
-           };
+        //订单计价
+        order.calculate({detailList:details},function(resp){
+            if(resp.code==0){
+                //订单信息存入全局变量
+                tools.setParams("temOrder",resp.data);
 
-           //商品添加到集合
-           itemArry.forEach(function (item) {
-               orderReq.detailList.push({
-                   outId: item.id,
-                   outSize: idArry[item.id],
-                   outType: item.type,
-                   commodityId: item.commodityId
-               });
-           });
-
-            //创建临时订单
-            tools.ajax("api/order/",JSON.stringify(orderReq),"POST",function(resp){
-
-                    if(resp.code==0){
-                        //订单信息存入全局变量
-                        tools.setParams("temOrder",resp.data);
-
-                        //跳转
-                        my.navigateTo({
-                            url:'/pages/order/order-sure/order-sure'
-                        });
-                    }
-
-                },{headers: {"Content-Type":"application/json"}});
-         });
+                //跳转
+                my.navigateTo({
+                    url:'/pages/order/order-sure/order-sure'
+                });
+            }
+        })
     },
     //form提交事件
     formSubmit:function(e){ 

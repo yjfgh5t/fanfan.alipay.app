@@ -5,6 +5,22 @@ Page({
         console.log(12312313131)
     },
     bindSubmit:function(e){
+
+     
+
+        my.downloadFile({
+          url: 'http://static.wxcard.com.cn/fanfan.apk', // 下载文件地址
+          success: function (res){
+             
+            my.alert({content:res.apFilePath})
+          },
+          fail: function(res){
+            my.alert({ content: res.errorMessage || res.error });
+          }
+        });
+
+    my.showToast({content:'开始下载文件'})
+        return;
         let name = e.detail.value.name;
         let tel = e.detail.value.tel;
 
