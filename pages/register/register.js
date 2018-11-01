@@ -1,15 +1,16 @@
 import { tools } from '/common/js/common.js'
 Page({
   data: {
-    codeModel: { text: '发送验证码', disabled: false, showImgCode: false, code: '', imgCodeSrc: '' },
+    codeModel: { text: '发送验证码', disabled: false, showImgCode: false, code: '', imgCodeSrc: 'http://localhost:8081/api/info/imgcode/5821243531' },
     showImgCodeLayer: false,
-    model: { mobile: '', pwd: '', confirmPwd: '', name: '', mobileCode: '' }
+    model: { mobile: '', pwd: '', confirmPwd: '', name: '', mobileCode: '' },
+    showType:1,
   },
   onShow: function() {
-
-  },
-  bindSubmit: function(e) {
-   
+    let res = my.getStorageSync({key:'registed'})
+    if (res.data != undefined && res.data.mobile!=undefined){
+      this.setData({"showType":2});
+    }
   },
   // 绑定发送二维码
   bindMobileCode: function() {
@@ -18,7 +19,7 @@ Page({
     }
     // 显示图片二维码
     if (this.data.codeModel.showImgCode) {
-      this.setData({"codeModel.showImgCode":true});
+      this.setData({"showImgCodeLayer":true});
       // 刷新图片二维码
       this.refreshCodeImg()
     } else {
@@ -46,21 +47,33 @@ Page({
       mobile: this.data.model.mobile,
       imgCode: this.data.codeModel.code
     }
+    if (_that.data.codeModel.disabled){
+      return;
+    }
+
+    //设置不可再发送
+    _that.setData({"codeModel.disabled": true});
+
     tools.ajax('api/user/sendCode', params, 'POST', function(res) {
       if (res.code === 0) {
         my.showToast({ content: '验证码已发送请注意查收' });
         _that.setData({ "codeModel.disabled": true,"showImgCodeLayer":false});
         // 设置计数器
         let start = 60
-        let interval = window.setInterval(function() {
+        debugger
+        let interval = setInterval(function() {
           if (--start === 0) {
-            window.clearInterval(interval)
+            clearInterval(interval)
             // 设置验证码
             _that.setData({ "codeModel.text": "发送验证码", "codeModel.disabled": false });
           } else {
             _that.setData({ "codeModel.text": start + 's' });
           }
         }, 1000)
+      }else{
+        //设置可以再发送
+        _that.setData({ "codeModel.disabled": false });
+        _that.refreshCodeImg();
       }
     })
   },
@@ -68,52 +81,61 @@ Page({
   refreshCodeImg: function() {
     this.setData({"codeModel.imgCodeSrc": getApp().config.apiHost + 'api/info/imgcode/' + this.data.model.mobile + '?v=' + parseInt(Math.random() * 100)});
   },
-  register: function() {
+  bindSubmit: function() {
     let _this = this
-    if (_this.model.name === '') {
+    if (_this.data.model.name === '') {
       return my.showToast({ content: '请输入商户姓名' });
     }
-    if (_this.model.mobile === '') {
+    if (_this.data.model.mobile === '') {
       return my.showToast({ content: '请输入手机号' });
     }
-    if (_this.model.mobile === '' || _this.model.mobile.length !== 11 || isNaN(_this.model.mobile)) {
+    if (_this.data.model.mobile === '' || _this.data.model.mobile.length !== 11 || isNaN(_this.data.model.mobile)) {
       return my.showToast({ content: '您输入的手机号格式不正确' });
     }
-    if (_this.model.mobileCode === '') {
+    if (_this.data.model.mobileCode === '') {
       return my.showToast({ content: '请输入手机验证码' });
     }
-    if (_this.model.pwd === '') {
+    if (_this.data.model.pwd === '') {
       return my.showToast({ content: '请输入密码' });
     }
-    if (_this.model.pwd.length < 6) {
+    if (_this.data.model.pwd.length < 6) {
       return my.showToast({ content: '密码长度不能小于6个字符' });
     }
-    if (_this.model.confirmPwd === '') {
+    if (_this.data.model.confirmPwd === '') {
       return my.showToast({ content: '请输入确认密码' });
     }
-    if (_this.model.confirmPwd.length < 6) {
+    if (_this.data.model.confirmPwd.length < 6) {
       return my.showToast({ content: '确认密码长度不能小于6个字符' });
     }
-    if (_this.model.pwd !== _this.model.confirmPwd) {
+    if (_this.data.model.pwd !== _this.data.model.confirmPwd) {
       return my.showToast({ content: '密码和确认密码不匹配' });
     }
 
     let subData = {
-      code: _this.model.mobileCode,
+      code: _this.data.model.mobileCode,
       userId: 0,
-      name: _this.model.name,
-      mobile: _this.model.mobile,
-      password: _this.model.pwd
+      name: _this.data.model.name,
+      mobile: _this.data.model.mobile,
+      password: _this.data.model.pwd
     }
     // 执行注册
-    tools.ajax('user/customer/register', subData,'POST', function(res) {
+    tools.ajax('api/user/customer/register', JSON.stringify(subData),'POST', function(res) {
       if (res.code === 0 && res.data !== '') {
-        my.alert('商户注册成功')
+        //标记用户已经注册
+        my.setStorageSync({
+          key: 'registed', data: { mobile: subData.mobile}
+        });
+        my.alert({ title: '提示', content: '注册成功', success:function(){
+          _this.setData("showType", 2);
+        }})
       }
-    })
+    }, { headers: { "Content-Type": "application/json" } }); 
   },
   //失去焦点事件
   onItemBlur: function(e) {
     this.setData({[e.target.dataset.field]: e.detail.value});
+  },
+  bindModalClose:function(){
+    this.setData({"showImgCodeLayer":false})
   }
 })

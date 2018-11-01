@@ -1,24 +1,38 @@
 <view>
   <view style="margin-top: 10px;" />
   <!--form表单 -->
-  <form onSubmit="bindSubmit">
-    <list>
-      <input-item name="name" placeholder="请输入商户姓名" type="text" onBlur="onItemBlur" data-field="model.name" clear="{{true}}">姓名</input-item>
-      <input-item name="mobile" placeholder="请输入手机号" type="number" onBlur="onItemBlur" data-field="model.mobile" clear="{{true}}">手机号</input-item>
-      <input-item name="mobileCode" onBlur="onItemBlur"  type="number" data-field="model.mobileCode" placeholder="请输入验证码"> 验证码            
-        <text slot="extra" class="btn code-btn" onTap="bindMobileCode">{{codeModel.text}}</text>
-      </input-item>
-      <input-item name="pwd" onBlur="onItemBlur" placeholder="请输入密码6-18位"  data-field="model.pwd" password clear="{{true}}">密码</input-item>
-      <input-item name="confirmPwd" onBlur="onItemBlur"  data-field="model.confirmPwd" placeholder="请输入确认密码6-18位" password clear="{{true}}">确认密码</input-item>
-    </list>
-    <view style="margin: 10px;">
-      <button formType="submit" type="primary">注 册</button>
-      <view>
-      </form>
-      <!-- 弹出层-->
-      <modal show="{{showImgCodeLayer}}">
-        <view slot="header">标题单行</view>
-        <view>12312</view>
-        <view slot="footer">确定</view>
-      </modal>
-    </view>
+  <view hidden="{{showType==2}}">
+    <form onSubmit="bindSubmit">
+      <list>
+        <input-item name="name" placeholder="请输入商户姓名" type="text" onBlur="onItemBlur" data-field="model.name" clear="{{true}}">姓名</input-item>
+        <input-item name="mobile" placeholder="请输入手机号" type="number" onBlur="onItemBlur" data-field="model.mobile" clear="{{true}}">手机号</input-item>
+        <input-item name="mobileCode" onBlur="onItemBlur" type="number" data-field="model.mobileCode" placeholder="请输入验证码"> 验证码                            
+          <text slot="extra" class="btn code-btn" onTap="bindMobileCode">{{codeModel.text}}</text>
+        </input-item>
+        <input-item name="pwd" onBlur="onItemBlur" placeholder="请输入密码6-18位" data-field="model.pwd" password clear="{{true}}">密码</input-item>
+        <input-item name="confirmPwd" onBlur="onItemBlur" data-field="model.confirmPwd" placeholder="请输入确认密码6-18位" password clear="{{true}}">确认密码</input-item>
+      </list>
+      <view style="margin: 10px;">
+        <button formType="submit" type="primary">注 册</button>
+      </view>
+    </form>
+    <!-- 弹出层-->
+    <modal show="{{showImgCodeLayer}}" onModalClose="bindModalClose" onModalClick="sendMobileCode">
+      <view slot="header">图形验证码</view>
+      <view class="modal-code">
+        <text>验证码</text>
+        <input type="text" placeholder="请输入图形验证码" onBlur="onItemBlur" data-field="codeModel.code" auto-focus/>
+        <image slot="extra" class="img-code" src="{{codeModel.imgCodeSrc}}" mode="aspectFit" />
+      </view>
+      <view slot="footer">确定</view>
+    </modal>
+</view>
+
+<!-- 已经注册 -->
+<view hidden="{{showType==1}}">
+
+<text>我们已经发送下载apk的短信至您手机 请你查收信息、点击内容中的链接下载商户版apk安装</text>
+<button type="primary"size="mini">重新注册</button>
+</view>
+
+</view>
