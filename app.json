@@ -1,5 +1,7 @@
 {
   "pages": [
+     "pages/register/register",
+    "pages/contact/contact",
     "pages/home/home",
     "pages/order/order",
     "pages/index/index",
@@ -12,9 +14,7 @@
     "pages/order/order-sure/order-sure",
     "pages/order/order-remark/order-remark",
     "pages/order/pay-order/pay-order", 
-    "pages/contact/contact",
     "pages/todos/todos",    
-   
     "pages/add-todo/add-todo"
   ],
   "window": {

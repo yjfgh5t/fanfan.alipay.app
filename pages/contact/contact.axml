@@ -13,7 +13,7 @@
 
   <view class="section">
     <view class="view-lable">联系人:</view>
-    <view class="view-form"> <input type="text" class="input" name="name" placeholder-class="inp-lpaceholder" placeholder="请输入联系人姓名" auto-focus/> </view>
+    <view class="view-form"> <input type="text" class="input" name="name" onInput="bindKeyInput"  placeholder-class="inp-lpaceholder" placeholder="请输入联系人姓名" auto-focus/> </view>
   </view>
   
   <view class="section">

@@ -30,5 +30,8 @@ Page({
                });
            }
        },{headers: {"Content-Type":"application/json"}}); 
-    }
+    },
+  bindKeyInput:function(e){
+   
+  }
 })
