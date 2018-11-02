@@ -3,14 +3,10 @@ Page({
   data: {
     codeModel: { text: '发送验证码', disabled: false, showImgCode: false, code: '', imgCodeSrc: 'http://localhost:8081/api/info/imgcode/5821243531' },
     showImgCodeLayer: false,
-    model: { mobile: '', pwd: '', confirmPwd: '', name: '', mobileCode: '' },
-    showType:1,
+    showAboutLayer:true,
+    model: { mobile: '', pwd: '', confirmPwd: '', name: '', mobileCode: '' }
   },
   onShow: function() {
-    let res = my.getStorageSync({key:'registed'})
-    if (res.data != undefined && res.data.mobile!=undefined){
-      this.setData({"showType":2});
-    }
   },
   // 绑定发送二维码
   bindMobileCode: function() {
@@ -57,10 +53,9 @@ Page({
     tools.ajax('api/user/sendCode', params, 'POST', function(res) {
       if (res.code === 0) {
         my.showToast({ content: '验证码已发送请注意查收' });
-        _that.setData({ "codeModel.disabled": true,"showImgCodeLayer":false});
+        _that.setData({ "codeModel.disabled": true, "showImgCodeLayer": false,"codeModel.code":""});
         // 设置计数器
         let start = 60
-        debugger
         let interval = setInterval(function() {
           if (--start === 0) {
             clearInterval(interval)
@@ -121,13 +116,7 @@ Page({
     // 执行注册
     tools.ajax('api/user/customer/register', JSON.stringify(subData),'POST', function(res) {
       if (res.code === 0 && res.data !== '') {
-        //标记用户已经注册
-        my.setStorageSync({
-          key: 'registed', data: { mobile: subData.mobile}
-        });
-        my.alert({ title: '提示', content: '注册成功', success:function(){
-          _this.setData("showType", 2);
-        }})
+        my.alert({ title: '提示', content: '注册成功，请查收短信,点击短信中的链接下载商户版APK', success:function(){}})
       }
     }, { headers: { "Content-Type": "application/json" } }); 
   },
@@ -137,5 +126,17 @@ Page({
   },
   bindModalClose:function(){
     this.setData({"showImgCodeLayer":false})
+  },
+  bindConfirmAbout:function(){
+    this.setData({ "showAboutLayer": false });
+    my.setClipboard({
+      text: 'http://t.cn/Ew2ra6G',
+      success:function(){
+        my.showToast({ duration: 3000, content: '已复制饭饭商户版APK下载地址，可在浏览器中打开下载' });
+      }
+    });
+  },
+  bindNotifyClick:function(){
+    this.setData({ "showAboutLayer": true });
   }
 })

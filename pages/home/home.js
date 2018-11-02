@@ -316,6 +316,6 @@ Page({
         return tempCommodity;
     },
     bindContact:function(){
-        my.navigateTo({url:'/pages/contact/contact'});
+        my.navigateTo({url:'/pages/register/register'});
     }
 });

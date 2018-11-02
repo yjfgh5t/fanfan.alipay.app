@@ -1,10 +1,30 @@
 page{
   font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
   font-size:32rpx; 
+  background: linear-gradient(rgb(6, 103, 249) 0px, rgb(255, 255, 255) 100%);
 }
 
-input[:placeholder]{
-font-size:32rpx; 
+.input-list{
+  background: none;
+}
+
+.input-list .input{
+  background: none;
+  color: white;
+}
+
+.input-list .input view{
+  color: white;
+}
+.input-list .input input{
+    background: rgba(185, 182, 182, 0.17);;
+    padding: 0;
+    color: white;
+}
+.input-placeholder{
+  font-size:30rpx; 
+  color:#ccc;
+  padding-left: 10rpx;
 }
 .modal-code{
   text-align: left;
@@ -22,4 +42,36 @@ font-size:32rpx;
 }
 .img-code{
   width: 1.6rem;
+}
+
+.code-btn{
+  color: white;
+  border-radius: 10rpx;
+  background:  linear-gradient(to right,rgb(154, 106, 247) 0px, rgb(8, 79, 185) 100%);
+  font-size: 28rpx;
+  padding: 10rpx;
+}
+
+.btn-regist{
+  border: 0px;
+  background:  linear-gradient(to right,rgb(154, 106, 247) 0px, rgb(8, 79, 185) 100%);
+}
+
+.view-describe{
+    padding: 20rpx;
+}
+.view-describe text{
+    font-size: 28rpx;
+    display: block;
+    line-height: 40rpx;
+    color: white;
+}
+
+.modal-about{
+text-align: left;
+}
+.modal-about text{
+ line-height: 0.4rem;
+text-indent: 0.2rem;
+display: inline-block;
 }

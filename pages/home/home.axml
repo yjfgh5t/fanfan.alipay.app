@@ -83,7 +83,7 @@
 
 <!--提示层-->
 <view class="view-contact-msg" onTap="bindContact" hidden="{{!showContact}}">
-    此为体验版、若您需要本程序请点此<text class="install">免费安装</text>
+    此为体验版店铺、点此免费创建您的<text class="install">店铺</text>
 </view>
 
 <view class="view-empty"></view>
