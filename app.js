@@ -24,7 +24,7 @@ App({
     //店铺状态 1:营业 2:休息中
     shopState:1,
     //客桌Id
-    deskId:-1,
+    deskNum: '',
     //商户Id 
     customerId:-1,
     //客户端类型
@@ -82,7 +82,7 @@ App({
   //获取基础信息 
   privInitParams:function(option){
     console.log(option)
-    let qrcode='';
+    let qrcode ='';
     if(option.query && option.query.qrCode){
        let temcode = option.query.qrCode;
        if(temcode.indexOf('qrcode=')>0){
@@ -99,8 +99,8 @@ App({
          //商户id
           _this.config.customerId=resp.data.customerId;
           //桌号
-          if(resp.data.deskId){
-            _this.config.deskId = resp.data.deskId;
+          if (resp.data.deskNum){
+            _this.config.deskNum = resp.data.deskNum;
           }
           //设置店铺信息
           if(resp.data.shop){

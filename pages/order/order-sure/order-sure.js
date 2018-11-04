@@ -124,6 +124,8 @@ Page({
             receiver:dataOrder.addr,
             //订单类型
             orderType:dataOrder.orderType,
+            //桌号
+            orderDeskNum: getApp().config.deskNum,
             //订单商品详情
             detailList: this.getCommodityDetails()
         };
