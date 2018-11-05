@@ -46,6 +46,8 @@ Page({
         my.confirm({
             title: '提示',
             content: '确认取消订单吗',
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
             success:(result)=>{
                 if(result.confirm){ 
                     tools.ajax("api/order/state/"+_this.data.order.orderId,{'state':'user-cancel',customerRemark:''},"POST",function(resp){
