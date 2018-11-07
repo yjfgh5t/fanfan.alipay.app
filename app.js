@@ -11,7 +11,7 @@ App({
   },
   //配置信息
   config:{
-    apiHost: 'http://wxcard.com.cn/', //'http://localhost:8081/',
+    apiHost: 'http://localhost:8081/', //'http://wxcard.com.cn/',
     networkAvailable:true,
     //店铺名称
     showName:"",
@@ -34,15 +34,22 @@ App({
     //版本
     version: "1.0.1"
   },
+  // 参数
+  params:{
+    //桌号二维码
+    qrcode: '',
+    //上海Id
+    customerId: -1,
+  },
   //全局对象
   globalData:{},
   onError:function(){
     console.log('出错')
   },
   onLaunch:function(option){
-     console.log(option)
    let _this =this;
-   this.globalData.option = option;
+    //加载参数
+    this.initParams(option)
 
     //监听网咯状态
     my.onNetworkStatusChange(function(res){
@@ -65,35 +72,54 @@ App({
       },
     });
   },
-  onShow:function(){
-    //加载数据
-    if(this.globalData.option){
-      this.privInitParams(this.globalData.option);
+  onShow: function(option){
+
+    //加载参数
+    this.initParams(option) 
+
+    //获取参数中的customerId
+    if (this.params.customerId !== -1) {
+      this.config.customerId = this.params.customerId
     }
-    //设置配置信息
+
+    //获取缓存中的customerId
      if(this.config.customerId==-1){
        let config =  my.getStorageSync({key:'app.config'});
        if(config!=null && config.customerId){
          debugger
           this.config = config;
        }
-     } 
+     }
+
+     //加载数据
+    this.loadData();
+  },
+  initParams: function(option){
+    if (option.query && option.query.qrCode) {
+      //二维码code
+      if (option.query.qrCode != undefined) {
+        let temcode = option.query.qrCode;
+        if (temcode.indexOf('qrcode=') > 0) {
+          temcode = temcode.split('qrcode=')[1];
+          if (temcode.length == 32) {
+           this.params.qrcode = temcode;
+          }
+        }
+      }
+
+      //customerId
+      if (option.query.customerId != undefined) {
+        this.params.customerId = option.query.customerId
+      }
+    }
   },
   //获取基础信息 
-  privInitParams:function(option){
-    console.log(option)
-    let qrcode ='';
-    if(option.query && option.query.qrCode){
-       let temcode = option.query.qrCode;
-       if(temcode.indexOf('qrcode=')>0){
-         temcode = temcode.split('qrcode=')[1];
-         if(temcode.length==32){
-           qrcode = temcode;
-         }
-       }
-    }
+  loadData:function(){
     let _this = this;
-      tools.ajax("api/info/",{qrcode:qrcode},"GET",(resp)=>{
+    tools.ajax("api/info/", { qrcode: this.params.qrcode},"GET",(resp)=>{
+        //清空qrcode
+      _this.params.qrcode = ''
+
         //设置值
         if(resp.data){
          //商户id
