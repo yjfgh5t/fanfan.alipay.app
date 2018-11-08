@@ -1,96 +1,104 @@
-<!--用户按钮-->
-<view class="view-user" onTap="userClick">
-    <image src="{{btnUser}}" mode="aspectFit" class="img-user" />
+<view a:if="{{loadState==1}}" style="text-align:center;color:#ccc;padding-top:20%;">
+  正在加载...
 </view>
-
-<!--遮罩层-->
-<view class="{{showMark?'view-mark':''}}" onTouchMove="bindMarkMove"></view>
-
-<!--规格弹出层-->
-<view class="view-lay-norms" hidden="{{!norms.show}}">
-    <view class="lay-norms-title">选择规格</view>
-    <view class="lay-norms-con">
-        <text class="price">价格：<text>￥{{norms.selected.price}}</text></text>
-        <text class="text-norms">规格:</text>
-        <view class="view-norms">
-            <text  a:for="{{norms.items}}" onTap="bindSelNorms"  data-id="{{item.id}}"  class="{{item.id==norms.selected.id?'active':''}}">{{item.title}}</text>
-        </view>
-    </view>
-    <view class="lay-norms-foot">
-        <text class="cancel" onTap="bindChoiseNorms" data-sure="false">取消</text>
-        <text class="sure" onTap="bindChoiseNorms" data-sure="true">确定</text>
-    </view>
-</view>
-
-<!--购物车弹出层 -->
-<view class="view-lay-car">
-    <form onSubmit="formSubmit" report-submit="true">
-        <view class="car-title" hidden="{{!carData.show}}"> 
-            <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
-            <text class="car-title-text">购物车</text>
-            <text onTap="closeCar" class="icon-close"> 
-                <image src="{{btnClose}}" mode="aspectFit"  class="img-car"/>
-            </text>
-        </view>
-        <view class="car-body" hidden="{{!carData.show}}">
-            <view a:for="{{carData.itemArry}}" class="lay-item">
-                    <text class="title">{{item.title}}</text>
-                    <text class="price mark-price">{{item.salePrice}}</text>
-                    <label class="item-btn lay-car">
-                        <image onTap="itemAddMinus" data-id="{{item.id}}" data-commodityId="{{item.commodityId}}" data-option="minus" src="{{btnMinus}}" />
-                        <text>{{carData.itemIdArry[item.id]}}</text>
-                        <image onTap="itemAddMinus" data-id="{{item.id}}" data-commodityId="{{item.commodityId}}" data-option="add" src="{{btnAdd}}"/>
-                    </label>
-            </view>
-            <view class="no-select-item" a:if="{{carData.itemArry.length==0}}">购物车还是空的哦！</view>
-        </view>
-        <view class="car-foot">
-            <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份</text>
-            <button class="cf-btn bnt-bg" disabled="{{carData.price<carData.minPrice && isBusiness}}" formType="submit" onTap="bindSubmit">去结算</button>
-        </view>
-    </form>
-</view>
-
-<!--购物车按钮-->
-<view class="view-car" id="view-car" onTap="showCar">
-    <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
-    <text style="display:{{carData.itemArry.length==0?'none':'block'}}" class="txt-car {{carData.itemArry.length>9?'txt-car-len':''}}">{{carData.count}}</text>
-</view>
-
-<!--商品列表 -->
-<view class="view-block view-content" style="height:{{viewContentHeight+'px'}}">
-  <view class="view-category">
-      <text a:for="{{categoryArray}}" data-id="{{item.id}}" class="{{item.id==choiseCategory?'active':''}}" onTap="changeCategory">{{item.name}}</text>
+<view a:elif="{{loadState==2}}">
+  <!--用户按钮-->
+  <view class="view-user" onTap="userClick">
+      <image src="{{btnUser}}" mode="aspectFit" class="img-user" />
   </view>
-  <view class="view-commodity">
-      <view a:for="{{choiseCommodity}}" class="view-block">
-          <view style="float:left;">
-              <image src="{{item.icon}}" class="item-img" />
-          </view>
-          <view style="float:left;">
-              <label class="item-con">
-                  <text class="title">{{item.title}}</text>
-                  <text class="desc">{{item.desc}}</text>
-                  <text class="active" a:for="{{item.active}}" a:for-item="aitem">
-                      <text class="t-head t-head-{{aitem.atype}}"></text> {{aitem.text}}
-                  </text>
-                  <text class="price"> <text class="salePrice mark-price">{{item.salePrice}}</text>  <text a:if="{{item.salePrice<item.price}}" class="mark-price cost">{{item.price}}</text></text>
-              </label>
-              <label class="item-btn"> 
-                  <block a:if="{{carData.itemIdArry[item.id]!=undefined}}">
-                      <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="minus" src="{{btnMinus}}" />
-                      <text>{{carData.itemIdArry[item.id]}}</text> 
-                  </block>
-                  <image onTap="itemAddMinus"  data-id="{{item.id}}" data-option="add" src="{{btnAdd}}"/>
-              </label>
+
+  <!--遮罩层-->
+  <view class="{{showMark?'view-mark':''}}" onTouchMove="bindMarkMove"></view>
+
+  <!--规格弹出层-->
+  <view class="view-lay-norms" hidden="{{!norms.show}}">
+      <view class="lay-norms-title">选择规格</view>
+      <view class="lay-norms-con">
+          <text class="price">价格：<text>￥{{norms.selected.price}}</text></text>
+          <text class="text-norms">规格:</text>
+          <view class="view-norms">
+              <text  a:for="{{norms.items}}" onTap="bindSelNorms"  data-id="{{item.id}}"  class="{{item.id==norms.selected.id?'active':''}}">{{item.title}}</text>
           </view>
       </view>
+      <view class="lay-norms-foot">
+          <text class="cancel" onTap="bindChoiseNorms" data-sure="false">取消</text>
+          <text class="sure" onTap="bindChoiseNorms" data-sure="true">确定</text>
+      </view>
+  </view>
+
+  <!--购物车弹出层 -->
+  <view class="view-lay-car">
+      <form onSubmit="formSubmit" report-submit="true">
+          <view class="car-title" hidden="{{!carData.show}}"> 
+              <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
+              <text class="car-title-text">购物车</text>
+              <text onTap="closeCar" class="icon-close"> 
+                  <image src="{{btnClose}}" mode="aspectFit"  class="img-car"/>
+              </text>
+          </view>
+          <view class="car-body" hidden="{{!carData.show}}">
+              <view a:for="{{carData.itemArry}}" class="lay-item">
+                      <text class="title">{{item.title}}</text>
+                      <text class="price mark-price">{{item.salePrice}}</text>
+                      <label class="item-btn lay-car">
+                          <image onTap="itemAddMinus" data-id="{{item.id}}" data-commodityId="{{item.commodityId}}" data-option="minus" src="{{btnMinus}}" />
+                          <text>{{carData.itemIdArry[item.id]}}</text>
+                          <image onTap="itemAddMinus" data-id="{{item.id}}" data-commodityId="{{item.commodityId}}" data-option="add" src="{{btnAdd}}"/>
+                      </label>
+              </view>
+              <view class="no-select-item" a:if="{{carData.itemArry.length==0}}">购物车还是空的哦！</view>
+          </view>
+          <view class="car-foot">
+              <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份</text>
+              <button class="cf-btn bnt-bg" disabled="{{carData.price<carData.minPrice && isBusiness}}" formType="submit" onTap="bindSubmit">去结算</button>
+          </view>
+      </form>
+  </view>
+
+  <!--购物车按钮-->
+  <view class="view-car" id="view-car" onTap="showCar">
+      <image src="{{btnCar}}" mode="aspectFit" class="img-car" />
+      <text style="display:{{carData.itemArry.length==0?'none':'block'}}" class="txt-car {{carData.itemArry.length>9?'txt-car-len':''}}">{{carData.count}}</text>
+  </view>
+
+  <!--商品列表 -->
+  <view class="view-block view-content" style="height:{{viewContentHeight+'px'}}">
+    <view class="view-category">
+        <text a:for="{{categoryArray}}" data-id="{{item.id}}" class="{{item.id==choiseCategory?'active':''}}" onTap="changeCategory">{{item.name}}</text>
     </view>
-</view>
+    <view class="view-commodity">
+        <view a:for="{{choiseCommodity}}" class="view-block">
+            <view style="float:left;">
+                <image src="{{item.icon}}" class="item-img" />
+            </view>
+            <view style="float:left;">
+                <label class="item-con">
+                    <text class="title">{{item.title}}</text>
+                    <text class="desc">{{item.desc}}</text>
+                    <text class="active" a:for="{{item.active}}" a:for-item="aitem">
+                        <text class="t-head t-head-{{aitem.atype}}"></text> {{aitem.text}}
+                    </text>
+                    <text class="price"> <text class="salePrice mark-price">{{item.salePrice}}</text>  <text a:if="{{item.salePrice<item.price}}" class="mark-price cost">{{item.price}}</text></text>
+                </label>
+                <label class="item-btn"> 
+                    <block a:if="{{carData.itemIdArry[item.id]!=undefined}}">
+                        <image onTap="itemAddMinus" data-id="{{item.id}}" data-option="minus" src="{{btnMinus}}" />
+                        <text>{{carData.itemIdArry[item.id]}}</text> 
+                    </block>
+                    <image onTap="itemAddMinus"  data-id="{{item.id}}" data-option="add" src="{{btnAdd}}"/>
+                </label>
+            </view>
+        </view>
+      </view>
+  </view>
 
-<!--提示层-->
-<view class="view-contact-msg" onTap="bindContact" hidden="{{!showContact}}">
-    此为体验版 点此免费索要<text class="install">点餐程序</text>
-</view>
+  <!--提示层-->
+  <view class="view-contact-msg" onTap="bindContact" hidden="{{!showContact}}">
+      此为体验版 点此免费索要<text class="install">点餐程序</text>
+  </view>
 
-<view class="view-empty"></view>
+  <view class="view-empty"></view>
+</view>
+<view a:else style="text-align:center;color:#ccc;padding-top:20%;">
+  <image src="{{imgError}}" mode="aspectFit" />
+</view>

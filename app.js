@@ -11,7 +11,7 @@ App({
   },
   //配置信息
   config:{
-    apiHost: 'http://localhost:8081/', //'http://wxcard.com.cn/',
+    apiHost: 'http://wxcard.com.cn/', //'http://localhost:8081/',
     networkAvailable:true,
     //店铺名称
     showName:"",
@@ -95,7 +95,7 @@ App({
     this.loadData();
   },
   initParams: function(option){
-    if (option.query && option.query.qrCode) {
+    if (option.query) {
       //二维码code
       if (option.query.qrCode != undefined) {
         let temcode = option.query.qrCode;
@@ -137,6 +137,12 @@ App({
             _this.config.shopState = resp.data.shop.state;
             _this.config.showContact = (resp.data.showContact==="true");
             my.setNavigationBar({title:_this.config.shopName});
+          }else{
+            my.alert({
+              title: '提示' ,
+              content:'店铺信息未完善！敬请期待'
+            });
+            return;
           }
            //添加至缓存
            my.setStorageSync({

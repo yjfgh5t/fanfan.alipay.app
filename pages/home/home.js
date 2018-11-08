@@ -10,6 +10,7 @@ Page({
     btnCar: '/img/icon_btn_car.png',
     btnClose: '/img/icon_btn_add_white.png',
     btnUser: '/img/icon_head.png',
+    imgError: '/img/img_error.png',
     showMark: false,
     //是否营业中
     isBusiness: false,
@@ -46,7 +47,9 @@ Page({
       items: []
     },
     //是否显示提示
-    showContact: false
+    showContact: false,
+    // 加载状态 1：加载中 2:加载完成  3:加载异常
+    loadState: 3
   },
   onReady: function() {
     //my.showLoading();
@@ -85,20 +88,23 @@ Page({
 
     //商品数据
     tools.ajax('api/commodity/commodityWithCategory', {}, 'GET', function(res) {
-      if (res.code == 0) {
-        my.setNavigationBar({ title: _app.config.shopName });
-        //设置商品数据
-        _this.setData({
-          "itemArry": _this.convertComodity(res.data.commodity),
-          "categoryArray": res.data.category,
-          "carData.minPrice": _app.config.minTakePrice,
-          "isBusiness": _app.config.shopState == 1,
-          "showContact": _app.config.showContact
-        });
-        if (res.data.category.length > 0) {
-          _this.changeCategory(res.data.category[0].id)
+      if (res.code == 0 && res.data.commodity && res.data.commodity.length > 0) {
+          my.setNavigationBar({ title: _app.config.shopName }); 
+            //设置商品数据
+            _this.setData({
+              "itemArry": _this.convertComodity(res.data.commodity),
+              "categoryArray": res.data.category,
+              "carData.minPrice": _app.config.minTakePrice,
+              "isBusiness": _app.config.shopState == 1,
+              "showContact": _app.config.showContact,
+              "loadState":2
+            });
+            if (res.data.category.length > 0) {
+              _this.changeCategory(res.data.category[0].id)
+            }
+        }else{
+          _this.setData({ "loadState":3});
         }
-      }
     });
   },
   //显示购物车
