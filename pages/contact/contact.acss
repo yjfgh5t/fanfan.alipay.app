@@ -43,3 +43,12 @@
     border-top: 1rpx solid #ccc;
     width: 100%;
 }
+.btn-copy{
+  display:inline; 
+  padding:6rpx 10rpx;
+  font-size: 28rpx;
+  border:1rpx solid #00a1ff;
+  border-radius: 4rpx;
+  color: #00a1ff;
+  margin-left: 8rpx;
+}

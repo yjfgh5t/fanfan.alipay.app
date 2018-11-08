@@ -1,6 +1,6 @@
 <view>
 <view class="demo-item">
-  <notice  action="查看详情" onClick="bindNotifyClick">关于饭饭点餐</notice>
+  <notice action="查看详情" onClick="bindNotifyClick">关于饭饭点餐</notice>
 </view>
   <!--form表单 -->
   <view>

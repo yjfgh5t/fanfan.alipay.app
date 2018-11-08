@@ -1,6 +1,8 @@
 import {tools} from '/common/js/common.js'
 Page({
-    data:{},
+    data:{
+      showAboutLayer: true,
+    },
     onShow:function(){
        
     },
@@ -33,5 +35,17 @@ Page({
     },
   bindKeyInput:function(e){
    
+  },
+  bindConfirmAbout: function() {
+    this.setData({ "showAboutLayer": false });
+    my.setClipboard({
+      text: 'http://t.cn/Ew2ra6G',
+      success: function() {
+        my.showToast({ duration: 3000, content: '已复制饭饭商户版APK下载地址，可在浏览器中打开下载' });
+      }
+    });
+  },
+  bindNotifyClick: function() {
+    this.setData({ "showAboutLayer": true });
   }
 })

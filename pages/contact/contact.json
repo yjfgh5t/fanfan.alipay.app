@@ -1,4 +1,8 @@
 {
     "defaultTitle":"联系我们",
-    "titleBarColor":"#0085ff"
+    "titleBarColor":"#0085ff",
+    "usingComponents": {
+      "modal": "mini-antui/es/modal/index",
+      "notice": "mini-antui/es/notice/index"
+  }
 }

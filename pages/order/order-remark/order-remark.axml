@@ -9,15 +9,24 @@
             </label>
         </radio-group> 
     </view>
+    
+  <view class="d-pad">
+    <radio-group name="remarkSpicy" onChange="bindRadio">
+      <label class="checkbox" a:for="{{remarkSpicy}}" style="margin-right:30rpx;font-size:24rpx;">
+        <radio value="{{item.title}}" checked="{{item.checked}}" />
+        <text class="checkbox-text">{{item.title}}</text>
+      </label>
+    </radio-group>
+  </view>
 
-    <view class="d-pad"> 
-        <checkbox-group name="remarkOther">
-            <label class="checkbox" a:for="{{remarkOther}}" style="margin-right:30rpx;font-size:24rpx;" >
-                <checkbox value="{{item.title}}" checked="{{item.checked}}" />
-                <text class="checkbox-text">{{item.title}}</text>
-            </label>
-        </checkbox-group> 
-    </view>
+  <view class="d-pad"> 
+      <checkbox-group name="remarkOther">
+          <label class="checkbox" a:for="{{remarkOther}}" style="margin-right:30rpx;font-size:24rpx;" >
+              <checkbox value="{{item.title}}" checked="{{item.checked}}" />
+              <text class="checkbox-text">{{item.title}}</text>
+          </label>
+      </checkbox-group> 
+  </view>
 
 </view>
 

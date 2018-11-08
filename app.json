@@ -14,7 +14,7 @@
     "pages/order/pay-order/pay-order", 
     "pages/todos/todos",    
     "pages/register/register",
-    "pages/contact/contact",
+     "pages/contact/contact",
     "pages/add-todo/add-todo"
   ],
   "window": {

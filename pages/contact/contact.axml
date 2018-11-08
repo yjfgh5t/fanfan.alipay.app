@@ -1,12 +1,17 @@
 
 <form onSubmit="bindSubmit" onReset="formReset" class="form">
-
  <view class="view-describe">
-     <text>1. 欢迎您使用本小程序。</text>
-     <text>2. 本程序是基于线下实体店扫码点餐使用</text>
-     <text style="padding-left:35rpx;">主要用户快餐店、餐馆内顾客自助点餐。</text>
-     <text>3. 如您需要本程序，请提交您的联系方式</text>
-    <text style="padding-left:35rpx;">我们将在三个工作日内联系您。</text>
+     <text>1. 欢迎您使用本饭饭点餐小程序。</text>
+     <text>2. 饭饭点餐是一款用于实体店内顾客自主扫码</text>
+     <text style="padding-left:35rpx;">点餐，主要于快餐店、餐馆内减轻人工负担</text>
+     <text>3. 如您需要本程序，请提交您的联系方式我们</text>
+     <text style="padding-left:35rpx;">将在三个工作日内联系您。</text>
+     <text>4.您需要下载饭饭点餐商家版App管理您的店铺</text>
+    <text style="padding-left:35rpx;">
+        下载地址如下<text style="display:inline;color:#00a1ff;margin-left:2rpx;">http://t.cn/Ew2ra6G</text>
+        <text style="display:inline" onTap="bindConfirmAbout" class="btn-copy">复制</text>
+    </text>
+    <text>5.如您有疑问其它疑问请加客服微信<text style="display:inline;color:#00a1ff;margin-left:2rpx;">yjfgh5t</text></text>
  </view>
 
  <view class="view-line"></view>

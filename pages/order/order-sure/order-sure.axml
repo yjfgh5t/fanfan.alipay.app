@@ -64,7 +64,9 @@
 
 <view class="block">
   <view class="d-pad left border-line">
-   订单备注<text class="t-muted t-right arrow" style="max-width:500rpx; height:32rpx;overflow:hidden;" onTap="bindRemark" >{{order.remark==""?"口味，偏好等":order.remark}}</text>
+   订单备注
+   <text class="t-muted t-right arrow" a:if="{{order.remark!=''}}" style="max-width:450rpx;  overflow:hidden;  text-overflow:ellipsis;  white-space:nowrap;" onTap="bindRemark" >{{order.remark}}</text>
+   <text class="t-muted t-right arrow" a:if="{{order.remark==''}}"  onTap="bindRemark"><badge style="font-size:30rpx;margin-top:-10rpx;" text="设置口味、偏好"></badge></text>
 </view>
 </view>
 

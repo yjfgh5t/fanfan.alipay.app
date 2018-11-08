@@ -31,15 +31,45 @@
     height:40rpx;
 }
 
+
+/*****商品分类*******/
+.view-content{
+  height: 1145rpx;
+  padding: 0rpx;
+}
+
+.view-category{
+  float: left;
+  width: 200rpx;
+  height: 100%;
+  background:#eae6e3;
+}
+.view-category text{
+  display: block;
+  padding: 50rpx 10rpx 50rpx 50rpx;
+  border-bottom: 1rpx solid #fff; 
+  color: #000;
+  font-size: 28rpx;
+}
+.view-category text.active{
+  background:white;
+}
+.view-commodity{
+  float: left;
+  width: 546rpx;
+   height: 100%;
+   overflow-y: scroll;
+}
+
 .item-img{
     width: 180rpx;
     height: 180rpx; 
 }
 .item-con{
-    margin-left:20rpx;   
+    margin-left: 20rpx;
     padding: 0rpx; 
     display: block;
-    width: 490rpx;
+    font-size: 28rpx;
 }
 .item-con text{
     display:block;
@@ -47,11 +77,25 @@
     height: 45rpx; 
     color:#bfbfbf;
     font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
+    max-width: 296rpx;
+}
+.item-con text.title{
+  color:#000;
+  font-weight:700;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 .item-con text.desc{ 
-    height:70rpx; 
-    line-height:35rpx;
-    font-size:30rpx;
+    margin-top: 4rpx;
+    max-width: 296rpx;
+    line-height:40rpx;
+    height: 72rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box; 
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2; 
 }
 
 .item-con text.active .t-head{
@@ -368,10 +412,10 @@
 
 .view-contact-msg{
     font-size: 28rpx;
-    width: 80%;
-    left: 10%;
+    width: 500rpx;
+    right: 20rpx;
     border-radius: 20rpx;
-    padding: 10rpx 20rpx;
+    padding: 10rpx 10rpx;
     background: rgba(7, 133, 253,0.9);
     color: white;
     position: fixed;
