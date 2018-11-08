@@ -49,22 +49,11 @@ Page({
     //是否显示提示
     showContact: false,
     // 加载状态 1：加载中 2:加载完成  3:加载异常
-    loadState: 3
+    loadState: 1
   },
   onReady: function() {
     //my.showLoading();
     this.lazyLoad(this);
-
-    //设置高度
-    let _that = this;
-    my.getSystemInfo({
-      success: (win) => {
-        my.createSelectorQuery().boundingClientRect().select(".view-lay-car").boundingClientRect().selectViewport().exec((ret) => {
-          let height = win.windowHeight - ret[0].height;
-          _that.setData({ "viewContentHeight": height })
-        })
-      },
-    });
   }, 
   onShow: function() {
     //清空购物车
@@ -83,9 +72,7 @@ Page({
   loadData: function() {
     let _this = this;
     let _app = getApp();
-
-    //商品分类
-
+ 
     //商品数据
     tools.ajax('api/commodity/commodityWithCategory', {}, 'GET', function(res) {
       if (res.code == 0 && res.data.commodity && res.data.commodity.length > 0) {
@@ -102,6 +89,10 @@ Page({
             if (res.data.category.length > 0) {
               _this.changeCategory(res.data.category[0].id)
             }
+
+          //设置高度
+          _this.initContentHeight();
+
         }else{
           _this.setData({ "loadState":3});
         }
@@ -379,5 +370,19 @@ Page({
         "choiseCategory": choiseId
       });
     }
+  },
+  //设置高度
+  initContentHeight:function(){
+    //设置高度
+    let _that = this;
+    my.getSystemInfo({
+      success: (win) => {
+        my.createSelectorQuery().boundingClientRect().select(".view-lay-car").boundingClientRect().selectViewport().exec((ret) => {
+          console.log(JSON.stringify(win))
+          let height = win.windowHeight - ret[0].height;
+          _that.setData({ "viewContentHeight": height })
+        })
+      },
+    });
   }
 });

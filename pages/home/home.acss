@@ -43,6 +43,7 @@
   width: 200rpx;
   height: 100%;
   background:#eae6e3;
+  overflow-y: scroll;
 }
 .view-category text{
   display: block;
