@@ -53,6 +53,9 @@ page{
 .d-pad-tb{
     padding: 28rpx 0rpx;
 }
+.d-pad-bottom{
+   padding-bottom:28rpx;
+}
 
 .d-pad-left{
     padding-left: 28rpx;
@@ -64,6 +67,9 @@ page{
 
 .border-line{
     border-bottom: 1rpx solid #f5f5f5;
+}
+.border-line-top{
+  border-top: 1rpx solid #f5f5f5;
 }
 
 .from-input,.form-input:disabled{

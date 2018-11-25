@@ -2,6 +2,7 @@ import {tools} from '/common/js/common.js';
 import {pay} from '/common/js/pay.js';
 Page({
     data:{
+      defaultImg: '/img/img_item_default.png',
         order:{
             name:"",
             commoditys:[{id:1001,title:'',price:10,size:10}],
@@ -23,6 +24,10 @@ Page({
             }
         },
         endPayText:'',
+        //订单状态
+      orderState: { businessPending: 200, businessCancel:202},
+        //付款方式
+        payType:{alipay:1,offline:3}
     },
     onLoad:function(query){
          let orderId;   
@@ -31,7 +36,6 @@ Page({
         }else{
             orderId = this.data.order.orderId==0?tools.getParams("orderId",true):this.data.order.orderId;  
         }
-
         //加载数据
         this.privLoadData(orderId);
     },
@@ -104,13 +108,30 @@ Page({
                deskNum:resp.data.orderDeskNum,
                alipayOrderStr:resp.data.alipayOrderStr,
                orderTypeText:resp.data.orderTypeText,
+               orderPayTypeText: resp.data.orderPayTypeText,
                commoditys:[],
+               others:[],
                receiver:receiver
                };
 
-            resp.data.detailList.forEach((item)=>{
-                tmpOrder.commoditys.push({title:item.outTitle,price:item.outPrice,size:item.outSize});
-            });
+          //商品信息
+          tmpOrder.commoditys = resp.data.detailList.filter(f => (f.outType == 1 || f.outType == 5)).map(function(item) {
+            return {
+              id: item.id,
+              title: item.outTitle,
+              price: item.outPrice,
+              count: item.outSize
+            }
+          });
+          //其它 配送费、餐盒费等
+          tmpOrder.others = resp.data.detailList.filter(f => (f.outType == 6)).map(function(item) {
+            return {
+              id: item.id,
+              title: item.outTitle,
+              price: item.outPrice,
+              count: item.outSize
+            }
+          });
 
            //设置标题
            tmpOrder.name=tmpOrder.commoditys[0].title;

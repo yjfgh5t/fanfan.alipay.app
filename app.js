@@ -11,7 +11,7 @@ App({
   },
   //配置信息
   config:{
-    apiHost: 'http://wxcard.com.cn/', //'http://localhost:8081/',
+    apiHost: 'http://localhost:8081/', //'http://wxcard.com.cn/',
     networkAvailable:true,
     //店铺名称
     showName:"",
@@ -32,7 +32,9 @@ App({
     //是否显示跳转提交联系人我们提示
     showContact:false,
     //版本
-    version: "1.0.1"
+    version: "1.0.1",
+    //支付宝付款
+    shopId:-1,
   },
   // 参数
   params:{
@@ -136,6 +138,7 @@ App({
             _this.config.endBusiTime=resp.data.shop.businessEnd;
             _this.config.shopState = resp.data.shop.state;
             _this.config.showContact = (resp.data.showContact==="true");
+            _this.config.shopId = resp.data.shop.id;
             my.setNavigationBar({title:_this.config.shopName});
           }else{
             my.alert({

@@ -69,7 +69,8 @@
     <view class="view-commodity">
         <view a:for="{{choiseCommodity}}" class="view-block">
             <view style="float:left;">
-                <image src="{{item.icon}}" class="item-img" />
+                <image src="{{defaultImg}}" a:if="{{item.icon==''}}" class="item-img" />
+                <image src="{{item.icon}}" a:else="{{item.icon!=''}}" class="item-img" />
             </view>
             <view style="float:left;">
                 <label class="item-con">
@@ -94,7 +95,7 @@
 
   <!--提示层-->
   <view class="view-contact-msg" onTap="bindContact" hidden="{{!showContact}}">
-      此为体验版 点此免费索要<text class="install">点餐程序</text>
+      此为体验版 点此免费安装<text class="install">点餐程序</text>
   </view>
 
   <view class="view-empty"></view>

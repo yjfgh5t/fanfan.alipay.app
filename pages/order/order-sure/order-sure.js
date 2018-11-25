@@ -19,6 +19,7 @@ Page({
             {id:10,text:'10人以上'},
         ],
         dinnerIndex:0,
+        payType: {data:[{id:-1,text:'请选择付款方式'}],selected:0},
         order:{
             //菜单
             menuArry:[
@@ -44,6 +45,8 @@ Page({
             orderState:102, 
             //订单类型 [1：堂吃 2：打包 3：外卖]
             orderType:0,
+            //付款方式 [1：支付宝 2：微信 3：线下付款]
+            orderPayType:0,
             invoice:'商家不支持开发票',
             addr:{
                 tel:'',
@@ -60,6 +63,9 @@ Page({
     onLoad:function(e){
 
         let temOrder = tools.getParams("temOrder");
+
+        //付款类型
+        this.privInitPayType();
 
         //加载订单信息
         if(temOrder!=null){ 
@@ -90,6 +96,11 @@ Page({
             dinnerIndex:_index,
         });
     },
+    bindPayType: function(e){
+      let _index = parseInt(e.detail.value);
+      let selectdItem = this.data.payType.data[_index];
+      this.setData({ "payType.selected": _index, "order.orderPayType": selectdItem.id});
+    },
     //输入描述
     bindRemark:function(e){
         //设置数据
@@ -119,7 +130,7 @@ Page({
             //订单发票信息
             orderInvoice:dataOrder.invoice,
             //订单支付类型  1:支付宝  2：微信 3：现金
-            orderPayType:1,
+            orderPayType: dataOrder.orderPayType,
             //收货人信息
             receiver:dataOrder.addr,
             //订单类型
@@ -136,20 +147,31 @@ Page({
         reqOrder = Object.assign(this.data.temOrder,reqOrder);
   
         tools.ajax("api/order/",JSON.stringify(reqOrder),"POST",(resp)=>{
-             
             //状态为待支付
-            if(resp.code==0 && resp.data.orderState==103){
-                //设置请求状态
-                dataOrder.orderState=resp.data.orderState;
-
-                //清空首页购物车
-                tools.setParams("clearCar",true); 
-
-                //支付
-                pay.tradePay(resp.data.alipayOrderStr,resp.data.id,(succes)=>{
-                    tools.setParams("orderId",resp.data.id);
-                    my.redirectTo({url:"/pages/order/order-detail/order-detail"});
+            if(resp.code==0){
+              //清空首页购物车
+              tools.setParams("clearCar", true); 
+              //支付宝付款
+              if (resp.data.orderPayType == 1 && resp.data.orderState == 103){
+                  //设置请求状态
+                  dataOrder.orderState=resp.data.orderState;
+                  //支付
+                  pay.tradePay(resp.data.alipayOrderStr,resp.data.id,(succes)=>{
+                      tools.setParams("orderId",resp.data.id);
+                      my.redirectTo({url:"/pages/order/order-detail/order-detail"});
+                  });
+              //线下付款
+              }else if(resp.data.orderPayType==3){
+                my.alert({
+                  title: '付款提示',
+                  content: '下单成功了，请去收银台付款哦',
+                  buttonText:'好的',
+                  success:function(){
+                    tools.setParams("orderId", resp.data.id);
+                    my.redirectTo({ url: "/pages/order/order-detail/order-detail" });
+                  }
                 });
+              }
             }
 
         },{headers: {"Content-Type":"application/json"}}); 
@@ -161,21 +183,27 @@ Page({
         this.data.temOrder= orderInfo;
 
         let dataOrder ={menuArry:[],activeArry:[],otherArry:[]}; 
-
         //菜单
-        dataOrder.menuArry = orderInfo.detailList.map(function(item){ 
+      dataOrder.menuArry = orderInfo.detailList.filter(f => (f.outType==1 || f.outType==5)).map(function(item){ 
             return{
                 id:item.id,
                 title:item.outTitle,
                 price:item.outPrice,
-                count:item.outSize,
-                showCount: item.outType==1 || item.outType==5
+                count:item.outSize
             }
         });
 
         //优惠券 todo
 
         //其它 todo
+      dataOrder.otherArry = orderInfo.detailList.filter(f => f.outType == 6).map(function(item) {
+          return {
+            id: item.id,
+            title: item.outTitle,
+            price: item.outPrice,
+            count: item.outSize
+          }
+        });
 
         //金额
         dataOrder.total=orderInfo.orderTotal;
@@ -195,8 +223,31 @@ Page({
             "order.orderType":dataOrder.orderType
         });
     },
+    //加载付款类型
+    privInitPayType:function(){
+      let app = getApp();
+
+      tools.ajax("api/shop/payType", { shopId: app.config.shopId}, "POST", (resp) => {
+          if(resp.code==0 && resp.data!=null){
+            let data = [], selected = 0;
+            if (resp.data.alipay) {
+              data.push({ id: 1, text: '支付宝' })
+            }
+            if (resp.data.offline) {
+              data.push({ id: 3, text: '线下付款' })
+            }
+            //设置数据
+            this.setData({ "payType": { data: data, selected: selected },"order.orderPayType": data[selected].id });
+          }
+      });
+    },
     //验证订单内容
     privVerifyOrder:function(orderInfo){
+
+        if (orderInfo.orderPayType<=0) {
+          my.alert({ title: "提示", content: "请选择付款方式" });
+          return false;
+        }
 
         if(orderInfo.orderType==3 && orderInfo.receiver.addrDetail==''){
             my.alert({title:"提示",content:"请选择收货地址"});

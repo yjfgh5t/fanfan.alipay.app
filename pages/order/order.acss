@@ -41,6 +41,7 @@ page {
 .v-text .order-state{
     float:right;
     color:rgba(0, 0, 0, .65);
+    font-size: 30rpx;
 }
 
 .v-text .time{

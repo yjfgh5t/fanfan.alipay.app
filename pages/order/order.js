@@ -2,6 +2,7 @@ import {tools} from '/common/js/common.js'
 import {pay} from '/common/js/pay.js'
 Page({
     data:{
+        defaultImg: '/img/img_item_default.png',
         orders:[
             //{id:1001,title:"套餐鸡蛋+油条+面包 丰盛的早餐 哇哈哈哈",orderStateText:"订单已完成",orderTime:"2018-04-12 08:30:22",ortherRemark:"油条等2件商品",pay:"20",pic:"/img/img_item_default.png"},
         ],
@@ -82,7 +83,7 @@ Page({
                             orderTime:item.createTime,
                             ortherRemark:"共"+item.commodityTotal+"件商品",
                             pay:item.orderPay,
-                            pic:item.commoditImg,
+                            pic:item.commodityImg,
                             orderState:item.orderState,
                             endPayText:'',
                             alipayOrderStr:item.alipayOrderStr,

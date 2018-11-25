@@ -1,10 +1,24 @@
+page {
+  background-color: #eee;
+}
+
+.t-title{
+  width: 400rpx;
+  display: inline-block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
 .t-price{
     float: right;
+    min-width: 130rpx;
+    text-align: right;
 }
 
 .t-count{
     float: right;
     padding-right: 50rpx;
+    width: 100rpx;
 }
 
 .t-pay{
@@ -43,3 +57,5 @@
     color: #000;
     margin-right: 20rpx;
 }
+
+

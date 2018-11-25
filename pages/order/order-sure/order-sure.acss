@@ -1,4 +1,7 @@
 
+page {
+  background-color: #eee;
+}
 .txt-order text{
  margin-right: 20rpx;
 }
@@ -7,9 +10,20 @@
 }
 .t-right{
     float: right;
+    min-width: 130rpx;
 }
-.t-count{
-    margin-right:40rpx;
+.t-title{
+  width: 400rpx;
+  display: inline-block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.t-price{
+  text-align: right;
+}
+.t-right.t-count{
+    min-width: 80rpx;
 }
 
 .arrow:after,.arrow::before{

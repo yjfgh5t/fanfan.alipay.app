@@ -343,7 +343,7 @@ Page({
     return tempCommodity;
   },
   bindContact: function() {
-    my.navigateTo({ url: '/pages/contact/contact' });
+    my.navigateTo({ url: '/pages/register/register' });
   },
   //选择分类
   changeCategory: function(obj) {

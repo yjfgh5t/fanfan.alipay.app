@@ -1,14 +1,15 @@
 
-<view class="block" style="text-align:center;">
-
-    <image src="{{order.mainImg}}" mode="aspectFit" class="head-img" />
+<view class="block d-pad-bottom" style="text-align:center;">
+    <image src="{{defaultImg}}" a:if="{{order.mainImg==''}}" class="head-img" />
+    <image src="{{order.mainImg}}" a:else="{{order.mainImg!=''}}" mode="aspectFit" class="head-img" />
     <view><text class="wait-pay">{{order.orderStateText}} </text></view>
 
     <block a:if="{{order.orderState==103}}">
-    <view><text class="t-muted" style="line-height:50rpx;">逾期未支付，订单将自动取消</text></view>
-    <view style="line-height:80rpx;">
-        <text class="btn btn-defcolor" onTap="bindChanel" >取消订单 </text> 
-        <text class="btn" onTap="binPay">立即支付（{{endPayText}}）</text> </view>
+      <view><text class="t-muted" style="line-height:50rpx;">逾期未支付，订单将自动取消</text></view>
+      <view style="line-height:80rpx;">
+          <text class="btn btn-defcolor" onTap="bindChanel" >取消订单 </text> 
+          <text class="btn" onTap="binPay">立即支付（{{endPayText}}）</text> 
+      </view>
     <block>
 </view>
 
@@ -16,17 +17,25 @@
 
 <view class="block d-mar"> 
     <view class="d-pad  border-line">
-        <text>{{order.name}}</text> 
+        <text>商品列表</text> 
     </view>
-
     <view class="d-pad" a:for="{{order.commoditys}}" >
-        <text class="t-muted">{{item.title}}</text> 
+        <text class="t-muted t-title">{{item.title}}</text> 
         <text class="t-price t-muted">￥{{item.price}}</text>
-        <text class="t-count t-muted">x {{item.size}}</text>
+        <text class="t-count t-muted">x {{item.count}}</text>
+    </view>
+    <view class="d-pad" a:for="{{order.others}}">
+      <text class="t-muted">{{item.title}}</text>
+      <text class="t-price t-muted">￥{{item.price}}</text>
+      <text class="t-count t-muted"></text>
     </view> 
  
-    <view class="d-pad" style="overflow: hidden;"> 
+    <view class="d-pad border-line-top" a:if="{{order.orderPayType==payType.alipay}}" style="overflow: hidden;"> 
         <text class="t-price t-pay">实付￥{{order.pay}}</text>
+    </view> 
+    <view class="d-pad border-line-top" a:if="{{order.orderPayType==paType.offline}}" style="overflow: hidden;">
+      <text class="t-price t-pay" a:if="order.orderState==orderState.businessPending || order.orderState==orderState.businessCancel">待付￥{{order.pay}}</text>
+      <text class="t-price t-pay" a:else>实付￥{{order.pay}}</text>
     </view> 
 </view>
 
@@ -35,7 +44,7 @@
         <text>订单信息</text>
     </view>
 
-    <view class="d-pad-left t-muted border-line">
+    <view class="d-pad-left t-muted">
         <block a:if="{{order.orderState!=103}}">
             <view class="d-pad-tb border-line">
                 排队号：{{order.dateNum}}
@@ -48,7 +57,7 @@
             </view>
         </block> 
          <view class="d-pad-tb border-line">
-            支付方式：在线支付
+            支付方式：{{order.orderPayTypeText}}
         </view>
        <view class="d-pad-tb border-line">
             就餐方式：{{order.orderTypeText}}
@@ -61,9 +70,9 @@
             发票信息：不需要发票
         </view> 
 
-        <view  class="d-pad" style="overflow: hidden;"> 
-            <text class="t-price t-pay">{{order.orderStateText}}</text> 
-        </view>
+      <view class="d-pad" style="overflow: hidden;"> 
+         <text class="t-price t-pay">{{order.orderStateText}}</text> 
+      </view>
     </view>   
 </view>
 
