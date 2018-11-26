@@ -11,6 +11,7 @@ Page({
     btnClose: '/img/icon_btn_add_white.png',
     btnUser: '/img/icon_head.png',
     imgError: '/img/img_error.png',
+    restMessage:'',
     showMark: false,
     //是否营业中
     isBusiness: false,
@@ -92,6 +93,18 @@ Page({
 
           //设置高度
           _this.initContentHeight();
+
+        //判断是否营业
+        if (_this.isBusiness){
+          let starTime = parseInt(_app.config.startBusiTime.replace(":", ""));
+          let endTime = parseInt(_app.config.endBusiTime.replace(":", ""));
+          let currentTime = parseInt(new Date().getHours() + '' + new Date().getMinutes())
+          if(starTime>currentTime || endTime<currentTime){
+            _this.setData({ "isBusiness": false, "restMessage":'店铺休息中! 营业时间为 '+ _app.config.startBusiTime +' - '+ _app.config.endBusiTime})
+          }
+        }else{
+          _this.setData({ "restMessage": '店铺休息中! 请稍后再来！'})
+        }
 
         }else{
           _this.setData({ "loadState":3});

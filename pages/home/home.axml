@@ -2,6 +2,11 @@
   正在加载...
 </view>
 <view a:elif="{{loadState==2}}">
+  <!-- 营业时间通告 -->
+  <view class="notice" a:if="{{!isBusiness}}">
+    <notice>{{restMessage}}</notice>
+  </view>
+<view class="notice-empty" a:if="{{!isBusiness}}"></view>
   <!--用户按钮-->
   <view class="view-user" onTap="userClick">
       <image src="{{btnUser}}" mode="aspectFit" class="img-user" />
@@ -49,8 +54,8 @@
               <view class="no-select-item" a:if="{{carData.itemArry.length==0}}">购物车还是空的哦！</view>
           </view>
           <view class="car-foot">
-              <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份</text>
-              <button class="cf-btn bnt-bg" disabled="{{carData.price<carData.minPrice && isBusiness}}" formType="submit" onTap="bindSubmit">去结算</button>
+              <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份{{carData.price}}</text>
+              <button class="cf-btn bnt-bg" disabled="{{!(carData.price>carData.minPrice && isBusiness)}}" formType="submit" onTap="bindSubmit">去结算</button>
           </view>
       </form>
   </view>

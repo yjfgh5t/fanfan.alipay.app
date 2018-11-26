@@ -12,6 +12,17 @@
  position: relative;
 }
 
+/**通知**/
+.notice{
+position: absolute;
+z-index: 9;
+width: 100%;
+}
+
+.notice-empty{
+  height: 70rpx;
+}
+
 /**用户头像**/
 .view-user{
     width:70rpx;

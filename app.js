@@ -11,12 +11,12 @@ App({
   },
   //配置信息
   config:{
-    apiHost: 'http://localhost:8081/', //'http://wxcard.com.cn/',
+    apiHost: 'http://wxcard.com.cn/', //'http://wxcard.com.cn/',
     networkAvailable:true,
     //店铺名称
     showName:"",
-    //最低起送价
-    minTakePrice:0.0,
+    //最低起送价 默认0.01 不做外卖 无需设置改值
+    minTakePrice:0.01,
     //店铺营业开始时间,
     startBusiTime:"09:00",
     //结束营业时间
@@ -133,7 +133,6 @@ App({
           //设置店铺信息
           if(resp.data.shop){
             _this.config.shopName=resp.data.shop.name;
-            _this.config.minTakePrice=resp.data.shop.minOrderPrice;
             _this.config.startBusiTime=resp.data.shop.businessStart;
             _this.config.endBusiTime=resp.data.shop.businessEnd;
             _this.config.shopState = resp.data.shop.state;
@@ -143,7 +142,7 @@ App({
           }else{
             my.alert({
               title: '提示' ,
-              content:'店铺信息未完善！敬请期待'
+              content:'店铺正在完善中！敬请期待'
             });
             return;
           }
