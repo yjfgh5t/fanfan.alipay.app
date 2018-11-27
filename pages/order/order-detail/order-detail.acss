@@ -41,6 +41,9 @@ page {
     border:1rpx solid #ccc;
     border-radius: 50%;
 }
+.head-img.def{
+  border: none;
+}
 
 .wait-pay{
     font-size:32rpx;

@@ -54,8 +54,8 @@
               <view class="no-select-item" a:if="{{carData.itemArry.length==0}}">购物车还是空的哦！</view>
           </view>
           <view class="car-foot">
-              <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份{{carData.price}}</text>
-              <button class="cf-btn bnt-bg" disabled="{{!(carData.price>carData.minPrice && isBusiness)}}" formType="submit" onTap="bindSubmit">去结算</button>
+              <text class="cf-price">￥{{carData.price}}</text><text class="cf-desc">|共{{carData.count}}份</text>
+              <button class="cf-btn bnt-bg" disabled="{{!(carData.price>=carData.minPrice && isBusiness)}}" formType="submit" onTap="bindSubmit">去结算</button>
           </view>
       </form>
   </view>

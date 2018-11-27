@@ -1,6 +1,6 @@
 
 <view class="block d-pad-bottom" style="text-align:center;">
-    <image src="{{defaultImg}}" a:if="{{order.mainImg==''}}" class="head-img" />
+    <image src="{{defaultImg}}" a:if="{{order.mainImg==''}}" class="head-img def" />
     <image src="{{order.mainImg}}" a:else="{{order.mainImg!=''}}" mode="aspectFit" class="head-img" />
     <view><text class="wait-pay">{{order.orderStateText}} </text></view>
 
