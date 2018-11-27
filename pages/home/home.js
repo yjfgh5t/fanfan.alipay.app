@@ -11,6 +11,7 @@ Page({
     btnClose: '/img/icon_btn_add_white.png',
     btnUser: '/img/icon_head.png',
     imgError: '/img/img_error.png',
+    btnRefresh: '/img/icon_btn_refsh.png',
     restMessage:'',
     showMark: false,
     //是否营业中
@@ -46,6 +47,14 @@ Page({
       selected: {},
       commodity: {},
       items: []
+    },
+    recommend:{
+      show: false,
+      hasShow:[],
+      selected: { id: 1, showTitle:"", title: '', salePrice:0.0, icon: ''},
+      data: [
+          //{ id: 1, title: '', salePrice: 2.3, icon:''}
+        ]
     },
     //是否显示提示
     showContact: false,
@@ -110,6 +119,22 @@ Page({
           _this.setData({ "loadState":3});
         }
     });
+
+   //推荐商品
+    tools.ajax('api/commodity/getRecommend', {}, 'GET', function(res) {
+      if (res.code == 0 && res.data && res.data.length > 0) {
+       let data = res.data.map(item=>{
+          return {
+            id: item.id,
+            title:item.title,
+            icon:item.icon,
+            salePrice:item.salePrice
+          }
+        });
+        _this.setData({"recommend.data":data})
+      }
+    });
+
   },
   //显示购物车
   showCar: function(e) {
@@ -263,7 +288,71 @@ Page({
   },
   //提交按钮
   bindSubmit: function(e) {
-
+    //刷新显示推荐商品
+    if (this.data.recommend.data.length > 0 && this.data.recommend.hasShow.length < this.data.recommend.data.length){
+      this.bindRefreshRecommend();
+    }else{
+      //直接提交
+      this.privSubmitMain();
+    }
+  },
+  //form提交事件
+  formSubmit: function(e) {
+    if (e.detail.formId) {
+      tools.ajax('api/formId/', { formId: e.detail.formId }, 'POST', function(res) {
+        console.log(res.code)
+      })
+    }
+  },
+  //刷新推荐
+  bindRefreshRecommend: function() { 
+    let length = this.data.recommend.data.length;
+    if (this.data.recommend.hasShow.length<length){ 
+      let index = Math.floor(Math.random() * 10)%length
+      //已经显示 重新刷新
+      if(this.data.recommend.hasShow.indexOf(index)>0){
+        this.bindRefreshRecommend();
+        return;
+      }
+      //记录展示了
+      this.data.recommend.hasShow.push(index);
+      let selected = this.data.recommend.data[index];
+      //是否选择了改推荐商品
+      if (this.data.carData.itemIdArry[selected.id]==undefined){
+        selected.showTitle = "店长为您推荐"+selected.title+"一份";
+        this.setData({ "recommend.selected": selected, "recommend.show": true,"showMark":"true"});
+      }else{
+        this.bindRefreshRecommend();
+      }
+    }else{
+      my.showToast({
+        content:"没有更多的推荐了"
+      });
+    }
+  },
+  //关闭推荐
+  bindCloseRecommend:function(){
+    this.setData({"recommend.show": false, "showMark": false });
+    this.privSubmitMain();
+  },
+  //添加推荐商品
+  bindAddRecommend:function(){
+    let selected = this.data.recommend.selected;
+    //包装数据
+    let commodity ={
+      id: selected.id,
+      title: selected.title,
+      salePrice: selected.salePrice,
+      commodityId:selected.id,
+      type:1
+    }
+    //执行添加或减去
+    this.addMinus('add', commodity);
+    //关闭并提交
+    this.bindCloseRecommend();
+  },
+  //提交订单
+  privSubmitMain:function(){
     //选择的菜单
     let idArry = this.data.carData.itemIdArry;
 
@@ -291,14 +380,6 @@ Page({
         });
       }
     })
-  },
-  //form提交事件
-  formSubmit: function(e) {
-    if (e.detail.formId) {
-      tools.ajax('api/formId/', { formId: e.detail.formId }, 'POST', function(res) {
-        console.log(res.code)
-      })
-    }
   },
   //清空购物车
   privClearCar: function() {
