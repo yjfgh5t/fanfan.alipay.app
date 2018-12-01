@@ -3,6 +3,7 @@
     "pages/home/home",
     "pages/order/order",
     "pages/index/index",
+    "pages/register/register",
     "pages/me/me",   
     "pages/me/me-addr/me-addr",
     "pages/me/me-addr-edit/me-addr-edit", 
@@ -13,8 +14,7 @@
     "pages/order/pay-order/pay-order", 
     "pages/order/order-detail/order-detail",
     "pages/todos/todos",    
-    "pages/register/register",
-     "pages/contact/contact",
+    "pages/contact/contact",
     "pages/add-todo/add-todo"
   ],
   "window": {

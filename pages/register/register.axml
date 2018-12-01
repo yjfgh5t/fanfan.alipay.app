@@ -1,19 +1,31 @@
 <view>
-<view class="demo-item">
-  <notice action="查看详情" onClick="bindNotifyClick">关于饭饭点餐</notice>
-</view>
+  <view class="demo-item">
+    <notice action="查看详情" onClick="bindNotifyClick">关于饭饭点餐</notice>
+  </view>
   <!--form表单 -->
   <view>
-    <form onSubmit="bindSubmit">
-      <list class="input-list">
-        <input-item class="input" placeholderClass="input-placeholder" name="name" placeholder="请输入商户姓名" type="text" onBlur="onItemBlur" data-field="model.name" clear="{{true}}">姓名</input-item>
-        <input-item class="input" placeholderClass="input-placeholder" name="mobile" placeholder="请输入手机号" type="number" onBlur="onItemBlur" data-field="model.mobile" clear="{{true}}">手机号</input-item>
-        <input-item class="input" placeholderClass="input-placeholder" name="mobileCode" onBlur="onItemBlur" type="number" data-field="model.mobileCode" placeholder="请输入验证码"> 验证码                            
-          <text slot="extra" class="btn code-btn" onTap="bindMobileCode">{{codeModel.text}}</text>
-        </input-item>
-        <input-item class="input" placeholderClass="input-placeholder" name="pwd" onBlur="onItemBlur" placeholder="请输入密码6-18位" data-field="model.pwd" password clear="{{true}}">密码</input-item>
-        <input-item class="input" placeholderClass="input-placeholder" name="confirmPwd" onBlur="onItemBlur" data-field="model.confirmPwd" placeholder="请输入确认密码6-18位" password clear="{{true}}">确认密码</input-item>
-      </list>
+    <form onSubmit="bindSubmit" class="form">
+      <view class="view-input">
+        <text class="input-text">姓名</text>
+        <input placeholder="请输入商户姓名" class="input" placeholder-class="input-placeholder" name="name" placeholder="请输入商户姓名" type="text" onBlur="onItemBlur" data-field="model.name" />
+      </view>
+      <view class="view-input">
+        <text class="input-text">手机号</text>
+        <input placeholder="请输入手机号" class="input" placeholder-class="input-placeholder" name="mobile" placeholder="请输入手机号" type="number" onBlur="onItemBlur" data-field="model.mobile" />
+      </view>
+      <view class="view-input">
+        <text class="input-text">验证码</text>
+        <input placeholder="请输入验证码" class="input code" placeholder-class="input-placeholder" name="mobileCode" onBlur="onItemBlur" type="number" data-field="model.mobileCode" />
+        <text class="btn code-btn" onTap="bindMobileCode">{{codeModel.text}}</text>
+      </view>
+      <view class="view-input">
+        <text class="input-text">密码</text>
+        <input placeholder="请输入密码6-18位" class="input" placeholder-class="input-placeholder" type="text" password="true" name="pwd" onBlur="onItemBlur" placeholder="请输入密码6-18位" data-field="model.pwd" />
+      </view>
+      <view class="view-input">
+        <text class="input-text">确认密码</text>
+        <input placeholder="请输入确认密码6-18位" class="input" placeholder-class="input-placeholder" type="text" password="true" name="confirmPwd" onBlur="onItemBlur" data-field="model.confirmPwd" />
+      </view>
       <view style="margin: 10px;">
         <button formType="submit" class="btn-regist" type="primary">注 册</button>
       </view>
@@ -28,18 +40,19 @@
       </view>
       <view slot="footer">确定</view>
     </modal>
-    
-  <!-- 弹出层-->
-  <modal show="{{showAboutLayer}}" showClose="{{false}}" onModalClick="bindConfirmAbout">
-    <view slot="header">关于饭饭点餐</view>
-    <view class="modal-about">
-      <text>1. 饭饭点餐适用于线下实体店扫码点餐使用,主要用户快餐店、餐馆内顾客自助点餐。</text>
-      <text>2. 注册成功后，系统将发送饭饭点餐商户版APP下载地址至您的短信！请您注意查收，或复制 <text style="display:inline;color:orange;">http://t.cn/Ew2ra6G</text> 此链接在浏览器中打开下载饭饭点餐商户版APP。</text>
-      <text>3. 请您加客服微信 <text style="display:inline;color:orange;">yjfgh5t</text>，将会帮助您解决使用中的相关问题。</text>
-    </view>
-    <view slot="footer">确定</view>
-  </modal>
-
-</view>
-
+    <!-- 弹出层-->
+    <modal show="{{showAboutLayer}}" showClose="{{false}}" onModalClick="bindConfirmAbout">
+      <view slot="header">关于饭饭点餐</view>
+      <view class="modal-about">
+        <text>1. 饭饭点餐适用于线下实体店扫码点餐使用,主要用户快餐店、餐馆内顾客自助点餐。</text>
+        <text>2. 注册成功后，系统将发送饭饭点餐商户版APP下载地址至您的短信！请您注意查收，或复制           
+          <text style="display:inline;color:orange;">http://t.cn/Ew2ra6G</text> 此链接在浏览器中打开下载饭饭点餐商户版APP。        
+        </text>
+        <text>3. 请您加客服微信           
+          <text style="display:inline;color:orange;">yjfgh5t</text>，将会帮助您解决使用中的相关问题。        
+        </text>
+      </view>
+      <view slot="footer">确定</view>
+    </modal>
+  </view>
 </view>

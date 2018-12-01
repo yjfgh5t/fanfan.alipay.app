@@ -76,11 +76,13 @@
             <view style="float:left;">
                 <label class="item-con">
                     <text class="title">{{item.title}}</text>
-                    <text class="desc">{{item.desc}}</text>
                     <text class="active" a:for="{{item.active}}" a:for-item="aitem">
                         <text class="t-head t-head-{{aitem.atype}}"></text> {{aitem.text}}
                     </text>
-                    <text class="price"> <text class="salePrice mark-price">{{item.salePrice}}</text>  <text a:if="{{item.salePrice<item.price}}" class="mark-price cost">{{item.price}}</text></text>
+                    <text class="price"> 
+                      <text class="salePrice mark-price">{{item.salePrice}}</text> 
+                      <text a:if="{{item.salePrice<item.price}}" class="mark-price cost">{{item.price}}</text>
+                    </text>
                 </label>
                 <label class="item-btn"> 
                     <block a:if="{{carData.itemIdArry[item.id]!=undefined}}">
@@ -107,14 +109,17 @@
   <view class="view-lay-recommend" hidden="{{!recommend.show}}" >
     <view class="content">
       <image src="{{recommend.selected.icon}}" mode="widthFix" class="img-main" />
-      <image src="{{btnRefresh}}" class="img-refresh" onTap="bindRefreshRecommend" />
+      <image src="{{btnRecommend}}" mode="widthFix" class="img-recoomend" />
+      <text class="refresh" onTap="bindRefreshRecommend">
+        <text class="empty-refresh"></text>
+        <text class="text-refresh">换一个</text>
+      </text>
       <text class="empty-line"></text>
-      <text class="msg-title">{{recommend.selected.showTitle}}</text>
-      <text class="price">￥{{recommend.selected.salePrice}}</text>
+      <text class="msg-title">{{recommend.selected.showTitle}} <text class="price">￥{{recommend.selected.salePrice}}</text></text>
     </view>
     <view class="foot">
       <text class="btn" onTap="bindCloseRecommend">不用谢谢</text>
-      <text class="btn" onTap="bindAddRecommend">好的</text>
+      <text class="btn" onTap="bindAddRecommend">加购</text>
     </view>
   </view>
 

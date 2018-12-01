@@ -10,6 +10,9 @@ Page({
   },
   // 绑定发送二维码
   bindMobileCode: function() {
+    if (this.data.codeModel.disabled) {
+      return;
+    }
     if (this.data.model.mobile.length !== 11) {
       return my.showToast({ content: '请输入有效的手机号'});
     }
@@ -67,7 +70,7 @@ Page({
         }, 1000)
       }else{
         //设置可以再发送
-        _that.setData({ "codeModel.disabled": false });
+        _that.setData({ "codeModel.disabled": false, "showImgCodeLayer": true });
         _that.refreshCodeImg();
       }
     })
@@ -116,7 +119,12 @@ Page({
     // 执行注册
     tools.ajax('api/user/customer/register', JSON.stringify(subData),'POST', function(res) {
       if (res.code === 0 && res.data !== '') {
-        my.alert({ title: '提示', content: '注册成功，请查收短信,点击短信中的链接下载商户版APK', success:function(){}})
+        my.alert({ title: '提示', content: '注册成功，请查收短信,点击短信中的链接下载商户版APK', success:function(){
+          //跳转
+          my.navigateTo({
+            url: '/pages/home/home'
+          });
+        }})
       }
     }, { headers: { "Content-Type": "application/json" } }); 
   },

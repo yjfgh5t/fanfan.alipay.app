@@ -4,6 +4,50 @@ page{
   background: linear-gradient(rgb(6, 103, 249) 0px, rgb(255, 255, 255) 100%);
 }
 
+.form{
+  width: 90%;
+  margin-left: 5%;
+}
+
+.view-input{
+  display: block;
+  background-color: rgba(0,0,0,0.1);
+  color: white;
+  line-height: 100rpx;
+  height: 100rpx;
+  padding:0rpx 18rpx;
+  margin-top: 30rpx;
+}
+
+.view-input .input-text{
+  display: block;
+  float: left;
+  margin-left: 20rpx;
+  width: 140rpx;
+}
+
+.view-input .input{
+  width: 360rpx;
+  background: none;
+  display: block;
+  height: 100rpx;
+  float: left;
+  margin: 0rpx 0rpx 0rpx 30rpx;
+  padding: 0rpx;
+  color: white;
+}
+.input.code{
+  width: 260rpx;
+}
+
+.view-input .input-placeholder{
+  color: #ccc;
+  font-size: 28rpx;
+}
+
+
+
+
 .input-list{
   background: none;
 }
@@ -11,6 +55,7 @@ page{
 .input-list .input{
   background: none;
   color: white;
+  border: none;
 }
 
 .input-list .input view{
@@ -50,6 +95,10 @@ page{
   background:  linear-gradient(to right,rgb(154, 106, 247) 0px, rgb(8, 79, 185) 100%);
   font-size: 28rpx;
   padding: 10rpx;
+  float: right;
+  height: 40rpx;
+  line-height: 40rpx;
+  margin-top: 20rpx;
 }
 
 .btn-regist{

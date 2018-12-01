@@ -57,7 +57,7 @@ width: 100%;
 }
 .view-category text{
   display: block;
-  padding: 35rpx 10rpx 35rpx 50rpx;
+  padding: 48rpx 15rpx 48rpx 15rpx;
   border-bottom: 1rpx solid #fff; 
   color: #000;
   font-size: 28rpx;
@@ -120,7 +120,7 @@ width: 100%;
 }
 .item-con text.price{
     position: absolute;
-    bottom: 10rpx;
+    bottom: 30rpx;
 }
 
 .t-head.t-head-1{
@@ -169,7 +169,7 @@ width: 100%;
 .item-btn{
     position: absolute;
     right:20rpx;
-    bottom:15rpx;
+    bottom:30rpx;
 }
 .item-btn image{
     width:36rpx;
@@ -271,12 +271,40 @@ width: 100%;
   display:block;
 }
 
-.view-lay-recommend .img-refresh{
+.view-lay-recommend .img-recoomend{
+  width: 40rpx;
   position: absolute;
-  width: 60rpx;
-  height: 60rpx;
+  top: 0rpx;
+  left: 10rpx;
+}
+.view-lay-recommend text{
+  margin: 0rpx;
+  padding: 0rpx;
+}
+.view-lay-recommend .refresh{
+  position: absolute;
+  width: 120rpx;
+  height: 40rpx;
   top: 10rpx;
   right: 10rpx;
+}
+.view-lay-recommend .refresh .empty-refresh{
+  display: inline-block;
+  width: 100%;
+  height: 40rpx;
+  background-color: rgba(0, 0, 0,0.4);
+  border-radius: 30rpx;
+}
+.view-lay-recommend .refresh .text-refresh{
+  position: absolute;
+  display: inline-block;
+  top: 8rpx;
+  left: 3rpx;
+  width: 120rpx;
+  height: 40rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #ccc;
 }
 
 .view-lay-recommend .empty-line{
@@ -301,12 +329,10 @@ width: 100%;
   white-space:nowrap;
 }
 .view-lay-recommend .price{
-  position: absolute;
   color:#ff7600;
-  display: block;
-  right: 10rpx;
-  bottom: 0rpx;
+  display: inline-block;
   line-height: 70rpx;
+  margin-left: 10rpx;
 }
 .view-lay-recommend .foot{
   line-height: 80rpx;
@@ -321,12 +347,12 @@ width: 100%;
 }
 
 .foot .btn:first-child{
-  width: 45%;
+  width: 50%;
   border-right: 1rpx solid #ccc;
 }
 
 .foot .btn:last-child{
-  width: 40%;
+  width: 48%;
   color: #0085ff;
 }
 

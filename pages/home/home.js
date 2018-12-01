@@ -11,8 +11,8 @@ Page({
     btnClose: '/img/icon_btn_add_white.png',
     btnUser: '/img/icon_head.png',
     imgError: '/img/img_error.png',
-    btnRefresh: '/img/icon_btn_refsh.png',
-    restMessage:'',
+    btnRecommend: '/img/icon_recommend.png',
+    restMessage: '',
     showMark: false,
     //是否营业中
     isBusiness: false,
@@ -27,7 +27,7 @@ Page({
     choiseCategory: -1,
     //选中的商品
     choiseCommodity: [],
-    viewContentHeight:0,
+    viewContentHeight: 0,
     carData: {
       show: false,
       //{id:'',title:'',type:1/5}
@@ -48,13 +48,13 @@ Page({
       commodity: {},
       items: []
     },
-    recommend:{
+    recommend: {
       show: false,
-      hasShow:[],
-      selected: { id: 1, showTitle:"", title: '', salePrice:0.0, icon: ''},
+      hasShow: [],
+      selected: { id: 1, showTitle: "", title: '', salePrice: 0.0, icon: '' },
       data: [
-          //{ id: 1, title: '', salePrice: 2.3, icon:''}
-        ]
+        //{ id: 1, title: '', salePrice: 2.3, icon:''}
+      ]
     },
     //是否显示提示
     showContact: false,
@@ -64,7 +64,7 @@ Page({
   onReady: function() {
     //my.showLoading();
     this.lazyLoad(this);
-  }, 
+  },
   onShow: function() {
     //清空购物车
     this.privClearCar();
@@ -82,56 +82,56 @@ Page({
   loadData: function() {
     let _this = this;
     let _app = getApp();
- 
+
     //商品数据
     tools.ajax('api/commodity/commodityWithCategory', {}, 'GET', function(res) {
       if (res.code == 0 && res.data.commodity && res.data.commodity.length > 0) {
-          my.setNavigationBar({ title: _app.config.shopName }); 
-            //设置商品数据
-            _this.setData({
-              "itemArry": _this.convertComodity(res.data.commodity),
-              "categoryArray": res.data.category,
-              "carData.minPrice": _app.config.minTakePrice,
-              "isBusiness": _app.config.shopState == 1,
-              "showContact": _app.config.showContact,
-              "loadState":2
-            });
-            if (res.data.category.length > 0) {
-              _this.changeCategory(res.data.category[0].id)
-            }
-
-          //设置高度
-          _this.initContentHeight();
+        my.setNavigationBar({ title: _app.config.shopName });
+        //设置商品数据
+        _this.setData({
+          "itemArry": _this.convertComodity(res.data.commodity),
+          "categoryArray": res.data.category,
+          "carData.minPrice": _app.config.minTakePrice,
+          "isBusiness": _app.config.shopState == 1,
+          "showContact": _app.config.showContact,
+          "loadState": 2
+        });
+        if (res.data.category.length > 0) {
+          _this.changeCategory(res.data.category[0].id)
+        }
 
         //判断是否营业
-        if (_this.isBusiness){
+        if (_this.data.isBusiness) {
           let starTime = parseInt(_app.config.startBusiTime.replace(":", ""));
           let endTime = parseInt(_app.config.endBusiTime.replace(":", ""));
           let currentTime = parseInt(new Date().getHours() + '' + new Date().getMinutes())
-          if(starTime>currentTime || endTime<currentTime){
-            _this.setData({ "isBusiness": false, "restMessage":'店铺休息中! 营业时间为 '+ _app.config.startBusiTime +' - '+ _app.config.endBusiTime})
+          if (starTime > currentTime || endTime < currentTime) {
+            _this.setData({ "isBusiness": false, "restMessage": '店铺已打烊! 营业时间为 ' + _app.config.startBusiTime + ' - ' + _app.config.endBusiTime })
           }
-        }else{
-          _this.setData({ "restMessage": '店铺休息中! 请稍后再来！'})
+        } else {
+          _this.setData({ "restMessage": '店铺已打烊! 请稍后再来！' })
         }
 
-        }else{
-          _this.setData({ "loadState":3});
-        }
+      } else {
+        _this.setData({ "loadState": 3 });
+      }
+
+      _this.initContentHeight();
     });
 
-   //推荐商品
+    //推荐商品
     tools.ajax('api/commodity/getRecommend', {}, 'GET', function(res) {
       if (res.code == 0 && res.data && res.data.length > 0) {
-       let data = res.data.map(item=>{
+        let data = res.data.map(item => {
           return {
             id: item.id,
-            title:item.title,
-            icon:item.icon,
-            salePrice:item.salePrice
+            title: item.title,
+            icon: item.icon.replace('.min',''),
+            salePrice: item.salePrice
           }
         });
-        _this.setData({"recommend.data":data})
+        _this.setData({ "recommend.data": data });
+
       }
     });
 
@@ -289,9 +289,9 @@ Page({
   //提交按钮
   bindSubmit: function(e) {
     //刷新显示推荐商品
-    if (this.data.recommend.data.length > 0 && this.data.recommend.hasShow.length < this.data.recommend.data.length){
+    if (this.data.recommend.data.length > 0 && this.data.recommend.hasShow.length < this.data.recommend.data.length) {
       this.bindRefreshRecommend();
-    }else{
+    } else {
       //直接提交
       this.privSubmitMain();
     }
@@ -305,12 +305,12 @@ Page({
     }
   },
   //刷新推荐
-  bindRefreshRecommend: function() { 
+  bindRefreshRecommend: function() {
     let length = this.data.recommend.data.length;
-    if (this.data.recommend.hasShow.length<length){ 
-      let index = Math.floor(Math.random() * 10)%length
+    if (this.data.recommend.hasShow.length < length) {
+      let index = Math.floor(Math.random() * 10) % length
       //已经显示 重新刷新
-      if(this.data.recommend.hasShow.indexOf(index)>0){
+      if (this.data.recommend.hasShow.indexOf(index) > 0) {
         this.bindRefreshRecommend();
         return;
       }
@@ -318,33 +318,39 @@ Page({
       this.data.recommend.hasShow.push(index);
       let selected = this.data.recommend.data[index];
       //是否选择了改推荐商品
-      if (this.data.carData.itemIdArry[selected.id]==undefined){
-        selected.showTitle = "店长为您推荐"+selected.title+"一份";
-        this.setData({ "recommend.selected": selected, "recommend.show": true,"showMark":"true"});
-      }else{
+      if (this.data.carData.itemIdArry[selected.id] == undefined) {
+        selected.showTitle = selected.title;
+        this.setData({ "recommend.selected": selected, "recommend.show": true, "showMark": "true" });
+      } else {
         this.bindRefreshRecommend();
       }
-    }else{
-      my.showToast({
-        content:"没有更多的推荐了"
-      });
+    } else {
+      //如果现实推荐中 则提示
+      if(this.data.recommend.show){
+        my.showToast({
+          content: "没有更多的推荐了"
+        });
+      }else{
+        //提交订单
+        this.privSubmitMain();
+      }
     }
   },
   //关闭推荐
-  bindCloseRecommend:function(){
-    this.setData({"recommend.show": false, "showMark": false });
+  bindCloseRecommend: function() {
+    this.setData({ "recommend.show": false, "showMark": false });
     this.privSubmitMain();
   },
   //添加推荐商品
-  bindAddRecommend:function(){
+  bindAddRecommend: function() {
     let selected = this.data.recommend.selected;
     //包装数据
-    let commodity ={
+    let commodity = {
       id: selected.id,
       title: selected.title,
       salePrice: selected.salePrice,
-      commodityId:selected.id,
-      type:1
+      commodityId: selected.id,
+      type: 1
     }
     //执行添加或减去
     this.addMinus('add', commodity);
@@ -352,7 +358,7 @@ Page({
     this.bindCloseRecommend();
   },
   //提交订单
-  privSubmitMain:function(){
+  privSubmitMain: function() {
     //选择的菜单
     let idArry = this.data.carData.itemIdArry;
 
@@ -394,7 +400,8 @@ Page({
         'carData.itemArry': [],
         'carData.itemIdArry': {},
         'carData.count': 0,
-        'carData.price': 0
+        'carData.price': 0,
+        'recommend.hasShow':[]
       });
       //设置菜单选择
       this.changeCategory(null);
@@ -466,15 +473,17 @@ Page({
     }
   },
   //设置高度
-  initContentHeight:function(){
+  initContentHeight: function() {
     //设置高度
     let _that = this;
     my.getSystemInfo({
       success: (win) => {
         my.createSelectorQuery().boundingClientRect().select(".view-lay-car").boundingClientRect().selectViewport().exec((ret) => {
           console.log(JSON.stringify(win))
-          let height = win.windowHeight - ret[0].height;
-          _that.setData({ "viewContentHeight": height })
+          if (ret[0]!= null) {
+            let height = win.windowHeight - ret[0].height;
+            _that.setData({ "viewContentHeight": height })
+          }
         })
       },
     });
