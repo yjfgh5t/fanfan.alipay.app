@@ -102,12 +102,12 @@ Page({
         tools.getUserInfo((userInfo)=>{
             requModel.userId= userInfo.id;
             //提交至数据库
-            tools.ajax("api/address/",JSON.stringify(requModel),"POST",function(resp){
+            tools.ajax("api/address/",JSON.stringify(requModel),"JSON",function(resp){
                 if(resp.code==0){ 
                     //返回列表页面
                     my.navigateBack({delta:1}); 
                 }
-            },{headers: {"Content-Type":"application/json"}}); 
+            }); 
         }); 
     }
 

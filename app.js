@@ -4,14 +4,13 @@ App({
   userInfo: {
     id: -1,
     userNick: '',
-    userMobile: '',
     userIcon: '',
     userSex: 1,
-    userState:1
+    userTpId:''
   },
   //配置信息
   config:{
-    apiHost: 'http://wxcard.com.cn/', //'http://wxcard.com.cn/',
+    apiHost: 'http://localhost:8081/', //'http://wxcard.com.cn/',
     networkAvailable:true,
     //店铺名称
     showName:"",
@@ -33,8 +32,10 @@ App({
     showContact:false,
     //版本
     version: "1.0.1",
-    //支付宝付款
+    //店铺Id
     shopId:-1,
+    //请求令牌
+    authToken: '',
   },
   // 参数
   params:{
@@ -65,14 +66,10 @@ App({
     });
 
     //设置用户信息
-    my.getStorage({
-      key: 'userInfo', // 缓存数据的 key
-      success: (res) => {
-        if(res!=null  &&  res.data!=null){
-          _this.userInfo = res.data;
-        }
-      },
-    });
+    let userInfo = my.getStorageSync({ key: 'userInfo'});
+    if(userInfo.data!=null){
+      this.userInfo = userInfo.data;
+    }
   },
   onShow: function(option){
 
@@ -83,13 +80,11 @@ App({
     if (this.params.customerId !== -1) {
       this.config.customerId = this.params.customerId
     }
-
     //获取缓存中的customerId
      if(this.config.customerId==-1){
        let config =  my.getStorageSync({key:'app.config'});
-       if(config!=null && config.customerId){
-         debugger
-          this.config = config;
+       if(config.data!=null && config.data.customerId){
+          this.config = config.data;
        }
      }
 

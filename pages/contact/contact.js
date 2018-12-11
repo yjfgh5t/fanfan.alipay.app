@@ -20,7 +20,7 @@ Page({
             return;
         }
 
-        tools.ajax('api/concat/',JSON.stringify({contact:name,telephone:tel}),'POST',function(res){
+        tools.ajax('api/concat/',JSON.stringify({contact:name,telephone:tel}),'JSON',function(res){
            if(res.code==0){
                my.alert({
                  title: '提交成功',
@@ -31,7 +31,7 @@ Page({
                 }
                });
            }
-       },{headers: {"Content-Type":"application/json"}}); 
+       }); 
     },
   bindKeyInput:function(e){
    

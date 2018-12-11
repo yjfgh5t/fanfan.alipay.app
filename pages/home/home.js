@@ -115,8 +115,8 @@ Page({
       } else {
         _this.setData({ "loadState": 3 });
       }
-
-      _this.initContentHeight();
+      //延迟获取高度
+      setTimeout(function(){_this.initContentHeight();},500)
     });
 
     //推荐商品
@@ -298,8 +298,9 @@ Page({
   },
   //form提交事件
   formSubmit: function(e) {
-    if (e.detail.formId) {
-      tools.ajax('api/formId/', { formId: e.detail.formId }, 'POST', function(res) {
+    let app = getApp();
+    if (app.userInfo.id!=-1 && e.detail.formId) {
+      tools.ajax('api/formId/', { formId: e.detail.formId,tpId:app.userInfo.userTpId }, 'POST', function(res) {
         console.log(res.code)
       })
     }
@@ -479,7 +480,7 @@ Page({
     my.getSystemInfo({
       success: (win) => {
         my.createSelectorQuery().boundingClientRect().select(".view-lay-car").boundingClientRect().selectViewport().exec((ret) => {
-          console.log(JSON.stringify(win))
+          console.log(JSON.stringify(ret))
           if (ret[0]!= null) {
             let height = win.windowHeight - ret[0].height;
             _that.setData({ "viewContentHeight": height })

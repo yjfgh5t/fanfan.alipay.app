@@ -146,7 +146,7 @@ Page({
         //合并对象
         reqOrder = Object.assign(this.data.temOrder,reqOrder);
   
-        tools.ajax("api/order/",JSON.stringify(reqOrder),"POST",(resp)=>{
+        tools.ajax("api/order/",JSON.stringify(reqOrder),"JSON",(resp)=>{
             //状态为待支付
             if(resp.code==0){
               //清空首页购物车
@@ -174,7 +174,7 @@ Page({
               }
             }
 
-        },{headers: {"Content-Type":"application/json"}}); 
+        }); 
     },
     //加载订单信息
     privInitOrder:function(orderInfo){
@@ -292,5 +292,13 @@ Page({
                 commodityId: item.commodityId
             };
        });
+  },
+  //form提交事件
+  formSubmit: function(e) {
+    if (e.detail.formId) {
+      tools.ajax('api/formId/', { formId: e.detail.formId, tpId: getApp().userInfo.userTpId }, 'POST', function(res) {
+        console.log(res.code)
+      })
     }
+  }
 });

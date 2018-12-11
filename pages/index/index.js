@@ -248,7 +248,7 @@ Page({
             })
 
         //创建临时订单
-        tools.ajax("api/order/",JSON.stringify(orderReq),"POST",function(resp){
+        tools.ajax("api/order/",JSON.stringify(orderReq),"JSON",function(resp){
 
             if(resp.code==0){
                 //订单信息存入全局变量
@@ -260,7 +260,7 @@ Page({
                 });
             }
 
-        },{headers: {"Content-Type":"application/json"}}); 
+        }); 
 
        });
     },

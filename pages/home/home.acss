@@ -462,6 +462,9 @@ width: 100%;
     padding:0rpx 40rpx;
     border:none;
     font-size: 36rpx;
+    line-height:100rpx;
+    height:100rpx;
+    border-radius: 0rpx;
 }
 .cf-btn.disable{
     background-color:#535356;

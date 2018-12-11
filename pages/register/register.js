@@ -117,7 +117,7 @@ Page({
       password: _this.data.model.pwd
     }
     // 执行注册
-    tools.ajax('api/user/customer/register', JSON.stringify(subData),'POST', function(res) {
+    tools.ajax('api/user/customer/register', JSON.stringify(subData),'JSON', function(res) {
       if (res.code === 0 && res.data !== '') {
         my.alert({ title: '提示', content: '注册成功，请查收短信,点击短信中的链接下载商户版APK', success:function(){
           //跳转
@@ -126,7 +126,7 @@ Page({
           });
         }})
       }
-    }, { headers: { "Content-Type": "application/json" } }); 
+    }); 
   },
   //失去焦点事件
   onItemBlur: function(e) {
