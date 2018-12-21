@@ -1,4 +1,7 @@
 
+page {
+  background-color: #eee;
+}
 .addr-block{
     padding-right:50rpx;position: relative;
 }
@@ -8,7 +11,10 @@
 }
 
 .addrDetail{
-    display:block;line-height:38rpx;
+    display:block;
+    margin-top: 5rpx;
+    line-height:38rpx;
+    font-size: 30rpx;
 }
 
 .choise{
@@ -26,6 +32,7 @@
     text-align:center;
     background-color:#00d9f1;
     color:white;
+     padding:28rpx 0rpx;
 }
 
 .add-img{
@@ -37,9 +44,26 @@
 }
 
 .noorder{
-    text-align: center;
-    margin-top: 30%; 
+   position: absolute;
+   text-align: center;
+   top: 30%; 
+   width: 100%;
 }
 .noorder text{
     color: #ccc;
 }
+
+.addr-item{
+  display: block;
+  overflow: hidden;
+}
+.addr-item{
+  margin-bottom: 3rpx;
+}
+
+.over-desc{
+  display: block;
+  margin: 20rpx 0rpx 10rpx 0rpx;
+  padding-left: 20rpx;
+  color: #5e5e5e;
+} 

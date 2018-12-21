@@ -13,15 +13,32 @@ input::-webkit-input-placeholder{text-align: center;}
 .d-pad.min{
     padding-top: 12rpx;
     padding-bottom: 12rpx;
-    color: #bbb;
+    color: #000;
 }
 
 
 .arrow:after,.arrow::before{
-    right: 0rpx; 
+    right: 4rpx; 
 }
 .arrow:before{
-    right: -4rpx; 
+    right: 0rpx; 
+}
+
+.neary{
+  overflow: hidden;
+  display: block;
+}
+
+.arrow.neary:after,.arrow.neary::before{
+     border: 12rpx solid transparent;
+     top: 30rpx;
+     right: 4rpx; 
+    border: 16rpx solid transparent;
+    border-left-color: white;
+}
+.arrow.neary:before{
+   right: 0rpx; 
+   border-left-color: #ccc;
 }
 
 .btn-box{ 
@@ -38,4 +55,19 @@ input::-webkit-input-placeholder{text-align: center;}
     padding:15rpx 0rpx;
     display:inline-block;
     text-align:center;
+}
+
+.neary{
+
+}
+
+.neary .title{
+  display: block;
+  color: #000;
+}
+.neary .area{
+  display: block;
+  color:  #bbb;
+  margin-top: 5rpx;
+  font-size: 30rpx;
 }

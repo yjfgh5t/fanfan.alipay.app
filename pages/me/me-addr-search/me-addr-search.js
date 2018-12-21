@@ -4,8 +4,10 @@ Page({
        addrModel:{ 
             district:'',
             street:'',
+            detail:'',
             lat:'',
-            lng:''
+            lng:'',
+            adcode:''
         },
         //多个addrModel
         nearAddr:[],
@@ -22,10 +24,12 @@ Page({
     bindChange:function(e){
         console.log(e.detail.value);
         if(e.detail.value!=''){
-            this.loadServerAddr(e.detail.value,this.data.addrModel.lat,this.data.addrModel.log);
+          console.log(this.data.addrModel);
+            this.loadServerAddr(e.detail.value,this.data.addrModel.lat,this.data.addrModel.lng,this.data.addrModel.adcode);
         }
     },
     bindSelected:function(e){
+      console.log(e);
         let index = e.currentTarget.dataset.index;
         let addrModel ={};
         if(index==-1){
@@ -57,17 +61,19 @@ Page({
                     if(res.streetNumber.number)
                         street+=res.streetNumber.number;
                 }
-
+                //城市名称
+                let city= res.city==''?res.province:res.city;
                 _this.setData({addrModel:{
-                    district:res.city+res.district,
+                    district:res.city+' '+res.district,
                     street:street,
+                    detail:'',
                     lat:res.latitude,
-                    lng:res.longitude
+                    lng:res.longitude,
+                    adcode: res.districtAdcode
                 }});
 
                 //搜索附件地址
-               _this.loadServerAddr(street,res.latitude,res.longitude);
-
+               _this.loadServerAddr(street,res.latitude,res.longitude,res.districtAdcode);
             },
             fail() {
                 my.hideLoading();
@@ -76,20 +82,23 @@ Page({
         })
     },
     //搜索服务地址
-    loadServerAddr:function(keyWord,lat,log){
+    loadServerAddr:function(keyWord,lat,lng,adcode){
         let  _this =this;
-        tools.ajax("api/address/search",{keyWord:keyWord,lat:lat,log:log},"GET",function(rep){
+        tools.ajax("api/address/search",{keyWord:keyWord,lat:lat,lng:lng,adcode:adcode},"GET",function(rep){
             if(rep.code==0 && rep.data!=null){
                 let data=[];
                 rep.data.forEach(function(item) {
-                    let location =item.location.split(',');
-                    data.push({
-                        title:item.name,
-                        district:item.district,
-                        street:item.address=='[]'?'':item.address,
-                        lat:location[0],
-                        lng:location[1]
-                    });
+                  if(item.district!='[]'){
+                      let location =item.location.split(',');
+                      data.push({
+                          district:item.district,
+                          street:item.address=='[]'?'':item.address,
+                          detail:item.name,
+                          lat:location[1],
+                          lng:location[0],
+                          adcode:item.adcode
+                      });
+                  }
                 });
                 //设置数据
                 _this.setData({nearAddr:data});

@@ -2,7 +2,7 @@
     <input type="text" onBlur="bindChange" class="from-input" style="width:700rpx;line-height:56rpx;border-radius:5rpx;text-align:center;" placeholder="请输入地址" auto-focus />
 </view>
 
-<block a:if="{{addrModel.street!=''}}">
+<block a:if="{{addrModel.title!=''}}">
     <view  class="d-pad min">
         当前地址
     </view>
@@ -16,10 +16,12 @@
         附近地址
     </view>
     <view a:for="{{nearAddr}}" class="block d-pad-left" onTap="bindSelected" data-index="{{index}}">
-        <view class="d-pad noright border-line arrow">{{item.title}}</view>
+        <view class="d-pad noright border-line arrow neary">
+            <text class="title">{{item.detail}}</text>
+            <text class="area" a:if="{{item.district!='[]'}}" >{{item.district}}{{item.street}}</text>
+          </view>
     </view>
 </block>
-
 
 <view class="btn-box">
     <text class="btn-addr" onTap="bindAddr">重新地位</text>

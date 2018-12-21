@@ -2,15 +2,16 @@ import {tools} from '/common/js/common.js'
 Page({
     data:{
         btnEdit:'/img/icon_btn_edit.png',
-        btnAdd:'/img/icon_btn_add_white.png',
         choise:false,
         addrArry:[
-            //{id:1001,name:'江洋',canChoise:true,tel:'15821243531',sex:'女士',district:'上海市松江区城鸿路222号',street:'',detail:'鸿路222号4号楼1103室',lng:145568.123,lat:123123},
-        ]
+            //{id:1001,name:'江洋',canChoise:true,tel:'15821243531',sex:'女士',district:'上海市松江区城鸿路222号',street:'',detail:'鸿路222号4号楼1103室',lng:145568.123,lat:123123,deliveryRange:200},
+        ],
+        //超出配送范围
+        overRangeArray:[]
     },
     onLoad:function(e){
         //是否选择地址
-        this.data.choise = !(e.choise==undefined);
+        this.data.choise =!(e.choise==undefined);
     },
     onShow:function(e){
         this.loadAddr();
@@ -23,22 +24,15 @@ Page({
         } 
 
         let choiseItem = this.data.addrArry[e.currentTarget.dataset.index];
-
-        if(choiseItem.canChoise==false){
-                my.alert({
-                title: '提示', // alert 框的标题
-                content:"您选择的地址距离太远、请重新选择",
-                }); 
-                return; 
-        }
-
         let  choiseModel={
             tel:choiseItem.tel,
-            addrDetail:choiseItem.district+choiseItem.detail,
+            addr:choiseItem.district,
+            addrDetail:choiseItem.street+choiseItem.detail,
             lng:choiseItem.lng,
             lat:choiseItem.lat,
             sex:choiseItem.sex,
-            name:choiseItem.name
+            name:choiseItem.name,
+            deliveryRange:choiseItem.deliveryRange
         };
 
         //设置参数 
@@ -66,9 +60,9 @@ Page({
                 
                 if(resp.code==0 && resp.data!=null)
                 {
-                    let  data=[];
-                    resp.data.forEach((item)=>{ 
-                        data.push({
+                    let  data=[],overRange=[];
+                    resp.data.forEach((item)=>{
+                        var tempItem = {
                             id:item.id,
                             name:item.name,
                             tel:item.tel,
@@ -77,12 +71,19 @@ Page({
                             street:item.street,
                             detail:item.detail,
                             lat:item.lat,
-                            lng:item.lng
-                        });
+                            lng:item.lng,
+                            deliveryRange:item.deliveryRange
+                        };
 
-                        _this.setData({addrArry:data});
-
+                        //超出范围地址
+                        if(_this.data.choise && item.overRange){
+                          overRange.push(tempItem)
+                        }else{
+                        //可选地址
+                        data.push(tempItem);
+                        }
                     });
+                  _this.setData({addrArry:data,overRangeArray:overRange});
                 }
 
 

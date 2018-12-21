@@ -5,7 +5,14 @@ Page({
     data:{
         name:'hellow',
         defaultImg:'/img/img_item_default.png',
-        orderImg:{dabao:'/img/icon_order_db_0.png',dabaoA:'/img/icon_order_db_1.png',tangchi:'/img/icon_order_tc_0.png',tangchiA:'/img/icon_order_tc_1.png'},
+        orderImg:{
+          dabao:'/img/icon_order_db_0.png',
+          dabaoA:'/img/icon_order_db_1.png',
+          tangchi:'/img/icon_order_tc_0.png',
+          tangchiA:'/img/icon_order_tc_1.png',
+          takeout:'/img/icon_order_wm_0.png',
+          takeoutA:'/img/icon_order_wm_1.png'
+          },
         dinner: [
             {id:1,text:'1人'},
             {id:2,text:'2人'},
@@ -20,6 +27,8 @@ Page({
         ],
         dinnerIndex:0,
         payType: {data:[{id:-1,text:'请选择付款方式'}],selected:0},
+        //外卖类型
+        orderType:{ tangchi:1,dabao:2,takeout:3},
         order:{
             //菜单
             menuArry:[
@@ -48,15 +57,21 @@ Page({
             //付款方式 [1：支付宝 2：微信 3：线下付款]
             orderPayType:0,
             invoice:'商家不支持开发票',
+            //配送信息
             addr:{
                 tel:'',
+                addr:'',
                 addrDetail:'',
-                lng:0,
-                lat:0,
+                lng:'',
+                lat:'',
                 sex:'',
-                name:''
+                name:'',
+                //配送距离
+                deliveryRange:0
             }
         },
+        //是否外卖
+        takeout:false,
         //临时订单信息 
         temOrder:{}
     },
@@ -83,8 +98,8 @@ Page({
        //获取参数 
        let choiseAddr = tools.getParams("choiseAddr",true);
        if(choiseAddr){
-            this.data.order.addr=Object.assign(choiseAddr);
-            this.setData({"order.addr":this.data.order.addr}); 
+            let temAddr=Object.assign(choiseAddr);
+            this.setData({"order.addr":temAddr}); 
        }
 
     },
@@ -196,7 +211,7 @@ Page({
         //优惠券 todo
 
         //其它 todo
-      dataOrder.otherArry = orderInfo.detailList.filter(f => f.outType == 6).map(function(item) {
+      dataOrder.otherArry = orderInfo.detailList.filter(f => f.outType == 6 || f.outType==7).map(function(item) {
           return {
             id: item.id,
             title: item.outTitle,
@@ -237,7 +252,11 @@ Page({
               data.push({ id: 3, text: '线下付款' })
             }
             //设置数据
-            this.setData({ "payType": { data: data, selected: selected },"order.orderPayType": data[selected].id });
+            this.setData({ 
+              "payType": { data: data, selected: selected },
+              "order.orderPayType": data[selected].id,
+              "takeout": resp.data.takeout
+               });
           }
       });
     },
@@ -255,7 +274,7 @@ Page({
         }
 
         if(orderInfo.orderType<1){
-            my.alert({title:"提示",content:"请选择堂吃或打包"});
+            my.alert({title:"提示",content:"请选择就餐方式堂吃、外卖或打包"});
             return false;
         }
 

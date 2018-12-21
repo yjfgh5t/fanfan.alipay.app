@@ -1,96 +1,112 @@
+<view class="block d-pad border-line">   商品列表
 
-<view class="block d-pad border-line">
-   商品列表
 </view>
-
 <!--遍历菜单-->
 <block a:for="{{order.menuArry}}">
-    <view class="block d-pad">
-      <text class="t-title"> {{item.title}}</text>
-      <text class="t-right t-price">￥{{item.price}}</text>
-      <text class="t-right t-count t-muted">x {{item.count}}</text>
-    </view>
+  <view class="block d-pad">
+    <text class="t-title"> {{item.title}}
+    </text>
+    <text class="t-right t-price">￥{{item.price}}
+    </text>
+    <text class="t-right t-count t-muted">x {{item.count}}
+    </text>
+  </view>
 </block>
-
 <!--遍历优惠券-->
 <block a:for="{{order.activeArry}}">
-    <view class="block">
-        <view class="d-pad left">
-           <text class="t-active t-active-{{item.atype}}"></text> {{item.title}}<text class="t-right t-price" style="color:red;">￥{{item.price}}</text>
-        </view>
-    </view> 
+  <view class="block">
+    <view class="d-pad left">
+      <text class="t-active t-active-{{item.atype}}">
+      </text> {{item.title}}
+      <text class="t-right t-price" style="color:red;">￥{{item.price}}
+      </text>
+    </view>
+  </view>
 </block>
-
 <!--其它费用 餐盒、配送费-->
 <block a:for="{{order.otherArry}}">
-    <view class="block">
-        <view class="d-pad left">
-          <text class="t-title">{{item.title}}</text>
-          <text class="t-right t-price">￥{{item.price}}</text>
-        </view>
-    </view> 
+  <view class="block">
+    <view class="d-pad left">
+      <text class="t-title">{{item.title}}
+      </text>
+      <text class="t-right t-price">￥{{item.price}}</text>
+    </view>
+  </view>
 </block>
- 
 <view class="block d-pad txt-order border-line-top" style="text-align:right;">
-    <text class="t-muted">订单￥{{order.total}}</text> <text class="t-muted">优惠￥{{order.discount}}</text> <text>待付款￥{{order.pay}}</text>
+  <text class="t-muted">订单￥{{order.total}}
+  </text>
+  <text class="t-muted">优惠￥{{order.discount}}
+  </text>
+  <text>待付款￥{{order.pay}}
+  </text>
 </view>
-
 <view class="block d-mar">
-  <view class="d-pad left border-line v-picker">付款方式    
+  <view class="d-pad left border-line v-picker">付款方式        
     <view style="display:inline-block;" class="t-muted t-right arrow">
       <picker value="{{index}}" range="{{payType.data}}" onChange="bindPayType" range-key="text">
-        <text>{{payType.selected>-1?payType.data[payType.selected].text:'请选择付款方式'}}</text>
+        <text>{{payType.selected>-1?payType.data[payType.selected].text:'请选择付款方式'}}
+        </text>
       </picker>
     </view>
   </view>
 </view>
-
-<view class="block" style="overflow: hidden" hidden="{{!order.orderType!=3}}">    选择地址 
-  <text class="arrow t-right" style="max-width:480rpx;" onTap="bindChoiseAddr">        {{order.addr.addrDetail==''?'未选择':'['+order.addr.name+'] '+order.addr.addrDetail}}    </text>
+<view class="block" style="overflow: hidden" a:if="{{order.orderType==orderType.takeout}}" >
+   <view class="d-pad left border-line">   收货地址
+    <text class="t-muted t-right arrow t-cut"  onTap="bindChoiseAddr">{{order.addr.addrDetail==''?'未选择':'['+order.addr.name+'] '+order.addr.addrDetail}}</text>
+  </view>
 </view>
-
 <view class="block">
-  <view class="d-pad left border-line v-picker">
-   用餐人数
+  <view class="d-pad left border-line v-picker">   用餐人数    
     <view style="display:inline-block;text-align:right;" class="t-muted t-right arrow">
-       <picker value="{{index}}" range="{{dinner}}" onChange="bindDinner" range-key="text">
-           <text>
-           {{dinnerIndex>-1?dinner[dinnerIndex].text:'便于商家带够餐具'}}
+      <picker value="{{index}}" range="{{dinner}}" onChange="bindDinner" range-key="text">
+        <text>           {{dinnerIndex>-1?dinner[dinnerIndex].text:'便于商家带够餐具'}}        
         </text>
       </picker>
     </view>
+  </view>
 </view>
-</view>
-
 <view class="block">
-  <view class="d-pad left border-line">
-   订单备注
-   <text class="t-muted t-right arrow" a:if="{{order.remark!=''}}" style="max-width:450rpx;  overflow:hidden;  text-overflow:ellipsis;  white-space:nowrap;" onTap="bindRemark" >{{order.remark}}</text>
-   <text class="t-muted t-right arrow" a:if="{{order.remark==''}}"  onTap="bindRemark"><badge style="font-size:30rpx;margin-top:-10rpx;" text="设置口味、偏好"></badge></text>
+  <view class="d-pad left border-line">   订单备注   
+    <text class="t-muted t-right arrow t-cut" a:if="{{order.remark!=''}}" onTap="bindRemark">{{order.remark}}
+    </text>
+    <text class="t-muted t-right arrow" a:if="{{order.remark==''}}" onTap="bindRemark">
+      <badge style="font-size:30rpx;margin-top:-10rpx;" text="设置口味、偏好">
+      </badge>
+    </text>
+  </view>
 </view>
-</view>
-
-<view class="block" >
-  <view class="d-pad left border-line">
-   发票信息<text class="t-muted t-right arrow">{{order.invoice}}</text>
-</view>
-</view>
-
-<view class="block d-pad-tb" style="overflow: hidden;">
-    <view class="view-type {{order.orderType==1?'active':''}}" data-value="1" onTap="bindOrderType">
-     <image src="{{order.orderType==1?orderImg.tangchiA:orderImg.tangchi}}" mode="aspectFit" />
-     <text>堂吃</text>
-    </view>
-    <view class="view-type {{order.orderType==2?'active':''}}" data-value="2" onTap="bindOrderType">
-        <image src="{{order.orderType==2?orderImg.dabaoA:orderImg.dabao}}" mode="aspectFit" />
-        <text>打包</text>
-    </view>
+<view class="block">
+  <view class="d-pad left border-line">   发票信息
+    <text class="t-muted t-right arrow">{{order.invoice}}
+    </text>
+  </view>
 </view>
 
-<view style="height:180rpx;"></view>
+<view class="block d-pad-tb {{takeout?'view-three-item':''}}"  style="overflow: hidden;">
+  <view class="view-type {{order.orderType==orderType.tangchi?'active':''}}" data-value="{{orderType.tangchi}}" onTap="bindOrderType">
+    <image src="{{order.orderType==orderType.tangchi?orderImg.tangchiA:orderImg.tangchi}}" mode="aspectFit" />
+    <text>堂吃</text>
+  </view>
+  <view class="view-type {{order.orderType==orderType.takeout?'active':''}}" hidden="{{!takeout}}" data-value="{{orderType.takeout}}" onTap="bindOrderType">
+    <image src="{{order.orderType==orderType.takeout?orderImg.takeoutA:orderImg.takeout}}" mode="aspectFit" />
+    <text>外卖</text>
+  </view>
+  <view class="view-type {{order.orderType==orderType.dabao?'active':''}}" data-value="{{orderType.dabao}}" onTap="bindOrderType">
+    <image src="{{order.orderType==orderType.dabao?orderImg.dabaoA:orderImg.dabao}}" mode="aspectFit" />
+    <text>打包</text>
+  </view>
+</view>
+
+<view style="height:180rpx;">
+</view>
 <view class="car-foot">
   <form bindsubmit="formSubmit" report-submit="true">
-    <text class="cf-price">待支付￥{{order.pay}}</text><text class="cf-desc">|已优惠{{order.discount}}</text> 
-    <button class="cf-btn" formType="submit" onTap="bindSubmit">提交订单</button>
+    <text class="cf-price">待支付￥{{order.pay}}
+    </text>
+    <text class="cf-desc">|已优惠{{order.discount}}
+    </text>
+    <button class="cf-btn" formType="submit" onTap="bindSubmit">提交订单
+    </button>
   </form>
 </view>

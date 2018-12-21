@@ -2,6 +2,11 @@ page {
   background-color: #eee;
 }
 
+.border-line{
+    line-height: 0.55rem;
+    min-height: 0.55rem;
+}
+
 .t-title{
   width: 400rpx;
   display: inline-block;
@@ -61,4 +66,30 @@ page {
     margin-right: 20rpx;
 }
 
+.text-tel{
+  color: #1296db;
+  line-height: 38rpx;
+  display: inline-block;
+  position: relative;
+}
 
+.icon-tel{
+  width: 38rpx;
+  height: 38rpx;
+  display: inline-block;
+  top: 0.08rem;;
+  margin-right: 5rpx;
+  position: relative;
+}
+
+.d-pad{
+  padding: 0rpx 28rpx;
+}
+
+.d-pad-tb{
+  padding: 10rpx;
+}
+.d-pad.pad-tb{
+ padding-top: 28rpx;
+ padding-bottom:28rpx;
+}

@@ -5,7 +5,7 @@
          <label>
             <text class="t-title">联系人</text> 
             <view class="border-line d-pad edit-right noright" style="width:560rpx;">
-                    <input type="text" class="from-input" value="{{model.name}}" name="name" placeholder="姓名"/> 
+                    <input type="text" class="from-input" value="{{model.name}}" name="name" placeholder="请输入联系人姓名"/> 
             </view> 
         </label>
     </view>
@@ -20,7 +20,7 @@
      <view class="d-pad border-line">
         <label>
          <text class="t-title">电话</text>
-          <input type="number" class="from-input" value="{{model.tel}}" maxlength="11" name="tel"  placeholder="电话"/>
+          <input type="number" class="from-input" value="{{model.tel}}" maxlength="11" name="tel"  placeholder="请输入联系电话"/>
         </label>
     </view>
 
@@ -28,7 +28,7 @@
         <label>
          <text class="t-title">地址</text>
            <view class="arrow edit-right" onTap="bindAddr">
-                <input type="text" class="from-input" disabled="true" name="addr"  placeholder="地址" value="{{model.district+model.street}}" />
+                <input type="text" class="from-input addr" disabled="true" name="addr"  placeholder="请选择地址地址" value="{{model.district==''?'':(model.district+' '+model.street)}}" />
           </view>
         </label>
     </view>

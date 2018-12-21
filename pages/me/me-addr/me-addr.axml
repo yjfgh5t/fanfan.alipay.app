@@ -1,4 +1,4 @@
-<view a:for="{{addrArry}}" class="block d-pad {{index==0?'':'d-mar'}}" onTap="bindChoise" data-id="{{item.id}}" data-index="{{index}}" class="addr-block">
+<view a:for="{{addrArry}}" class="block d-pad addr-item" onTap="bindChoise" data-id="{{item.id}}" data-index="{{index}}" class="addr-block">
         <text class="name">{{item.name}}</text> 
         <text class="sex">{{item.sex}}</text>
         <text>{{item.tel}}</text>
@@ -11,8 +11,17 @@
     <text>您还没有添加收货地址哦</text>
 </view>
 
+<view a:if="{{choise && overRangeArray.length>0}}">
+  <view class="over-desc">以下地址操作配送范围</view>
+  <view a:for="{{overRangeArray}}" class="block d-pad addr-item" data-id="{{item.id}}" data-index="{{index}}" class="addr-block">
+          <text class="name">{{item.name}}</text> 
+          <text class="sex">{{item.sex}}</text>
+          <text>{{item.tel}}</text>
+          <text class="t-muted addrDetail">{{item.district+item.street}}{{item.detail}}</text>
+  </view>
+</view>
+
 <view style="padding-top:80rpx;color:white;">12</view>
-<view class="d-pad add"   onTap="bindEdit" data-id="0" > 
-        <image src="{{btnAdd}}" mode="aspectFit" class="add-img" />
+<view class="add" onTap="bindEdit" data-id="0" >
         <text> 新增 </text>
 </view>

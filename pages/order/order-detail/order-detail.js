@@ -3,6 +3,7 @@ import {pay} from '/common/js/pay.js';
 Page({
     data:{
       defaultImg: '/img/img_item_default.png',
+      telImg: '/img/icon_tel.png',
         order:{
             name:"",
             commoditys:[{id:1001,title:'',price:10,size:10}],
@@ -74,6 +75,10 @@ Page({
             }
         }); 
     },
+    bindCall:function(e){
+       let tel = e.target.dataset.value;
+       my.makePhoneCall({ number: tel });
+    },
     privLoadData:function(orderId){
 
         let _this =  this;
@@ -91,6 +96,8 @@ Page({
                 sex:resp.data.receiver.sex,
                 tel:resp.data.receiver.tel,
                 addrDetail:resp.data.receiver.addrDetail,
+                deliveryName:resp.data.receiver.deliveryName || '',
+                deliveryTel:resp.data.receiver.deliveryTel || ''
                }
             }
 
@@ -108,9 +115,11 @@ Page({
                deskNum:resp.data.orderDeskNum,
                alipayOrderStr:resp.data.alipayOrderStr,
                orderTypeText:resp.data.orderTypeText,
+               orderType: resp.data.orderType,
                orderPayTypeText: resp.data.orderPayTypeText,
                commoditys:[],
                others:[],
+               customerTel: resp.data.customerTel,
                receiver:receiver
                };
 

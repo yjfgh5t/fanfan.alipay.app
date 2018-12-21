@@ -49,6 +49,10 @@ page{
 .d-pad.noright{
     padding-right: 0rpx;
 }
+.d-pad.noleft{
+    padding-left: 0rpx;
+}
+
 
 .d-pad-tb{
     padding: 28rpx 0rpx;

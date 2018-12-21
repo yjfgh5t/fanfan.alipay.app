@@ -11,6 +11,7 @@ page {
 .t-right{
     float: right;
     min-width: 130rpx;
+    text-align: right;
 }
 .t-title{
   width: 400rpx;
@@ -24,6 +25,12 @@ page {
 }
 .t-right.t-count{
     min-width: 80rpx;
+}
+.t-cut{
+  max-width:460rpx; 
+  overflow:hidden; 
+  text-overflow:ellipsis; 
+  white-space:nowrap;
 }
 
 .arrow:after,.arrow::before{
@@ -124,4 +131,14 @@ page {
 .view-type.active{
     border-color: #1296db;
     color: #1296db;
+}
+
+.view-three-item .view-type{
+  width:200rpx;
+  margin-left:32rpx; 
+}
+
+.view-three-item .view-type image{
+    width: 100rpx;
+    height: 100rpx;
 }
