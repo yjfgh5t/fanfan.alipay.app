@@ -11,7 +11,7 @@
     <text class="i-title">我的优惠券</text>
 </view>
 
-<view class="block d-pad arrow" onTap="bindAddr" hidden="true" >
+<view class="block d-pad arrow" onTap="bindAddr" >
     <text class="icon addr"></text>
     <text class="i-title">收货地址</text>
 </view>

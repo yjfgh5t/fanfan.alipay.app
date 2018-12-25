@@ -43,9 +43,12 @@ Page({
         let choiseAddr = tools.getParams("choiseAddr",true);
 
         if(choiseAddr!=null){
-            //合并json
-            let  model = Object.assign(this.data.model,choiseAddr);
-            this.setData({"model":model});
+             this.setData({
+              "model.district": choiseAddr.street,
+              "model.street": choiseAddr.street,
+              "model.lat": choiseAddr.lat,
+              "model.lng": choiseAddr.lng
+              });
         }
     },
     bindSex:function(e){

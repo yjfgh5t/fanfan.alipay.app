@@ -88,7 +88,7 @@
         <view class="d-pad-tb border-line"> 
             <text style="display:block;overflow: hidden;">
               <view style="float:left;">配送地址：</view>
-              <view style="float:left;">
+              <view style="float:left;max-width:520rpx;">
                 <text>{{order.receiver.name}}({{order.receiver.sex}})</text>
                 <text style="display:block;">{{order.receiver.tel}}</text>
                 <text style="display:block;">{{order.receiver.addrDetail}}</text>

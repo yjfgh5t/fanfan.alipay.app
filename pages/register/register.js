@@ -4,7 +4,7 @@ Page({
     codeModel: { text: '发送验证码', disabled: false, showImgCode: false, code: '', imgCodeSrc: 'http://localhost:8081/api/info/imgcode/5821243531' },
     showImgCodeLayer: false,
     showAboutLayer:true,
-    model: { mobile: '', pwd: '', confirmPwd: '', name: '', mobileCode: '' }
+    model: { mobile: '', pwd: '', confirmPwd: '', name: '', mobileCode: '',shopName: '' }
   },
   onShow: function() {
   },
@@ -81,6 +81,9 @@ Page({
   },
   bindSubmit: function() {
     let _this = this
+    if (_this.data.model.shopName === '') {
+      return my.showToast({ content: '请输入店铺名称' });
+    }
     if (_this.data.model.name === '') {
       return my.showToast({ content: '请输入商户姓名' });
     }
@@ -110,16 +113,17 @@ Page({
     }
 
     let subData = {
-      code: _this.data.model.mobileCode,
+      imgCode: _this.data.model.mobileCode,
       userId: 0,
       name: _this.data.model.name,
       mobile: _this.data.model.mobile,
-      password: _this.data.model.pwd
+      code: _this.data.model.pwd,
+      shopName: _this.data.model.shopName
     }
     // 执行注册
     tools.ajax('api/user/customer/register', JSON.stringify(subData),'JSON', function(res) {
       if (res.code === 0 && res.data !== '') {
-        my.alert({ title: '提示', content: '注册成功，请查收短信,点击短信中的链接下载商户版APK', success:function(){
+        my.alert({ title: '提示', content: '注册成功，请查收短信,点击短信中的链接下载商户版APP', success:function(){
           //跳转
           my.navigateTo({
             url: '/pages/home/home'

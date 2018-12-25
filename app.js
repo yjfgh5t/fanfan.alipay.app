@@ -72,10 +72,8 @@ App({
     }
   },
   onShow: function(option){
-
     //加载参数
     this.initParams(option) 
-
     //获取参数中的customerId
     if (this.params.customerId !== -1) {
       this.config.customerId = this.params.customerId
@@ -87,7 +85,6 @@ App({
           this.config = config.data;
        }
      }
-
      //加载数据
     this.loadData();
   },
@@ -103,7 +100,6 @@ App({
           }
         }
       }
-
       //customerId
       if (option.query.customerId != undefined) {
         this.params.customerId = option.query.customerId

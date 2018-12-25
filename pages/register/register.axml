@@ -6,12 +6,16 @@
   <view>
     <form onSubmit="bindSubmit" class="form">
       <view class="view-input">
+        <text class="input-text">店铺名称</text>
+        <input placeholder="请输入店铺名称" class="input" placeholder-class="input-placeholder" name="shopName" type="text" onBlur="onItemBlur" data-field="model.shopName" />
+      </view>
+      <view class="view-input">
         <text class="input-text">姓名</text>
-        <input placeholder="请输入商户姓名" class="input" placeholder-class="input-placeholder" name="name" placeholder="请输入商户姓名" type="text" onBlur="onItemBlur" data-field="model.name" />
+        <input placeholder="请输入商户姓名" class="input" placeholder-class="input-placeholder" name="name"  type="text" onBlur="onItemBlur" data-field="model.name" />
       </view>
       <view class="view-input">
         <text class="input-text">手机号</text>
-        <input placeholder="请输入手机号" class="input" placeholder-class="input-placeholder" name="mobile" placeholder="请输入手机号" type="number" onBlur="onItemBlur" data-field="model.mobile" />
+        <input placeholder="请输入手机号" class="input" placeholder-class="input-placeholder" name="mobile" type="number" onBlur="onItemBlur" data-field="model.mobile" />
       </view>
       <view class="view-input">
         <text class="input-text">验证码</text>
@@ -20,7 +24,7 @@
       </view>
       <view class="view-input">
         <text class="input-text">密码</text>
-        <input placeholder="请输入密码6-18位" class="input" placeholder-class="input-placeholder" type="text" password="true" name="pwd" onBlur="onItemBlur" placeholder="请输入密码6-18位" data-field="model.pwd" />
+        <input placeholder="请输入密码6-18位" class="input" placeholder-class="input-placeholder" type="text" password="true" name="pwd" onBlur="onItemBlur"  data-field="model.pwd" />
       </view>
       <view class="view-input">
         <text class="input-text">确认密码</text>
@@ -49,7 +53,7 @@
           <text style="display:inline;color:orange;">http://t.cn/Ew2ra6G</text> 此链接在浏览器中打开下载饭饭点餐商户版APP。        
         </text>
         <text>3. 请您加客服微信           
-          <text style="display:inline;color:orange;">yjfgh5t</text>，将会帮助您解决使用中的相关问题。        
+          <text style="display:inline;color:orange;">fanfandc</text>，将会帮助您解决使用中的相关问题。        
         </text>
       </view>
       <view slot="footer">确定</view>

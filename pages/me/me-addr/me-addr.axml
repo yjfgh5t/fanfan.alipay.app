@@ -1,4 +1,4 @@
-<view a:for="{{addrArry}}" class="block d-pad addr-item" onTap="bindChoise" data-id="{{item.id}}" data-index="{{index}}" class="addr-block">
+<view a:for="{{addrArry}}" class="block d-pad addr-item addr-block" onTap="bindChoise" data-id="{{item.id}}" data-index="{{index}}">
         <text class="name">{{item.name}}</text> 
         <text class="sex">{{item.sex}}</text>
         <text>{{item.tel}}</text>
@@ -13,7 +13,7 @@
 
 <view a:if="{{choise && overRangeArray.length>0}}">
   <view class="over-desc">以下地址操作配送范围</view>
-  <view a:for="{{overRangeArray}}" class="block d-pad addr-item" data-id="{{item.id}}" data-index="{{index}}" class="addr-block">
+  <view a:for="{{overRangeArray}}" class="block d-pad addr-item addr-block" data-id="{{item.id}}" data-index="{{index}}">
           <text class="name">{{item.name}}</text> 
           <text class="sex">{{item.sex}}</text>
           <text>{{item.tel}}</text>

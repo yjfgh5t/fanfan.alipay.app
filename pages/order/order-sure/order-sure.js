@@ -123,13 +123,13 @@ Page({
             getApp().globalData.orderRemark=this.data.orderRemark;
         }
         my.navigateTo({
-          url: '/pages/order/order-remark/order-remark', // 需要跳转的应用内非 tabBar 的页面的路径，路径后可以带参数。参数与路径之间使用
+          url: '/pages/order/order-remark/order-remark'
         });
     },
     //选择地址
     bindChoiseAddr:function(e){
         my.navigateTo({
-          url: '/pages/me/me-addr/me-addr?choise=true', // 需要跳转的应用内非 tabBar 的页面的路径，路径后可以带参数。参数与路径之间使用
+          url: '/pages/me/me-addr/me-addr?choise=true'
         });
     },
     //提交订单
