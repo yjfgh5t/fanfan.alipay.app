@@ -10,7 +10,7 @@ App({
   },
   //配置信息
   config:{
-    apiHost: 'http://localhost:8081/', //'http://wxcard.com.cn/',
+    apiHost: 'https://wxcard.com.cn/', //'https://wxcard.com.cn/',
     networkAvailable:true,
     //店铺名称
     showName:"",

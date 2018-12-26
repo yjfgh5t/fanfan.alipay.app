@@ -38,7 +38,6 @@
     <modal show="{{showImgCodeLayer}}" onModalClose="bindModalClose" onModalClick="sendMobileCode">
       <view slot="header">图形验证码</view>
       <view class="modal-code">
-        <text>验证码</text>
         <input type="text" placeholder="请输入图形验证码" value="{{codeModel.code}}" onBlur="onItemBlur" data-field="codeModel.code" auto-focus/>
         <image class="img-code" onTap="refreshCodeImg" src="{{codeModel.imgCodeSrc}}" mode="aspectFit" />
       </view>

@@ -1,7 +1,7 @@
 import { tools } from '/common/js/common.js'
 Page({
   data: {
-    codeModel: { text: '发送验证码', disabled: false, showImgCode: false, code: '', imgCodeSrc: 'http://localhost:8081/api/info/imgcode/5821243531' },
+    codeModel: { text: '发送验证码', disabled: false, showImgCode: false, code: '', imgCodeSrc: '' },
     showImgCodeLayer: false,
     showAboutLayer:true,
     model: { mobile: '', pwd: '', confirmPwd: '', name: '', mobileCode: '',shopName: '' }
